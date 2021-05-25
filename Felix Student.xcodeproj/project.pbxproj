@@ -3,19 +3,66 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04014B38262F42D5008F2C01 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04014B37262F42D5008F2C01 /* Constants.swift */; };
 		040694EF2625BBCC00C0EDC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040694EE2625BBCC00C0EDC0 /* AppDelegate.swift */; };
 		040694F12625BBCC00C0EDC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040694F02625BBCC00C0EDC0 /* SceneDelegate.swift */; };
 		040694F32625BBCC00C0EDC0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040694F22625BBCC00C0EDC0 /* ContentView.swift */; };
 		040694F52625BBCD00C0EDC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040694F42625BBCD00C0EDC0 /* Assets.xcassets */; };
 		040694F82625BBCD00C0EDC0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040694F72625BBCD00C0EDC0 /* Preview Assets.xcassets */; };
 		040694FB2625BBCD00C0EDC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040694F92625BBCD00C0EDC0 /* LaunchScreen.storyboard */; };
+		0413BC50263AA3F1008E8BDD /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413BC4F263AA3F1008E8BDD /* Router.swift */; };
+		0413BC85263B2229008E8BDD /* GeneralFeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413BC84263B2229008E8BDD /* GeneralFeedbackViewModel.swift */; };
+		04159AA62628049F0056006C /* GiveFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159AA52628049F0056006C /* GiveFeedback.swift */; };
+		04159AA926280BCC0056006C /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159AA826280BCC0056006C /* Feedback.swift */; };
+		04159AAC26280C750056006C /* FelixManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159AAB26280C750056006C /* FelixManagement.swift */; };
+		04159AAF262845AF0056006C /* FelixFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159AAE262845AF0056006C /* FelixFeedback.swift */; };
+		04159AB22628493D0056006C /* ReferAndEarn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159AB12628493D0056006C /* ReferAndEarn.swift */; };
+		04159AB526284D2E0056006C /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159AB426284D2E0056006C /* Settings.swift */; };
+		04159AB8262851140056006C /* EditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159AB7262851140056006C /* EditProfile.swift */; };
+		04159ABB2628550D0056006C /* RaiseTicket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159ABA2628550D0056006C /* RaiseTicket.swift */; };
+		0417BF6D265534FB004F6C98 /* RootPresentationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0417BF6C265534FB004F6C98 /* RootPresentationMode.swift */; };
+		042AC42926341A52005EA11C /* TextAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AC42826341A52005EA11C /* TextAlert.swift */; };
+		042AC43026344F18005EA11C /* Reference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AC42F26344F18005EA11C /* Reference.swift */; };
+		042AC43326345240005EA11C /* GeneralFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AC43226345240005EA11C /* GeneralFeedback.swift */; };
+		042AC43726345CBD005EA11C /* ReferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AC43626345CBD005EA11C /* ReferenceViewModel.swift */; };
+		042AC43A26346CC0005EA11C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AC43926346CC0005EA11C /* User.swift */; };
+		043D85CE2629927900397596 /* AddTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D85CD2629927900397596 /* AddTopic.swift */; };
+		043D85D1262997A500397596 /* MarkAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D85D0262997A500397596 /* MarkAttendance.swift */; };
+		043D85D42629D1C300397596 /* AddNewTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D85D32629D1C300397596 /* AddNewTopic.swift */; };
+		043D8618262AF56000397596 /* Batch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D8617262AF56000397596 /* Batch.swift */; };
+		043D861B262AF7DC00397596 /* Attendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D861A262AF7DC00397596 /* Attendance.swift */; };
+		043D861E262AF8F800397596 /* Topic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D861D262AF8F800397596 /* Topic.swift */; };
+		043D8621262AFAB600397596 /* Student.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D8620262AFAB600397596 /* Student.swift */; };
+		043FE1F5263271F300D3BC7F /* AttendanceRespository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FE1F4263271F300D3BC7F /* AttendanceRespository.swift */; };
+		043FE1F826327B5F00D3BC7F /* TopicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FE1F726327B5F00D3BC7F /* TopicRepository.swift */; };
+		043FE1FB26327BA500D3BC7F /* StudentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FE1FA26327BA500D3BC7F /* StudentRepository.swift */; };
+		04452BE0265A4A7600E9EAB8 /* StudentFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04452BDF265A4A7600E9EAB8 /* StudentFeedback.swift */; };
+		0463DE8F2626BDFA0047DCC0 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE8E2626BDFA0047DCC0 /* PageControl.swift */; };
+		0463DE922626C7350047DCC0 /* SelectRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE912626C7350047DCC0 /* SelectRole.swift */; };
+		0463DE952626D91B0047DCC0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE942626D91B0047DCC0 /* LoginView.swift */; };
+		0463DE982626FEF90047DCC0 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE972626FEF90047DCC0 /* HomePage.swift */; };
+		0463DE9B2627082C0047DCC0 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE9A2627082C0047DCC0 /* Tabbar.swift */; };
+		0463DEA5262740F50047DCC0 /* BatchDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DEA4262740F50047DCC0 /* BatchDetails.swift */; };
+		0464C005263183AD0040A753 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464C004263183AD0040A753 /* SessionStore.swift */; };
+		04AB43C2262F0907004E932B /* BatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43C1262F0907004E932B /* BatchViewModel.swift */; };
+		04AB43C5262F0967004E932B /* AttendanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43C4262F0967004E932B /* AttendanceViewModel.swift */; };
+		04AB43C8262F0985004E932B /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43C7262F0985004E932B /* TopicViewModel.swift */; };
+		04AB43CB262F0998004E932B /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43CA262F0998004E932B /* StudentViewModel.swift */; };
+		04AB43CF262F4004004E932B /* BatchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43CE262F4004004E932B /* BatchRepository.swift */; };
+		04AB43EB262F4217004E932B /* DatabaseReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43EA262F4217004E932B /* DatabaseReference.swift */; };
+		04C6245C2657C0430074A370 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6245B2657C0430074A370 /* Extensions.swift */; };
+		04E03ABC264BD6E40094E4B3 /* BatchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */; };
+		04E547FD263082BD0083D81D /* BatchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E547FC263082BD0083D81D /* BatchCellViewModel.swift */; };
+		04E5480026309C360083D81D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04E547FF26309C360083D81D /* GoogleService-Info.plist */; };
+		1DAEA643E7443D6EDEEE60BA /* Pods_Felix_Student.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B497B1CB19A41473643959 /* Pods_Felix_Student.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		04014B37262F42D5008F2C01 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		040694EB2625BBCC00C0EDC0 /* Felix Student.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Felix Student.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		040694EE2625BBCC00C0EDC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		040694F02625BBCC00C0EDC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +71,72 @@
 		040694F72625BBCD00C0EDC0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		040694FA2625BBCD00C0EDC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		040694FC2625BBCD00C0EDC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0413BC4F263AA3F1008E8BDD /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		0413BC84263B2229008E8BDD /* GeneralFeedbackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralFeedbackViewModel.swift; sourceTree = "<group>"; };
+		04159AA52628049F0056006C /* GiveFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFeedback.swift; sourceTree = "<group>"; };
+		04159AA826280BCC0056006C /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
+		04159AAB26280C750056006C /* FelixManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FelixManagement.swift; sourceTree = "<group>"; };
+		04159AAE262845AF0056006C /* FelixFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FelixFeedback.swift; sourceTree = "<group>"; };
+		04159AB12628493D0056006C /* ReferAndEarn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarn.swift; sourceTree = "<group>"; };
+		04159AB426284D2E0056006C /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		04159AB7262851140056006C /* EditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfile.swift; sourceTree = "<group>"; };
+		04159ABA2628550D0056006C /* RaiseTicket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaiseTicket.swift; sourceTree = "<group>"; };
+		0417BF0C2654BA5D004F6C98 /* PushViewLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushViewLink.swift; sourceTree = "<group>"; };
+		0417BF0D2654BA5D004F6C98 /* NavigationBarDefaultBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarDefaultBackgroundView.swift; sourceTree = "<group>"; };
+		0417BF0E2654BA5D004F6C98 /* RootPresentationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootPresentationMode.swift; sourceTree = "<group>"; };
+		0417BF0F2654BA5D004F6C98 /* NavigationKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationKitView.swift; sourceTree = "<group>"; };
+		0417BF102654BA5D004F6C98 /* PushView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushView.swift; sourceTree = "<group>"; };
+		0417BF112654BA5D004F6C98 /* InlineNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InlineNavigationBarView.swift; sourceTree = "<group>"; };
+		0417BF122654BA5D004F6C98 /* CustomNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationBarView.swift; sourceTree = "<group>"; };
+		0417BF132654BA5D004F6C98 /* Bool+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+.swift"; sourceTree = "<group>"; };
+		0417BF142654BA5D004F6C98 /* ImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageButton.swift; sourceTree = "<group>"; };
+		0417BF152654BA5D004F6C98 /* FullScreenCoverViewLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCoverViewLink.swift; sourceTree = "<group>"; };
+		0417BF162654BA5D004F6C98 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		0417BF172654BA5D004F6C98 /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
+		0417BF182654BA5D004F6C98 /* FullScreenCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCoverView.swift; sourceTree = "<group>"; };
+		0417BF192654BA5D004F6C98 /* LargeNavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeNavigationBarView.swift; sourceTree = "<group>"; };
+		0417BF1A2654BA5D004F6C98 /* NavigationKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationKitManager.swift; sourceTree = "<group>"; };
+		0417BF1B2654BA5D004F6C98 /* SystemImageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemImageButton.swift; sourceTree = "<group>"; };
+		0417BF1C2654BA5D004F6C98 /* SwipeToDismissView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeToDismissView.swift; sourceTree = "<group>"; };
+		0417BF1D2654BA5D004F6C98 /* PresentationsMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationsMode.swift; sourceTree = "<group>"; };
+		0417BF1E2654BA5D004F6C98 /* SheetViewLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewLink.swift; sourceTree = "<group>"; };
+		0417BF6C265534FB004F6C98 /* RootPresentationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootPresentationMode.swift; sourceTree = "<group>"; };
+		042AC42826341A52005EA11C /* TextAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextAlert.swift; sourceTree = "<group>"; };
+		042AC42F26344F18005EA11C /* Reference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reference.swift; sourceTree = "<group>"; };
+		042AC43226345240005EA11C /* GeneralFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralFeedback.swift; sourceTree = "<group>"; };
+		042AC43626345CBD005EA11C /* ReferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceViewModel.swift; sourceTree = "<group>"; };
+		042AC43926346CC0005EA11C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		043D85CD2629927900397596 /* AddTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTopic.swift; sourceTree = "<group>"; };
+		043D85D0262997A500397596 /* MarkAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAttendance.swift; sourceTree = "<group>"; };
+		043D85D32629D1C300397596 /* AddNewTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTopic.swift; sourceTree = "<group>"; };
+		043D8617262AF56000397596 /* Batch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Batch.swift; sourceTree = "<group>"; };
+		043D861A262AF7DC00397596 /* Attendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Attendance.swift; sourceTree = "<group>"; };
+		043D861D262AF8F800397596 /* Topic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Topic.swift; sourceTree = "<group>"; };
+		043D8620262AFAB600397596 /* Student.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Student.swift; sourceTree = "<group>"; };
+		043FE1F4263271F300D3BC7F /* AttendanceRespository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceRespository.swift; sourceTree = "<group>"; };
+		043FE1F726327B5F00D3BC7F /* TopicRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRepository.swift; sourceTree = "<group>"; };
+		043FE1FA26327BA500D3BC7F /* StudentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRepository.swift; sourceTree = "<group>"; };
+		04452BDF265A4A7600E9EAB8 /* StudentFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentFeedback.swift; sourceTree = "<group>"; };
+		0463DE8E2626BDFA0047DCC0 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
+		0463DE912626C7350047DCC0 /* SelectRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRole.swift; sourceTree = "<group>"; };
+		0463DE942626D91B0047DCC0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		0463DE972626FEF90047DCC0 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		0463DE9A2627082C0047DCC0 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
+		0463DEA4262740F50047DCC0 /* BatchDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchDetails.swift; sourceTree = "<group>"; };
+		0464C004263183AD0040A753 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
+		04AB43C1262F0907004E932B /* BatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchViewModel.swift; sourceTree = "<group>"; };
+		04AB43C4262F0967004E932B /* AttendanceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendanceViewModel.swift; sourceTree = "<group>"; };
+		04AB43C7262F0985004E932B /* TopicViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicViewModel.swift; sourceTree = "<group>"; };
+		04AB43CA262F0998004E932B /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
+		04AB43CE262F4004004E932B /* BatchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchRepository.swift; sourceTree = "<group>"; };
+		04AB43EA262F4217004E932B /* DatabaseReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseReference.swift; sourceTree = "<group>"; };
+		04C6245B2657C0430074A370 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchDetailTableViewCell.swift; sourceTree = "<group>"; };
+		04E547FC263082BD0083D81D /* BatchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchCellViewModel.swift; sourceTree = "<group>"; };
+		04E547FF26309C360083D81D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		33D9B047749F0C4396739C84 /* Pods-Felix Student.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Felix Student.release.xcconfig"; path = "Target Support Files/Pods-Felix Student/Pods-Felix Student.release.xcconfig"; sourceTree = "<group>"; };
+		37B497B1CB19A41473643959 /* Pods_Felix_Student.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Felix_Student.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		629E1ABD9AD0471F920EC66B /* Pods-Felix Student.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Felix Student.debug.xcconfig"; path = "Target Support Files/Pods-Felix Student/Pods-Felix Student.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +144,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DAEA643E7443D6EDEEE60BA /* Pods_Felix_Student.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04014B36262F42B3008F2C01 /* Helper Files */ = {
+			isa = PBXGroup;
+			children = (
+				04AB43EA262F4217004E932B /* DatabaseReference.swift */,
+				04014B37262F42D5008F2C01 /* Constants.swift */,
+				0413BC4F263AA3F1008E8BDD /* Router.swift */,
+				04C6245B2657C0430074A370 /* Extensions.swift */,
+				0417BF6C265534FB004F6C98 /* RootPresentationMode.swift */,
+			);
+			path = "Helper Files";
+			sourceTree = "<group>";
+		};
 		040694E22625BBCB00C0EDC0 = {
 			isa = PBXGroup;
 			children = (
 				040694ED2625BBCC00C0EDC0 /* Felix Student */,
 				040694EC2625BBCC00C0EDC0 /* Products */,
+				18971DC5B8F76139AD4637DB /* Pods */,
+				964E7AFBC130D7416ECCC40D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +184,17 @@
 		040694ED2625BBCC00C0EDC0 /* Felix Student */ = {
 			isa = PBXGroup;
 			children = (
-				040694EE2625BBCC00C0EDC0 /* AppDelegate.swift */,
-				040694F02625BBCC00C0EDC0 /* SceneDelegate.swift */,
-				040694F22625BBCC00C0EDC0 /* ContentView.swift */,
+				0464C0032631839A0040A753 /* Authentication */,
+				04014B36262F42B3008F2C01 /* Helper Files */,
+				04AB43BC262F0053004E932B /* App */,
+				043D8623262B04EF00397596 /* Models */,
+				043D8614262AF37C00397596 /* Views */,
+				04AB43BF262F006A004E932B /* ViewModels */,
+				04AB43CD262F3FD5004E932B /* Repositories */,
 				040694F42625BBCD00C0EDC0 /* Assets.xcassets */,
 				040694F92625BBCD00C0EDC0 /* LaunchScreen.storyboard */,
 				040694FC2625BBCD00C0EDC0 /* Info.plist */,
+				04E547FF26309C360083D81D /* GoogleService-Info.plist */,
 				040694F62625BBCD00C0EDC0 /* Preview Content */,
 			);
 			path = "Felix Student";
@@ -75,6 +208,135 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		0417BF0B2654BA5D004F6C98 /* NavigationKit */ = {
+			isa = PBXGroup;
+			children = (
+				0417BF0C2654BA5D004F6C98 /* PushViewLink.swift */,
+				0417BF0D2654BA5D004F6C98 /* NavigationBarDefaultBackgroundView.swift */,
+				0417BF0E2654BA5D004F6C98 /* RootPresentationMode.swift */,
+				0417BF0F2654BA5D004F6C98 /* NavigationKitView.swift */,
+				0417BF102654BA5D004F6C98 /* PushView.swift */,
+				0417BF112654BA5D004F6C98 /* InlineNavigationBarView.swift */,
+				0417BF122654BA5D004F6C98 /* CustomNavigationBarView.swift */,
+				0417BF132654BA5D004F6C98 /* Bool+.swift */,
+				0417BF142654BA5D004F6C98 /* ImageButton.swift */,
+				0417BF152654BA5D004F6C98 /* FullScreenCoverViewLink.swift */,
+				0417BF162654BA5D004F6C98 /* View+.swift */,
+				0417BF172654BA5D004F6C98 /* SheetView.swift */,
+				0417BF182654BA5D004F6C98 /* FullScreenCoverView.swift */,
+				0417BF192654BA5D004F6C98 /* LargeNavigationBarView.swift */,
+				0417BF1A2654BA5D004F6C98 /* NavigationKitManager.swift */,
+				0417BF1B2654BA5D004F6C98 /* SystemImageButton.swift */,
+				0417BF1C2654BA5D004F6C98 /* SwipeToDismissView.swift */,
+				0417BF1D2654BA5D004F6C98 /* PresentationsMode.swift */,
+				0417BF1E2654BA5D004F6C98 /* SheetViewLink.swift */,
+			);
+			name = NavigationKit;
+			path = "Felix Student/Helper Files/NavigationKit";
+			sourceTree = "<group>";
+		};
+		043D8614262AF37C00397596 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */,
+				040694F22625BBCC00C0EDC0 /* ContentView.swift */,
+				0463DE8E2626BDFA0047DCC0 /* PageControl.swift */,
+				042AC42826341A52005EA11C /* TextAlert.swift */,
+				0463DE912626C7350047DCC0 /* SelectRole.swift */,
+				0463DE942626D91B0047DCC0 /* LoginView.swift */,
+				0463DE972626FEF90047DCC0 /* HomePage.swift */,
+				0463DE9A2627082C0047DCC0 /* Tabbar.swift */,
+				0463DEA4262740F50047DCC0 /* BatchDetails.swift */,
+				04159AA52628049F0056006C /* GiveFeedback.swift */,
+				04159AA826280BCC0056006C /* Feedback.swift */,
+				04159AAB26280C750056006C /* FelixManagement.swift */,
+				04159AAE262845AF0056006C /* FelixFeedback.swift */,
+				04159AB12628493D0056006C /* ReferAndEarn.swift */,
+				04159AB426284D2E0056006C /* Settings.swift */,
+				04159AB7262851140056006C /* EditProfile.swift */,
+				04159ABA2628550D0056006C /* RaiseTicket.swift */,
+				043D85CD2629927900397596 /* AddTopic.swift */,
+				043D85D0262997A500397596 /* MarkAttendance.swift */,
+				043D85D32629D1C300397596 /* AddNewTopic.swift */,
+				04452BDF265A4A7600E9EAB8 /* StudentFeedback.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		043D8623262B04EF00397596 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				043D8617262AF56000397596 /* Batch.swift */,
+				043D861A262AF7DC00397596 /* Attendance.swift */,
+				043D861D262AF8F800397596 /* Topic.swift */,
+				043D8620262AFAB600397596 /* Student.swift */,
+				042AC42F26344F18005EA11C /* Reference.swift */,
+				042AC43226345240005EA11C /* GeneralFeedback.swift */,
+				042AC43926346CC0005EA11C /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0464C0032631839A0040A753 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				0464C004263183AD0040A753 /* SessionStore.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		04AB43BC262F0053004E932B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				040694EE2625BBCC00C0EDC0 /* AppDelegate.swift */,
+				040694F02625BBCC00C0EDC0 /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		04AB43BF262F006A004E932B /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				04AB43C1262F0907004E932B /* BatchViewModel.swift */,
+				04E547FC263082BD0083D81D /* BatchCellViewModel.swift */,
+				04AB43C4262F0967004E932B /* AttendanceViewModel.swift */,
+				04AB43C7262F0985004E932B /* TopicViewModel.swift */,
+				04AB43CA262F0998004E932B /* StudentViewModel.swift */,
+				042AC43626345CBD005EA11C /* ReferenceViewModel.swift */,
+				0413BC84263B2229008E8BDD /* GeneralFeedbackViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		04AB43CD262F3FD5004E932B /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				04AB43CE262F4004004E932B /* BatchRepository.swift */,
+				043FE1F4263271F300D3BC7F /* AttendanceRespository.swift */,
+				043FE1F726327B5F00D3BC7F /* TopicRepository.swift */,
+				043FE1FA26327BA500D3BC7F /* StudentRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		18971DC5B8F76139AD4637DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				629E1ABD9AD0471F920EC66B /* Pods-Felix Student.debug.xcconfig */,
+				33D9B047749F0C4396739C84 /* Pods-Felix Student.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		964E7AFBC130D7416ECCC40D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0417BF0B2654BA5D004F6C98 /* NavigationKit */,
+				37B497B1CB19A41473643959 /* Pods_Felix_Student.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,15 +344,19 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 040694FF2625BBCD00C0EDC0 /* Build configuration list for PBXNativeTarget "Felix Student" */;
 			buildPhases = (
+				F202F4DA8DA1B41334F79BDA /* [CP] Check Pods Manifest.lock */,
 				040694E72625BBCB00C0EDC0 /* Sources */,
 				040694E82625BBCB00C0EDC0 /* Frameworks */,
 				040694E92625BBCB00C0EDC0 /* Resources */,
+				1B8EB188AACA628F81B7A956 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Felix Student";
+			packageProductDependencies = (
+			);
 			productName = "Felix Student";
 			productReference = 040694EB2625BBCC00C0EDC0 /* Felix Student.app */;
 			productType = "com.apple.product-type.application";
@@ -118,6 +384,8 @@
 				Base,
 			);
 			mainGroup = 040694E22625BBCB00C0EDC0;
+			packageReferences = (
+			);
 			productRefGroup = 040694EC2625BBCC00C0EDC0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -133,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				040694FB2625BBCD00C0EDC0 /* LaunchScreen.storyboard in Resources */,
+				04E5480026309C360083D81D /* GoogleService-Info.plist in Resources */,
 				040694F82625BBCD00C0EDC0 /* Preview Assets.xcassets in Resources */,
 				040694F52625BBCD00C0EDC0 /* Assets.xcassets in Resources */,
 			);
@@ -140,14 +409,100 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1B8EB188AACA628F81B7A956 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Felix Student/Pods-Felix Student-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Felix Student/Pods-Felix Student-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Felix Student/Pods-Felix Student-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F202F4DA8DA1B41334F79BDA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Felix Student-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		040694E72625BBCB00C0EDC0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04AB43CF262F4004004E932B /* BatchRepository.swift in Sources */,
+				042AC43026344F18005EA11C /* Reference.swift in Sources */,
+				04E547FD263082BD0083D81D /* BatchCellViewModel.swift in Sources */,
+				042AC43326345240005EA11C /* GeneralFeedback.swift in Sources */,
+				043D861B262AF7DC00397596 /* Attendance.swift in Sources */,
+				04AB43EB262F4217004E932B /* DatabaseReference.swift in Sources */,
+				043D861E262AF8F800397596 /* Topic.swift in Sources */,
+				04AB43C2262F0907004E932B /* BatchViewModel.swift in Sources */,
+				0463DE952626D91B0047DCC0 /* LoginView.swift in Sources */,
+				04159ABB2628550D0056006C /* RaiseTicket.swift in Sources */,
+				0413BC50263AA3F1008E8BDD /* Router.swift in Sources */,
+				04159AAC26280C750056006C /* FelixManagement.swift in Sources */,
+				043FE1F826327B5F00D3BC7F /* TopicRepository.swift in Sources */,
+				04159AB22628493D0056006C /* ReferAndEarn.swift in Sources */,
+				04014B38262F42D5008F2C01 /* Constants.swift in Sources */,
+				04159AB8262851140056006C /* EditProfile.swift in Sources */,
+				043D8621262AFAB600397596 /* Student.swift in Sources */,
+				043D85CE2629927900397596 /* AddTopic.swift in Sources */,
 				040694EF2625BBCC00C0EDC0 /* AppDelegate.swift in Sources */,
+				042AC43A26346CC0005EA11C /* User.swift in Sources */,
+				04452BE0265A4A7600E9EAB8 /* StudentFeedback.swift in Sources */,
+				042AC42926341A52005EA11C /* TextAlert.swift in Sources */,
+				04E03ABC264BD6E40094E4B3 /* BatchDetailTableViewCell.swift in Sources */,
 				040694F12625BBCC00C0EDC0 /* SceneDelegate.swift in Sources */,
+				04C6245C2657C0430074A370 /* Extensions.swift in Sources */,
+				04AB43CB262F0998004E932B /* StudentViewModel.swift in Sources */,
+				04159AA62628049F0056006C /* GiveFeedback.swift in Sources */,
+				042AC43726345CBD005EA11C /* ReferenceViewModel.swift in Sources */,
+				043D8618262AF56000397596 /* Batch.swift in Sources */,
+				04159AA926280BCC0056006C /* Feedback.swift in Sources */,
+				0464C005263183AD0040A753 /* SessionStore.swift in Sources */,
+				043D85D42629D1C300397596 /* AddNewTopic.swift in Sources */,
+				0463DE9B2627082C0047DCC0 /* Tabbar.swift in Sources */,
+				04159AAF262845AF0056006C /* FelixFeedback.swift in Sources */,
+				043FE1F5263271F300D3BC7F /* AttendanceRespository.swift in Sources */,
+				04159AB526284D2E0056006C /* Settings.swift in Sources */,
+				04AB43C8262F0985004E932B /* TopicViewModel.swift in Sources */,
+				04AB43C5262F0967004E932B /* AttendanceViewModel.swift in Sources */,
+				0413BC85263B2229008E8BDD /* GeneralFeedbackViewModel.swift in Sources */,
+				043FE1FB26327BA500D3BC7F /* StudentRepository.swift in Sources */,
+				0417BF6D265534FB004F6C98 /* RootPresentationMode.swift in Sources */,
+				0463DEA5262740F50047DCC0 /* BatchDetails.swift in Sources */,
+				0463DE922626C7350047DCC0 /* SelectRole.swift in Sources */,
+				0463DE8F2626BDFA0047DCC0 /* PageControl.swift in Sources */,
+				0463DE982626FEF90047DCC0 /* HomePage.swift in Sources */,
 				040694F32625BBCC00C0EDC0 /* ContentView.swift in Sources */,
+				043D85D1262997A500397596 /* MarkAttendance.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,19 +638,20 @@
 		};
 		040695002625BBCD00C0EDC0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 629E1ABD9AD0471F920EC66B /* Pods-Felix Student.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Felix Student/Preview Content\"";
-				DEVELOPMENT_TEAM = 69MU368JWF;
+				DEVELOPMENT_TEAM = VFRFP6ZDLY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Felix Student/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Felix.Felix-Student";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.felixtechlabs.Felix-Student";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -304,19 +660,20 @@
 		};
 		040695012625BBCD00C0EDC0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 33D9B047749F0C4396739C84 /* Pods-Felix Student.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Felix Student/Preview Content\"";
-				DEVELOPMENT_TEAM = 69MU368JWF;
+				DEVELOPMENT_TEAM = VFRFP6ZDLY;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = "Felix Student/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Felix.Felix-Student";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.felixtechlabs.Felix-Student";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
