@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="Ticket" transform="translate(-61 -339)">
+    <g id="Rectangle_487" data-name="Rectangle 487" transform="translate(61 339)" fill="#fff" stroke="#707070" stroke-width="1" opacity="0">
+      <rect width="24" height="24" stroke="none"/>
+      <rect x="0.5" y="0.5" width="23" height="23" fill="none"/>
+    </g>
+    <g id="coupon_1_" data-name="coupon (1)" transform="translate(63 242.292)" style="isolation: isolate">
+      <path id="Path_944" data-name="Path 944" d="M6.005,102.708H.632a.631.631,0,0,0-.632.629v3.19a.631.631,0,0,0,.632.629,1.512,1.512,0,1,1,0,3.023.631.631,0,0,0-.632.629V114a.631.631,0,0,0,.632.629H6.005Z" transform="translate(0 0)" fill="#ed1c24"/>
+      <path id="Path_945" data-name="Path 945" d="M196.134,107.157a.631.631,0,0,0,.632-.629v-3.19a.631.631,0,0,0-.632-.629h-12.2v11.921h12.2a.631.631,0,0,0,.632-.629v-3.19a.631.631,0,0,0-.632-.629,1.512,1.512,0,1,1,0-3.023Z" transform="translate(-176.766 0)" fill="#ed1c24"/>
+    </g>
+  </g>
+</svg>

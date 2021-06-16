@@ -46,4 +46,8 @@ final class DatabaseReference {
     func walkinReference() -> CollectionReference {
         return db.collection(environment).document(Constants.WALKINS).collection(Constants.WALKINS)
     }
+    
+    func notificationReference() -> CollectionReference {
+        return db.collection(environment).document(Constants.NOTIFICATIONS).collection(Constants.NOTIFICATIONS)
+    }
 }

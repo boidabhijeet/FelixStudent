@@ -13,7 +13,6 @@
 		040694F32625BBCC00C0EDC0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040694F22625BBCC00C0EDC0 /* ContentView.swift */; };
 		040694F52625BBCD00C0EDC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040694F42625BBCD00C0EDC0 /* Assets.xcassets */; };
 		040694F82625BBCD00C0EDC0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 040694F72625BBCD00C0EDC0 /* Preview Assets.xcassets */; };
-		040694FB2625BBCD00C0EDC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040694F92625BBCD00C0EDC0 /* LaunchScreen.storyboard */; };
 		0413BC50263AA3F1008E8BDD /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413BC4F263AA3F1008E8BDD /* Router.swift */; };
 		0413BC85263B2229008E8BDD /* GeneralFeedbackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0413BC84263B2229008E8BDD /* GeneralFeedbackViewModel.swift */; };
 		04159AA62628049F0056006C /* GiveFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04159AA52628049F0056006C /* GiveFeedback.swift */; };
@@ -30,6 +29,9 @@
 		042AC43326345240005EA11C /* GeneralFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AC43226345240005EA11C /* GeneralFeedback.swift */; };
 		042AC43726345CBD005EA11C /* ReferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AC43626345CBD005EA11C /* ReferenceViewModel.swift */; };
 		042AC43A26346CC0005EA11C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042AC43926346CC0005EA11C /* User.swift */; };
+		042BB37D26693C8600A9AA3D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042BB37C26693C8600A9AA3D /* Notification.swift */; };
+		042BB38026693E0E00A9AA3D /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042BB37F26693E0E00A9AA3D /* NotificationView.swift */; };
+		042BB38326693FE300A9AA3D /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042BB38226693FE300A9AA3D /* NotificationViewModel.swift */; };
 		043D85CE2629927900397596 /* AddTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D85CD2629927900397596 /* AddTopic.swift */; };
 		043D85D1262997A500397596 /* MarkAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D85D0262997A500397596 /* MarkAttendance.swift */; };
 		043D85D42629D1C300397596 /* AddNewTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D85D32629D1C300397596 /* AddNewTopic.swift */; };
@@ -41,6 +43,7 @@
 		043FE1F826327B5F00D3BC7F /* TopicRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FE1F726327B5F00D3BC7F /* TopicRepository.swift */; };
 		043FE1FB26327BA500D3BC7F /* StudentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043FE1FA26327BA500D3BC7F /* StudentRepository.swift */; };
 		04452BE0265A4A7600E9EAB8 /* StudentFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04452BDF265A4A7600E9EAB8 /* StudentFeedback.swift */; };
+		045F439426711C1B00E0CD77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045F439326711C1B00E0CD77 /* GoogleService-Info.plist */; };
 		0463DE8F2626BDFA0047DCC0 /* PageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE8E2626BDFA0047DCC0 /* PageControl.swift */; };
 		0463DE922626C7350047DCC0 /* SelectRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE912626C7350047DCC0 /* SelectRole.swift */; };
 		0463DE952626D91B0047DCC0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE942626D91B0047DCC0 /* LoginView.swift */; };
@@ -48,6 +51,7 @@
 		0463DE9B2627082C0047DCC0 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE9A2627082C0047DCC0 /* Tabbar.swift */; };
 		0463DEA5262740F50047DCC0 /* BatchDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DEA4262740F50047DCC0 /* BatchDetails.swift */; };
 		0464C005263183AD0040A753 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464C004263183AD0040A753 /* SessionStore.swift */; };
+		046B8523265E6A2E007A7E5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040694F92625BBCD00C0EDC0 /* LaunchScreen.storyboard */; };
 		04AB43C2262F0907004E932B /* BatchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43C1262F0907004E932B /* BatchViewModel.swift */; };
 		04AB43C5262F0967004E932B /* AttendanceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43C4262F0967004E932B /* AttendanceViewModel.swift */; };
 		04AB43C8262F0985004E932B /* TopicViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43C7262F0985004E932B /* TopicViewModel.swift */; };
@@ -57,7 +61,6 @@
 		04C6245C2657C0430074A370 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6245B2657C0430074A370 /* Extensions.swift */; };
 		04E03ABC264BD6E40094E4B3 /* BatchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */; };
 		04E547FD263082BD0083D81D /* BatchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E547FC263082BD0083D81D /* BatchCellViewModel.swift */; };
-		04E5480026309C360083D81D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04E547FF26309C360083D81D /* GoogleService-Info.plist */; };
 		1DAEA643E7443D6EDEEE60BA /* Pods_Felix_Student.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B497B1CB19A41473643959 /* Pods_Felix_Student.framework */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +109,9 @@
 		042AC43226345240005EA11C /* GeneralFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeneralFeedback.swift; sourceTree = "<group>"; };
 		042AC43626345CBD005EA11C /* ReferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferenceViewModel.swift; sourceTree = "<group>"; };
 		042AC43926346CC0005EA11C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		042BB37C26693C8600A9AA3D /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		042BB37F26693E0E00A9AA3D /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		042BB38226693FE300A9AA3D /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		043D85CD2629927900397596 /* AddTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTopic.swift; sourceTree = "<group>"; };
 		043D85D0262997A500397596 /* MarkAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAttendance.swift; sourceTree = "<group>"; };
 		043D85D32629D1C300397596 /* AddNewTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTopic.swift; sourceTree = "<group>"; };
@@ -117,6 +123,7 @@
 		043FE1F726327B5F00D3BC7F /* TopicRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicRepository.swift; sourceTree = "<group>"; };
 		043FE1FA26327BA500D3BC7F /* StudentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentRepository.swift; sourceTree = "<group>"; };
 		04452BDF265A4A7600E9EAB8 /* StudentFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentFeedback.swift; sourceTree = "<group>"; };
+		045F439326711C1B00E0CD77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0463DE8E2626BDFA0047DCC0 /* PageControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageControl.swift; sourceTree = "<group>"; };
 		0463DE912626C7350047DCC0 /* SelectRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRole.swift; sourceTree = "<group>"; };
 		0463DE942626D91B0047DCC0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -131,9 +138,9 @@
 		04AB43CE262F4004004E932B /* BatchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchRepository.swift; sourceTree = "<group>"; };
 		04AB43EA262F4217004E932B /* DatabaseReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseReference.swift; sourceTree = "<group>"; };
 		04C6245B2657C0430074A370 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		04D3AB2C266FD94C00573564 /* Felix Student.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Felix Student.entitlements"; sourceTree = "<group>"; };
 		04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchDetailTableViewCell.swift; sourceTree = "<group>"; };
 		04E547FC263082BD0083D81D /* BatchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchCellViewModel.swift; sourceTree = "<group>"; };
-		04E547FF26309C360083D81D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		33D9B047749F0C4396739C84 /* Pods-Felix Student.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Felix Student.release.xcconfig"; path = "Target Support Files/Pods-Felix Student/Pods-Felix Student.release.xcconfig"; sourceTree = "<group>"; };
 		37B497B1CB19A41473643959 /* Pods_Felix_Student.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Felix_Student.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		629E1ABD9AD0471F920EC66B /* Pods-Felix Student.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Felix Student.debug.xcconfig"; path = "Target Support Files/Pods-Felix Student/Pods-Felix Student.debug.xcconfig"; sourceTree = "<group>"; };
@@ -184,6 +191,7 @@
 		040694ED2625BBCC00C0EDC0 /* Felix Student */ = {
 			isa = PBXGroup;
 			children = (
+				04D3AB2C266FD94C00573564 /* Felix Student.entitlements */,
 				0464C0032631839A0040A753 /* Authentication */,
 				04014B36262F42B3008F2C01 /* Helper Files */,
 				04AB43BC262F0053004E932B /* App */,
@@ -194,7 +202,7 @@
 				040694F42625BBCD00C0EDC0 /* Assets.xcassets */,
 				040694F92625BBCD00C0EDC0 /* LaunchScreen.storyboard */,
 				040694FC2625BBCD00C0EDC0 /* Info.plist */,
-				04E547FF26309C360083D81D /* GoogleService-Info.plist */,
+				045F439326711C1B00E0CD77 /* GoogleService-Info.plist */,
 				040694F62625BBCD00C0EDC0 /* Preview Content */,
 			);
 			path = "Felix Student";
@@ -259,6 +267,7 @@
 				043D85D0262997A500397596 /* MarkAttendance.swift */,
 				043D85D32629D1C300397596 /* AddNewTopic.swift */,
 				04452BDF265A4A7600E9EAB8 /* StudentFeedback.swift */,
+				042BB37F26693E0E00A9AA3D /* NotificationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -273,6 +282,7 @@
 				042AC42F26344F18005EA11C /* Reference.swift */,
 				042AC43226345240005EA11C /* GeneralFeedback.swift */,
 				042AC43926346CC0005EA11C /* User.swift */,
+				042BB37C26693C8600A9AA3D /* Notification.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -304,6 +314,7 @@
 				04AB43CA262F0998004E932B /* StudentViewModel.swift */,
 				042AC43626345CBD005EA11C /* ReferenceViewModel.swift */,
 				0413BC84263B2229008E8BDD /* GeneralFeedbackViewModel.swift */,
+				042BB38226693FE300A9AA3D /* NotificationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -349,6 +360,7 @@
 				040694E82625BBCB00C0EDC0 /* Frameworks */,
 				040694E92625BBCB00C0EDC0 /* Resources */,
 				1B8EB188AACA628F81B7A956 /* [CP] Embed Pods Frameworks */,
+				047A5AEB26613A4C007160A0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -400,8 +412,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				040694FB2625BBCD00C0EDC0 /* LaunchScreen.storyboard in Resources */,
-				04E5480026309C360083D81D /* GoogleService-Info.plist in Resources */,
+				046B8523265E6A2E007A7E5B /* LaunchScreen.storyboard in Resources */,
+				045F439426711C1B00E0CD77 /* GoogleService-Info.plist in Resources */,
 				040694F82625BBCD00C0EDC0 /* Preview Assets.xcassets in Resources */,
 				040694F52625BBCD00C0EDC0 /* Assets.xcassets in Resources */,
 			);
@@ -410,6 +422,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		047A5AEB26613A4C007160A0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		1B8EB188AACA628F81B7A956 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -472,10 +503,13 @@
 				04159AB22628493D0056006C /* ReferAndEarn.swift in Sources */,
 				04014B38262F42D5008F2C01 /* Constants.swift in Sources */,
 				04159AB8262851140056006C /* EditProfile.swift in Sources */,
+				042BB38026693E0E00A9AA3D /* NotificationView.swift in Sources */,
 				043D8621262AFAB600397596 /* Student.swift in Sources */,
 				043D85CE2629927900397596 /* AddTopic.swift in Sources */,
 				040694EF2625BBCC00C0EDC0 /* AppDelegate.swift in Sources */,
 				042AC43A26346CC0005EA11C /* User.swift in Sources */,
+				042BB38326693FE300A9AA3D /* NotificationViewModel.swift in Sources */,
+				042BB37D26693C8600A9AA3D /* Notification.swift in Sources */,
 				04452BE0265A4A7600E9EAB8 /* StudentFeedback.swift in Sources */,
 				042AC42926341A52005EA11C /* TextAlert.swift in Sources */,
 				04E03ABC264BD6E40094E4B3 /* BatchDetailTableViewCell.swift in Sources */,
@@ -642,7 +676,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Felix Student/Felix Student.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Felix Student/Preview Content\"";
 				DEVELOPMENT_TEAM = VFRFP6ZDLY;
 				ENABLE_PREVIEWS = YES;
@@ -651,7 +687,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.felixtechlabs.Felix-Student";
+				PRODUCT_BUNDLE_IDENTIFIER = com.felixtechlabs.FelixStudent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -664,7 +700,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Felix Student/Felix Student.entitlements";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"Felix Student/Preview Content\"";
 				DEVELOPMENT_TEAM = VFRFP6ZDLY;
 				ENABLE_PREVIEWS = YES;
@@ -673,7 +711,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.felixtechlabs.Felix-Student";
+				PRODUCT_BUNDLE_IDENTIFIER = com.felixtechlabs.FelixStudent;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

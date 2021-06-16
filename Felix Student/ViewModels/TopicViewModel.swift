@@ -19,15 +19,17 @@ class TopicViewModel: ObservableObject, Identifiable {
     @Published var attendance: [Attendance] = []
     @Published var attendanceOfSameBatchId: [Attendance] = []
     @Published var attDict = [Int64: [Topic]]()
-    
-    let uid = SessionStore.shared.session?.uid
+    @Published var feedback = Feedbacks()
+    @Published var feedbackArr = [Feedbacks]()
+    let uid = Auth.auth().currentUser?.uid
     let leadId = SessionStore.shared.student?.leadId
+    
     init() {
         
     }
     
     func loadTopicsWith(batchId: String, completionHandler: @escaping ([Topic], Int, String) -> Void) {
-        DatabaseReference.shared.topicReference().whereField("batchId", isEqualTo: batchId).getDocuments { [unowned self] (snapshot, error) in
+        DatabaseReference.shared.topicReference().whereField("batchId", isEqualTo: batchId).order(by: "dateCreatedAt", descending: true).getDocuments { [unowned self] (snapshot, error) in
             if error == nil {
                 self.topics.removeAll()
                 var averageFeedback = 0
@@ -35,47 +37,60 @@ class TopicViewModel: ObservableObject, Identifiable {
                 var hrsCovered = ""
                 var hrsCoveredInt = 0.0
                 for document in snapshot!.documents {
+                    var facultyAvgFeedback = 0
                     let topic = Mapper<Topic>().map(JSON: document.data())
                     if let feedbacks = topic?.feedbacks {
                         counter = feedbacks.count
-                        if let feedback = feedbacks[uid ?? ""] {
-                            
-                            topic?.presentString = "Feedback sent"
-                            topic?.rating = feedback.rating
-                            averageFeedback += topic!.rating
+                        if Utility.getRole() == Constants.FACULTY {
+                            for feed in feedbacks {
+                                let studFeedback = Mapper<Feedbacks>().map(JSON: feed.value.toJSON())
+                                facultyAvgFeedback += studFeedback?.rating ?? 0
+                            }
+                            if counter != 0 {
+                                facultyAvgFeedback = facultyAvgFeedback / counter
+                            }
+                            topic?.averageFeedback = Int(facultyAvgFeedback)
                             self.topics.append(topic!)
+                        
                         } else {
-                            self.loadAttendancesWith(aid: topic!.aid, topic: topic!)
+                            if let feedback = feedbacks[uid ?? ""] {
+                                topic?.presentString = "Feedback sent"
+                                topic?.rating = feedback.rating
+                                averageFeedback += topic!.rating
+                                self.topics.append(topic!)
+                            } else {
+                                self.loadAttendancesWith(aid: topic!.aid, topic: topic!)
+                            }
                         }
                     }  else {
                         self.loadAttendancesWith(aid: topic!.aid, topic: topic!)
                     }
                     hrsCoveredInt += Double(topic!.timeSpentMints)
-                    print(hrsCoveredInt)
                 }
-                
-                
                 if counter != 0 {
                     averageFeedback = averageFeedback / counter
                 }
                 let avg = Double(hrsCoveredInt) / 60
                 hrsCovered = String(format: "%.2f Hrs", avg)
+               
+                
                 completionHandler(self.topics, averageFeedback, hrsCovered)
             }
         }
     }
     
     func giveFeedback(feedback: Feedbacks, topicId: String) {
-        print(feedback.toJSON())
-        print(topicId)
-        DatabaseReference.shared.topicReference().document(topicId).updateData(["feedbacks": feedback.toJSON()])
+        Utility.fromFeedbackScreen = true
+        feedback.uid = Auth.auth().currentUser?.uid ?? ""
+        feedback.createdAt = Int64(Date().timeIntervalSince1970)
+        DatabaseReference.shared.topicReference().document(topicId).updateData(["feedbacks": [feedback.uid: feedback.toJSON()]])
         { (err) in
             print(err?.localizedDescription as Any)
         }
     }
     
     func loadAttendancesWith(aid: String, topic: Topic) {
-        DatabaseReference.shared.attendanceReference().whereField("aid", isEqualTo: aid).getDocuments { [unowned self] (snapshot, error) in
+        DatabaseReference.shared.attendanceReference().whereField("aid", isEqualTo: aid).order(by: "createdAt", descending: true).getDocuments { [self] (snapshot, error) in
             if error == nil {
                 self.attendance.removeAll()
                 for document in snapshot!.documents {
@@ -98,6 +113,9 @@ class TopicViewModel: ObservableObject, Identifiable {
                                 if atValue {
                                     topic.presentString = "Feedback pending"
                                 }
+                                else {
+                                    topic.presentString = "Absent"
+                                }
                             } else {
                                 topic.presentString = "Absent"
                             }
@@ -105,47 +123,48 @@ class TopicViewModel: ObservableObject, Identifiable {
                         
                     }
                     self.topics.append(topic)
+                    self.topics = self.topics.sorted { $0.dateCreatedAt > $1.dateCreatedAt }
+                    self.topics = self.topics.reversed()
                 }
             }
         }
     }
     func loadTopicsForAttendance(date: String, batchId: String, completionHandler: @escaping ([Topic], Int, String) -> Void) {
-        print(date)
-        print(batchId)
-           DatabaseReference.shared.topicReference().whereField("date", isEqualTo: date).whereField("batchId", isEqualTo: batchId).getDocuments { [unowned self] (snapshot, error) in
+
+        DatabaseReference.shared.topicReference().whereField("date", isEqualTo: date).whereField("batchId", isEqualTo: batchId).order(by: "createdAt", descending: true).getDocuments { [unowned self] (snapshot, error) in
             if ((snapshot?.isEmpty) != nil) {
-                   self.topicsOfSameAid.removeAll()
-                   var topicArray: [Topic] = []
-                   var averageFeedback = 0
-                   var counter = 0
-                   var hrsCovered = ""
-                   var hrsCoveredInt = 0.0
-                   for document in snapshot!.documents {
-                       let topic = Mapper<Topic>().map(JSON: document.data())
-                       
-                       if let feedbacks = topic?.feedbacks {
-                           counter = feedbacks.count
-                           if let feedback = feedbacks[uid ?? ""] {
-                               topic?.presentString = "Feedback sent"
-                               topic?.rating = feedback.rating
-                               topic?.ratingImage = renderImageWithRating(rating: topic!.rating)
-                               topic?.averageFeedback += topic!.rating
-                           }
-                       }
-                       hrsCoveredInt += Double(topic!.timeSpentMints)
-                       topicArray.append(topic!)
-                       self.topicsOfSameAid.append(topic!)
-                   }
-                   if counter != 0 {
-                       averageFeedback = averageFeedback / counter
-                   }
-                   hrsCovered = "\(hrsCoveredInt) Hrs"
-                   completionHandler(topicsOfSameAid, averageFeedback, hrsCovered)
-               }
-           }
-       }
+                self.topicsOfSameAid.removeAll()
+                var topicArray: [Topic] = []
+                var averageFeedback = 0
+                var counter = 0
+                var hrsCovered = ""
+                var hrsCoveredInt = 0.0
+                for document in snapshot!.documents {
+                    let topic = Mapper<Topic>().map(JSON: document.data())
+                    
+                    if let feedbacks = topic?.feedbacks {
+                        counter = feedbacks.count
+                        if let feedback = feedbacks[uid ?? ""] {
+                            topic?.presentString = "Feedback sent"
+                            topic?.rating = feedback.rating
+                            topic?.ratingImage = renderImageWithRating(rating: topic!.rating)
+                            topic?.averageFeedback += topic!.rating
+                        }
+                    }
+                    hrsCoveredInt += Double(topic!.timeSpentMints)
+                    topicArray.append(topic!)
+                    self.topicsOfSameAid.append(topic!)
+                }
+                if counter != 0 {
+                    averageFeedback = averageFeedback / counter
+                }
+                hrsCovered = "\(hrsCoveredInt) Hrs"
+                completionHandler(topicsOfSameAid, averageFeedback, hrsCovered)
+            }
+        }
+    }
     func loadTopicsOfAid(aid: String, completionHandler: @escaping ([Topic], Int, String) -> Void) {
-        DatabaseReference.shared.topicReference().whereField("aid", isEqualTo: aid).getDocuments { [unowned self] (snapshot, error) in
+        DatabaseReference.shared.topicReference().whereField("aid", isEqualTo: aid).order(by: "createdAt", descending: true).getDocuments { [unowned self] (snapshot, error) in
             if error == nil {
                 self.topicsOfSameAid.removeAll()
                 var topicArray: [Topic] = []
@@ -179,14 +198,15 @@ class TopicViewModel: ObservableObject, Identifiable {
     }
     
     func checkTopicsAePresentAtDate(selectedDate: String, batchId: String, handler:@escaping (Bool) -> Void) {
+        print(selectedDate)
         print(batchId)
-        DatabaseReference.shared.attendanceReference().whereField("date", isEqualTo: selectedDate).whereField("batchId", isEqualTo: batchId).getDocuments { (snapshot, error) in
-//            if ((snapshot?.isEmpty) != nil) {
-//                handler(true)
-//            } else {
-//                handler(false)
-//            }
-            print(snapshot?.documents.count)
+        DatabaseReference.shared.topicReference().whereField("date", isEqualTo: selectedDate).whereField("batchId", isEqualTo: batchId).getDocuments { (snapshot, error) in
+            if (snapshot?.documents.count ?? 0 > 0) {
+                handler(true)
+            } else {
+                handler(false)
+            }
+            
         }
         
     }
@@ -203,7 +223,7 @@ class TopicViewModel: ObservableObject, Identifiable {
             return ""
         }
     }
-
+    
     func loadAttendanceWith(batchId: String, completionHandler:@escaping ([Attendance]) -> Void) {
         DatabaseReference.shared.attendanceReference().whereField("batchId", isEqualTo: batchId).order(by: "createdAt", descending: true).getDocuments { (snapshot, error) in
             if error == nil {
@@ -232,5 +252,59 @@ class TopicViewModel: ObservableObject, Identifiable {
             }
         })
     }
+    
+    func loadFeedbacksOfAid(aid: String, handler: @escaping([Feedbacks], Int) -> Void) {
+        DatabaseReference.shared.topicReference().whereField("aid", isEqualTo: aid).getDocuments { (snapshot, error) in
+            if let err = error {
+                print(err)
+            } else {
+                self.topics.removeAll()
+                var feedbacksArray: [Feedbacks] = []
+                var averageFeedback = 0
+                var counter = 0
+                for document in snapshot!.documents {
+                    let topic = Mapper<Topic>().map(JSON: document.data())
+                    if let feedbacks = topic?.feedbacks {
+                        counter = feedbacks.count
+                        for feedback in feedbacks.values {
+                            topic?.presentString = "Feedback sent"
+                            topic?.rating = feedback.rating
+                            averageFeedback += topic!.rating
+                            self.topics.append(topic!)
+                            feedbacksArray.append(feedback)
+                        }
+                    }
+                }
+                print(averageFeedback)
+                
+                if counter != 0 {
+                    averageFeedback = averageFeedback / counter
+                }
+                self.feedbackArr = feedbacksArray
+                handler(feedbacksArray, averageFeedback)
+            }
+        }
+    }
+    
+    func getFeedbackOfParticularStudent(topicId: String, handler:@escaping(Feedbacks)->Void) {
+        DatabaseReference.shared.topicReference().whereField("topicId", isEqualTo: topicId).getDocuments { (snapshot, error) in
+            if let err = error {
+                print(err)
+            } else {
+                self.topics.removeAll()
+                for document in snapshot!.documents {
+                    let topic = Mapper<Topic>().map(JSON: document.data())
+                    if let feedbacks = topic?.feedbacks {
+                        if let feedback = feedbacks[self.uid ?? ""] {
+                            self.feedback = Feedbacks(comment: feedback.comment, feedback: feedback.feedback, rating: feedback.rating)
+            
+                            handler(self.feedback)
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
 

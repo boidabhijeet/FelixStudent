@@ -13,6 +13,7 @@ struct MarkAttendance: View {
     var studentVM = StudentViewModel()
     var batch: Batch
     var topicVM = TopicViewModel()
+    var batchDateString: String
     @Binding var shouldPopToRootView : Bool
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
 //    let navigationStack: NavigationStack
@@ -22,7 +23,6 @@ struct MarkAttendance: View {
     @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
 
     var body: some View {
-//        NavigationView {
         VStack {
             List (checklistItems) { checklistItem in
                 HStack {
@@ -40,9 +40,6 @@ struct MarkAttendance: View {
                   }
                 }
 
-                
-                //              .onDelete(perform: deleteListItem)
-                //              .onMove(perform: moveListItem)
             }.onAppear(perform: {
                 studentVM.getStudentsFom(batchId: batch.batchId) { (studArray) in
                     checklistItems = []
@@ -60,25 +57,25 @@ struct MarkAttendance: View {
                     markAtt.updateValue(item.isChecked, forKey: item.uid)
                 }
                 self.shouldPopToRootView = true
+                for newTopic in newTopics {
+                    let att = Attendance(batchId: batch.batchId, batchModule: batch.module, remark: newTopic.remarks, totalTimeSpent: newTopic.timeSpent, totalTimeSpentMints: newTopic.timeSpentMints, markAttendance: markAtt, createdAt: Int64(Date().timeIntervalSince1970))
+                    print(att.toJSON())
+                    newTopic.date = batchDateString
+                    topicVM.saveAttendanceAndTopic(newTopic: newTopic, attn: att)
+                    DatabaseReference.shared.topicArray = []
+                }
+                
                 Router.showTabbar()
-
-//                let att = Attendance(batchId: batch.batchId, batchModule: batch.module, remark: newTopic.remarks, totalTimeSpent: newTopic.timeSpent, totalTimeSpentMints: newTopic.timeSpentMints, markAttendance: markAtt, createdAt: Int64(Date().timeIntervalSince1970))
-//                print(att.toJSON())
-//                topicVM.saveAttendanceAndTopic(newTopic: newTopic, attn: att)
-//                self.mode.wrappedValue.dismiss()
-//                self.rootPresentationMode.wrappedValue.dismiss()
-//                self.presentationMode.wrappedValue.dismiss()
-//                navigationStack.pop(to: .root)
             }) {
                 HStack(spacing: 10) {
                     Text("Mark Attendance")
                 }
-            }.padding()
+            }.padding(10)
             .frame(maxWidth: .infinity)
             .foregroundColor(.white)
             .background(Color.red)
         }.navigationTitle("Mark Attendance")
-//        }
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     func deleteListItem(whichElement: IndexSet) {

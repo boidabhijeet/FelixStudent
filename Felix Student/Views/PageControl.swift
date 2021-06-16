@@ -14,6 +14,7 @@ struct PageControl: View {
             SecondView()
             ThirdView()
         }
+        
         .tabViewStyle(PageTabViewStyle())
         .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
     }

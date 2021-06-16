@@ -6,12 +6,21 @@
 //
 
 import SwiftUI
+import AlertToast
 
 struct FelixManagement: View {
+    @State private var showToast = false
+    init() {
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
+        navigationBarAppearace.tintColor = #colorLiteral(red: 0, green: 0.4377841353, blue: 0.654399991, alpha: 1)
+    }
     var body: some View {
-        //        NavigationView {
-        VStack(alignment: .center) {
-            Spacer()
+        VStack(alignment: .leading) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(Color.white)
+                    .frame(width: 350, height: 60)
             NavigationLink(
                 destination: FelixFeedback()) {
                 HStack(spacing: 10) {
@@ -22,15 +31,15 @@ struct FelixManagement: View {
                 .foregroundColor(Color.black)
                 .multilineTextAlignment(.center)
                 
+            }.isDetailLink(false)
             }
-            .isDetailLink(false)
-            .frame(minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: 100,
-                    alignment: .leading)
-            .border(Color.gray).frame(maxWidth: .infinity)
-            
+            .padding()
+            .shadow(color: .gray, radius: 10)
+                    
+            ZStack {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(Color.white)
+                    .frame(width: 350, height: 60)
             NavigationLink(
                 destination: ReferAndEarn()) {
                 HStack(spacing: 10) {
@@ -43,42 +52,46 @@ struct FelixManagement: View {
                 
             }
             .isDetailLink(false)
-            .frame(minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: 100,
-                    alignment: .leading)
-            .border(Color.gray).frame(maxWidth: .infinity)
-            
-            NavigationLink(
-                destination: RaiseTicket()) {
-                HStack(spacing: 10) {
-                    Image("icn_raiseticket")
-                    Text("Raise a Ticket")
-                }.font(.title)
-                .padding()
-                .foregroundColor(Color.black)
-                .multilineTextAlignment(.center)
-                
             }
-            .isDetailLink(false)
-            .frame(minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: 100,
-                    alignment: .leading)
-            .border(Color.gray).frame(maxWidth: .infinity)
-            Spacer()
-        }.padding()
-        //            .frame(minWidth: 0,
-        //                   maxWidth: .infinity,
-        //                   minHeight: 0,
-        //                   maxHeight: .infinity,
-        //                   alignment: .leading)
+            .padding()
+            .shadow(color: .gray, radius: 10)
+            
+//            NavigationLink(
+//                destination: RaiseTicket()) {
+//                HStack(spacing: 10) {
+//                    Image("Ticket")
+//                    Text("Raise a Ticket")
+//                }.font(.title)
+//                .padding()
+//                .foregroundColor(Color.black)
+//                .multilineTextAlignment(.center)
+//
+//            }
+//            .isDetailLink(false)
+//            .frame(minWidth: 0,
+//                    maxWidth: .infinity,
+//                    minHeight: 0,
+//                    maxHeight: 100,
+//                    alignment: .leading)
+//            .border(Color.gray).frame(maxWidth: .infinity)
+           
+        }
+        .padding(.top, 100)
+        .frame(
+              minWidth: 0,
+              maxWidth: .infinity,
+              minHeight: 0,
+              maxHeight: .infinity,
+              alignment: .topLeading
+            )
+       
         .navigationBarTitle("@ Felix Management")
-        
+        .toast(isPresenting: $showToast){
+            
+            // `.alert` is the default displayMode
+            AlertToast(type: .regular, title: ToastAlert.felixFeedback)
+        }
     }
-    //    }
 }
 
 struct FelixManagement_Previews: PreviewProvider {

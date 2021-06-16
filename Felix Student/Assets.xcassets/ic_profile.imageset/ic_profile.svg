@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17.543" height="17.543" viewBox="0 0 17.543 17.543">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="17.543" height="17.543" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="Repeat_Grid_2" data-name="Repeat Grid 2" clip-path="url(#clip-path)">
+    <g transform="translate(-18.5 -336.457)">
+      <path id="Icon_open-person" data-name="Icon open-person" d="M8.771,0C6.359,0,4.386,2.456,4.386,5.482s1.974,5.482,4.386,5.482,4.386-2.456,4.386-5.482S11.184,0,8.771,0ZM4.188,10.964A4.39,4.39,0,0,0,0,15.35v2.193H17.543V15.35a4.375,4.375,0,0,0-4.188-4.386,6.159,6.159,0,0,1-4.583,2.193A6.159,6.159,0,0,1,4.188,10.964Z" transform="translate(18.5 336.457)" fill="#ed1c24"/>
+    </g>
+  </g>
+</svg>

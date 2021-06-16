@@ -13,9 +13,7 @@ struct BatchDetails: View {
     @State var appearCount = 0
     @State private var timeSpent = ""
     @ObservedObject var topicVM = TopicViewModel()
-//    @State var isActive : Bool = false
     @State var avgFeedback = 0
-    
     @State private var isActive : Bool = false
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
@@ -25,43 +23,63 @@ struct BatchDetails: View {
         UINavigationBar.appearance().tintColor = .systemGray6
         UINavigationBar.appearance().barTintColor = .systemTeal
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)]
-        if !didAppear {
+        // Set selected (onTapped) background color of cell.
+        let color = UIView()
+        color.backgroundColor = UIColor.red
+        UITableViewCell.appearance().selectedBackgroundView = color
+        if !didAppear || Utility.fromFeedbackScreen {
             appearCount += 1
             topicVM.loadTopicsWith(batchId: batch.batchId){ (topics,avgFeedback,hrsCovered)  in
+                
                 self.avgFeedback = avgFeedback
                 self.hrsCovered = hrsCovered
+                Utility.fromFeedbackScreen = false
             }
         }
         didAppear = true
     }
     var body: some View {
-//        NavigationView {
-        VStack {
+        VStack(spacing: 0) {
             ZStack {
-                RoundedRectangle(cornerRadius: 25, style: .continuous)
+                RoundedRectangle(cornerRadius: 25)
                     .fill(Color.white)
-                    VStack(alignment: .leading) {
-                        Text(batch.module)
-                            .font(.headline)
+                    .frame(width: 350, height: 130)
+                
+                VStack(alignment: .leading) {
+                    Text(batch.module)
+                        .font(.system(size: 25, weight: .bold, design: .default))
+                    if Utility.getRole() == Constants.FACULTY {
                         Text("start date: \(batch.fromDateString) @\(batch.fromTime)")
-                        Text("Hours Covered: \(batch.totalHours)")
+                    } else {
+                        Text("Batch start date: \(batch.fromDateString)")
+                    }
+                    
+                    Text("Hours Covered: \(self.hrsCovered)")
+                    if Utility.getRole() == Constants.FACULTY {
                         Text("Total Students: \(batch.students.count)")
-                        VStack(alignment: .trailing) {
-                            HStack(alignment: .bottom, spacing: nil, content: {
-                                Spacer()
-                                Button(action: {
-                                    print("Edit button was tapped")
-                                }) {
-                                    HStack(spacing: 10) {
-                                        Text("Show study material")
-                                        Image("icn_redArrow")
-                                        
-                                    }
-                                }.foregroundColor(.red)
-                            })
-                        }
-                    } .padding()
-            }.padding().shadow(color: Color.gray, radius: 10)
+                    } else {
+                        Text("Faculty Name: \(batch.faculty)")
+                    }
+                    
+                    //                    VStack(alignment: .trailing) {
+                    //                        HStack(alignment: .bottom, spacing: nil, content: {
+                    //                            Spacer()
+                    //                            Button(action: {
+                    //                                print("Edit button was tapped")
+                    //                            }) {
+                    //                                HStack(spacing: 10) {
+                    //                                    Text("Show study material")
+                    //                                    Image("icn_redArrow")
+                    //
+                    //                                }
+                    //                            }.foregroundColor(.red)
+                    //                        })
+                    //                    }
+                    
+                }.padding()
+            }
+            .padding()
+            .shadow(color: Color.gray, radius: 5)
             
             Section(header:
                         Text("Topics Covered")
@@ -70,37 +88,51 @@ struct BatchDetails: View {
             }.foregroundColor(.black)
             
             
-                        listView
-                            .onAppear(perform: {
-                                onLoad()
-                            })
+            listView
+                .onAppear(perform: {
+                    onLoad()
+                })
+//                .listStyle(InsetListStyle())
+//                .listItemTint(.black)
+                
             
-            VStack {
-                HStack {
-                    Spacer()
-                    NavigationLink(
-                        destination: AddTopic(batch: batch, aid: "", fromPlusButton: true, topic: nil, rootIsActive: self.$isActive, batchDateString: "", isActive: isActive)) {
-                        HStack(spacing: 10) {
-                            Text("+")
-                                .font(.system(.largeTitle))
-                                .frame(width: 77, height: 70)
-                                .foregroundColor(Color.white)
-                                .padding(.bottom, 7)
+            if Utility.getRole() == Constants.FACULTY {
+                Spacer()
+                VStack {
+                    HStack {
+                        Spacer()
+                        NavigationLink(
+                            destination: AddTopic(batch: batch, aid: "", fromPlusButton: true, topic: nil, rootIsActive: self.$isActive, batchDateString: "", isActive: isActive)) {
+                            HStack(spacing: 10) {
+                                Text("+")
+                                    .font(.system(.largeTitle))
+                                    .frame(width: 57, height: 50)
+                                    .foregroundColor(Color.white)
+                                    .padding(.bottom, 7)
+                            }
+                            
                         }
-                       
+                        .isDetailLink(false)
+                        .background(Color.black)
+                        .cornerRadius(38.5)
+                        .padding()
+                        .shadow(color: Color.black.opacity(0.3),
+                                radius: 3,
+                                x: 3,
+                                y: 3)
                     }
-                    .isDetailLink(false)
-                    .background(Color.black)
-                    .cornerRadius(38.5)
-                    .padding()
-                    .shadow(color: Color.black.opacity(0.3),
-                            radius: 3,
-                            x: 3,
-                            y: 3)
                 }
             }
-        }.navigationBarTitle("Batch Details")
-//        }
+        }
+        .frame(
+            minWidth: 0,
+            maxWidth: .infinity,
+            minHeight: 0,
+            maxHeight: .infinity,
+            alignment: .topLeading
+        )
+        .navigationBarTitle("Batch Details")
+        .navigationBarTitleDisplayMode(.inline)
     }
     @ViewBuilder
     var listView: some View {
@@ -108,6 +140,7 @@ struct BatchDetails: View {
             emptyListView
         } else {
             objectsListView
+            
         }
     }
     
@@ -118,12 +151,13 @@ struct BatchDetails: View {
     var objectsListView: some View {
         List(topicVM.topics) { topic in
             TopicRow(topicData: topic, batch: batch)
+                .listRowBackground(Color.red)
         }
     }
 }
 
 struct TopicRow: View {
-    var topicData: Topic
+    @State var topicData: Topic
     var batch: Batch
     let role = Utility.getRole()
     @State var isActive : Bool = false
@@ -131,50 +165,121 @@ struct TopicRow: View {
         ZStack {
             RoundedRectangle(cornerRadius: 25, style: .continuous)
                 .fill(Color.white)
-            VStack(alignment: .leading, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
-                
+            
+            VStack(alignment: .leading) {
+                Spacer()
                 HStack {
-                    Text(topicData.topic)
+                    Text(topicData.topic).font(.system(size: 16, weight: .bold, design: .default))
                     Spacer()
                     Text(topicData.date)
                 }
-                Text("Hours: "+topicData.timeSpent)
+                Spacer()
+                Text("Hours: " + topicData.timeSpent)
+                Spacer()
                 if role == Constants.FACULTY {
                     HStack {
-                        Text("Avg rating:\(topicData.averageFeedback)")
-                        Spacer()
-                        Text(topicData.presentString)
+                        
+                        if topicData.averageFeedback == 0 {
+                            Text("Avg rating:\(topicData.averageFeedback)")
+                        } else if topicData.averageFeedback == 1 {
+                            HStack {
+                                Text("Avg rating: ")
+                                Image("icn_understoodselected")
+                            }
+                            
+                        } else if topicData.averageFeedback == 2 {
+                            HStack {
+                                Text("Avg rating: ")
+                                Image("icn_partiallyunderstood-1")
+                            }
+                        } else if topicData.averageFeedback == 3 {
+                            HStack {
+                                Text("Avg rating: ")
+                                Image("icn_notunderstoodselected")
+                            }
+                            Spacer()
+                            Text(topicData.presentString)
+                        }
                     }
                 } else {
                     HStack {
-                        Text("My rating: \(topicData.rating)")
-                        Image(topicData.ratingImage)
-                        Spacer()
-                        Group {
-                            Text(topicData.presentString)
+                        if topicData.rating == 0 {
+                            Text("My rating: 0")
+                        } else if topicData.rating == 1 {
+                            HStack {
+                                Text("My rating: ")
+                                Image("icn_understoodselected")
+                            }
+                            
+                        } else if topicData.rating == 2 {
+                            HStack {
+                                Text("My rating: ")
+                                Image("icn_partiallyunderstood-1")
+                            }
+                        } else if topicData.rating == 3 {
+                            HStack {
+                                Text("My rating: ")
+                                Image("icn_notunderstoodselected")
+                            }
                         }
-                        .background(Color.yellow)
-                        .padding()
-                        
+                        Spacer()
+                        if topicData.presentString == "Feedback sent" {
+                            Group {
+                                Text(topicData.presentString)
+                            }.padding(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.green, lineWidth: 2)
+                            )
+                            .background(Color.green)
+                            .opacity(0.5)
+                        } else if topicData.presentString == "Feedback pending" {
+                            Group {
+                                Text(topicData.presentString)
+                            }.padding(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.yellow, lineWidth: 2)
+                            )
+                            .background(Color.yellow)
+                            .opacity(0.5)
+                        } else {
+                            Group {
+                                Text(topicData.presentString)
+                            }.padding(10)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.red, lineWidth: 2)
+                            )
+                            .background(Color.red)
+                            .opacity(0.5)
+                        }
                     }
                 }
                 if Utility.getRole() == Constants.FACULTY {
-                    NavigationLink(destination: StudentFeedback()) {
+                    NavigationLink(destination: StudentFeedback(topic: topicData, avgFeedback: 0)) {
                         EmptyView()
                     } .isDetailLink(false)
-                } else {
-                   
+                    .buttonStyle(PlainButtonStyle()).frame(width:0).opacity(0)
+                } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback pending" {
+                    
                     NavigationLink(destination: GiveFeedback(topic: topicData)) {
                         EmptyView()
                     } .isDetailLink(false)
+                    .buttonStyle(PlainButtonStyle()).frame(width:0).opacity(0)
+                } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback sent" {
+                    NavigationLink(destination: Feedback(topic: topicData)) {
+                        EmptyView()
+                    }.isDetailLink(false)
+                    .buttonStyle(PlainButtonStyle()).frame(width:0).opacity(0)
                 }
                 
                 
-            })
-            .padding()
-            .shadow(color: Color.gray, radius: 5)
-            
-        }
+                
+                
+            }.padding()
+        }.padding()
+        .shadow(color: Color.gray, radius: 5)
         
     }
 }

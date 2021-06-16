@@ -18,6 +18,7 @@ pod 'ObjectMapper'
 pod 'Resolver'
 pod 'ToastUI'
 pod 'AlertToast'
-
-
+pod 'Firebase/Crashlytics'
+pod 'SDWebImageSwiftUI'
+pod 'Firebase/Messaging'
 end

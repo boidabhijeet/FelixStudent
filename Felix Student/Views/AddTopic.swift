@@ -24,26 +24,31 @@ struct AddTopic: View {
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
     @State private var showToast = false
+    @State private var showfutureToast = false
     @State private var disableButton = false
-
+    @State private var showingAlert = false
+    @State private var isShowingDetailView: Int? = 0
+    
     func stringDate() -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(batchDate))
         let dateFormatter = DateFormatter()
-        //        dateFormatter.timeStyle = DateFormatter.Style.medium //Set time style
         dateFormatter.dateStyle = DateFormatter.Style.medium //Set date style
         dateFormatter.timeZone = .current
         let localDate = dateFormatter.string(from: date)
         return localDate
     }
     func onLoad() {
-        if !fromPlusButton {
-            batchDate = TimeInterval(topic!.dateCreatedAt)
-            date = Date(timeIntervalSince1970: TimeInterval(batchDate))
+        if let topic = topic {
+            batchDate = TimeInterval(topic.dateCreatedAt)
         }
+        
+        date = Date(timeIntervalSince1970: TimeInterval(batchDate))
+        let formate = date.getFormattedDate(format: "dd MMM, yyyy") // Set output formate
+        batchDateString = formate
+        onCheck(selectedDate: batchDateString)
     }
     func onCheck(selectedDate: String) {
         self.topicVM.checkTopicsAePresentAtDate(selectedDate: selectedDate, batchId: batch.batchId) { (presentAtt) in
-            print(presentAtt)
             if presentAtt {
                 showToast = true
                 disableButton = true
@@ -51,20 +56,25 @@ struct AddTopic: View {
                 showToast = false
                 disableButton = false
             }
-//            loadTopics()
+            //            loadTopics()
             
         }
     }
     func loadTopics() {
-//        topicVM.loadTopicsOfAid(aid: aid) { (topics, avgFeedback, covered) in
-//            topicVM.topicsOfSameAid = topics
-//        }
-        topicVM.loadTopicsForAttendance(date: batchDateString, batchId: batch.batchId) { (topicArray, avgFeedback, coveredHrs) in
-            
+        topicVM.loadTopicsOfAid(aid: aid) { (topics, avgFeedback, covered) in
+            topicVM.topicsOfSameAid = topics
+        }
+        //        topicVM.loadTopicsForAttendance(date: batchDateString, batchId: batch.batchId) { (topicArray, avgFeedback, coveredHrs) in
+        //
+        //        }
+    }
+    func unpairAndSetDefaultDeviceInformation() {
+        // YOUR CODE IS HERE
+        DispatchQueue.main.async {
+            self.isShowingDetailView = 1
         }
     }
     var body: some View {
-        //        NavigationView {
         VStack {
             ZStack {
                 HStack {
@@ -77,30 +87,35 @@ struct AddTopic: View {
                         .datePickerStyle(CompactDatePickerStyle())
                         .labelsHidden()
                         .onChange(of: date) {
-                            print($0)
                             batchDate = $0.timeIntervalSince1970
-                            let formate = $0.getFormattedDate(format: "dd MMM,yyyy") // Set output formate
+                            let currentTimestamp = Date().timeIntervalSince1970
+                            if currentTimestamp < batchDate {
+                                showfutureToast = true
+                                disableButton = true
+                                return
+                            }
+                            let formate = $0.getFormattedDate(format: "dd MMM, yyyy") // Set output formate
                             batchDateString = formate
                             onCheck(selectedDate: formate)
                             
                         }
                 }
             }
-            List(topicVM.topicsOfSameAid, id: \.id) { feedback in
+            
+            
+            List(DatabaseReference.shared.topicArray, id: \.id) { feedback in
                 AddTopicRow(topicData: feedback)
             }
-//            .onAppear(perform: {
-//                loadTopics()
-//            })
+            
             VStack {
-                Spacer()
+                
                 HStack {
                     Spacer()
                     
-                    NavigationLink(destination: AddNewTopic(showModal: $showModal, batch: batch, topicData: topic ?? Topic(), rootIsActive: self.$rootIsActive, isActive: isActive)) {
+                    NavigationLink(destination: AddNewTopic(showModal: $showModal, batch: batch, batchDate: Int64(batchDate), batchDateString: batchDateString, rootIsActive: self.$rootIsActive, isActive: isActive)) {
                         HStack(spacing: 10) {
                             Text("+ click to add topic")
-                                .frame(width: 177, height: 70)
+                                .frame(width: 177, height: 35)
                                 .foregroundColor(Color.black)
                                 .padding(.bottom, 7)
                         }
@@ -117,24 +132,44 @@ struct AddTopic: View {
                 }
             }.disabled(disableButton == true)
             
-            NavigationLink(destination: MarkAttendance(newTopics: DatabaseReference.shared.topicArray, batch: batch, shouldPopToRootView: $isActive)
-            ) {
+            NavigationLink(destination:  MarkAttendance(newTopics: DatabaseReference.shared.topicArray, batch: batch, batchDateString: batchDateString, shouldPopToRootView: $isActive), tag: 1, selection: $isShowingDetailView) {
+                EmptyView()
+            }
+            
+            Button(action: {
+                showingAlert = true
+            }) {
                 HStack(spacing: 10) {
                     Text("Next")
                 }
-            }.padding()
+            }
+            .padding(10)
             .frame(maxWidth: .infinity)
             .foregroundColor(.white)
             .background(Color.red)
             .disabled(disableButton == true)
-        }.navigationTitle("Add Topic")
-        .toast(isPresenting: $showToast){
+        }
+        .alert(isPresented: $showingAlert) {
+            Alert(title: Text("Do you want to add more topics?"), message: Text("Once you mark attendance you unable to add more topics to this session"),  primaryButton: .destructive(Text("No")) {
+                self.isShowingDetailView = 1
+                let formate = date.getFormattedDate(format: "dd MMM, yyyy") // Set output formate
+                batchDateString = formate
+            },
+            secondaryButton: .default(Text("Yes")) {
+                
+            })
+        }
+        .navigationTitle("Add Topic")
+        .navigationBarTitleDisplayMode(.inline)
+        .toast(isPresenting: $showToast, duration: 10.0){
             
-            // `.alert` is the default displayMode
             AlertToast(type: .regular, title: ToastAlert.attendanceMarked)
         }
+        .toast(isPresenting: $showfutureToast, duration: 10.0){
+            
+            AlertToast(type: .regular, title: ToastAlert.FutureDate)
+        }
     }
-    //}
 }
 
 struct AddTopicRow: View {
@@ -145,13 +180,13 @@ struct AddTopicRow: View {
             HStack {
                 Text(topicData.topic)
                 Spacer()
-                Button(action: {
-                    print("Edit button was tapped")
-                }) {
-                    HStack(spacing: 10) {
-                        Image("icn_threedots")
-                    }
-                }
+                //                Button(action: {
+                //                    print("Edit button was tapped")
+                //                }) {
+                //                    HStack(spacing: 10) {
+                //                        Image("icn_threedots")
+                //                    }
+                //                }
             }
             Text(topicData.remarks)
             Text(topicData.timeSpent)
@@ -159,7 +194,7 @@ struct AddTopicRow: View {
         }
         .padding(25)
         .border(Color("GrayColor"))
-        .shadow(radius: 10 )
+        .shadow(radius: 5 )
         
     }
 }

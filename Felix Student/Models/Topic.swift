@@ -75,6 +75,10 @@ class Feedbacks: Mappable, Identifiable {
     var rating: Int = 0
     var uid: String = ""
     
+    init() {
+        
+    }
+    
     init(comment: String, feedback: String, rating: Int) {
         self.comment = comment
 //        self.createdAt = Int64(Date().timeIntervalSince1970)

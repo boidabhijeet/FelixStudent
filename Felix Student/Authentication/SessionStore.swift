@@ -28,38 +28,49 @@ class SessionStore: ObservableObject {
 //                self.session = nil
 //            }
 //        })
-        if let uid = Auth.auth().currentUser?.uid {
+        if (Auth.auth().currentUser?.uid) != nil {
             let uid = Auth.auth().currentUser?.uid
             let email = Auth.auth().currentUser?.email
             self.session = User(uid: uid!, email: email!)
-            fetchUser()
+            fetchUser { (isUserExixts) in
+                
+            }
         } else {
             return
         }
         
     }
     
-    func fetchUser() {
+    func fetchUser(Handler:@escaping (Bool) -> Void) {
         let role = Utility.getRole()
-
+        
         if role == Constants.FACULTY {
             
             DatabaseReference.shared.UsersReference().document(Auth.auth().currentUser!.uid).getDocument { [unowned self] (snapshot, error) in
                 if error == nil {
-                    self.user = Mapper<Users>().map(JSON: snapshot!.data()!)
+                    if let data = snapshot?.data() {
+                        self.user = Mapper<Users>().map(JSON: data)
+                        Handler(true)
+                    } else {
+                        Handler(false)
+                    }
+                    
                 }
             }
         } else if role == Constants.STUDENT {
-            DatabaseReference.shared.walkinReference().whereField(Constants.UID, isEqualTo: SessionStore.shared.student?.leadId).getDocuments { [unowned self] (snapshot, error) in
+            DatabaseReference.shared.walkinReference().whereField(Constants.UID, isEqualTo: Auth.auth().currentUser?.uid ?? "").getDocuments { [unowned self] (snapshot, error) in
                 guard let documents = snapshot?.documents else {
                     print("No Documents")
+                    Handler(false)
                     return
                 }
                 if error == nil {
                     for doc in documents {
                         self.student = Mapper<Student>().map(JSON: doc.data())
+                        Handler(true)
                     }
-                }                    }
+                }
+            }
         }
     }
     

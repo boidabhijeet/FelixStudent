@@ -11,32 +11,47 @@ import FirebaseAuth
 struct HomePage: View {
     @StateObject var batchVM = BatchViewModel()
     
+    init() {
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
+        navigationBarAppearace.tintColor = #colorLiteral(red: 0, green: 0.4377841353, blue: 0.654399991, alpha: 1)
+        
+    }
+  
+    
     var body: some View {
+    
+
         List(batchVM.batches) { batch in
-//            ForEach { batch in
-                
                 BatchRow(batch: batch)
-                    .shadow(color: Color.gray, radius: 10)
-//            }
+                    .shadow(color: Color.gray, radius: 5)
         }
         .onAppear() {
-            if Utility.getRole() == Constants.FACULTY {
-                self.batchVM.subscribe(facultyUid: Auth.auth().currentUser!.uid)
-            } else if Utility.getRole() == Constants.STUDENT {
-                self.batchVM.getBatchForStudent()
-            }
             
+            if batchVM.batches.count > 0 {
+                
+            } else {
+                if Utility.getRole() == Constants.FACULTY {
+                    self.batchVM.subscribe(facultyUid: Auth.auth().currentUser!.uid)
+                } else if Utility.getRole() == Constants.STUDENT {
+                    self.batchVM.getBatchForStudent()
+                }
+            }
         }
         .listStyle(InsetListStyle())
         .navigationTitle("Felix Student")
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button(action: {
-                    print("Notification icon tap")
-                    let myDate = Date()
-                }, label: { Image("icn_notification")
-                    
-                })
+//                Button(action: {
+//                    print("Notification icon tap")
+//                    let myDate = Date()
+//                }, label: { Image("icn_notification")
+//
+//                })
+                NavigationLink(destination: NotificationView()) {
+                    Image("icn_notification")
+                }
             }
         }
         
@@ -62,14 +77,27 @@ struct BatchRow: View {
                     VStack(alignment: .leading, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
                         Spacer()
                         Text(verbatim: batch.module)
-                            .font(.headline)
+                            .font(.system(size: 25, weight: .bold, design: .default))
                         Spacer()
-                        Text("start date: \(batch.fromDateString) @\(batch.fromTime)")
+                        if Utility.getRole() == Constants.FACULTY {
+                            Text("start date: \(batch.fromDateString) @\(batch.fromTime)")
+                        } else {
+                            Text("Batch start date: \(batch.fromDateString)")
+                        }
                         Spacer()
-                        Text("Hours Covered: \(batch.totalHours)")
-                        Spacer()
-                        Text("Total Students: \(batch.students.count)")
-                        Spacer()
+                        if Utility.getRole() == Constants.FACULTY {
+                            Text("Hours Covered: \(batch.totalHours)")
+                            Spacer()
+                            Text("Total Students: \(batch.students.count)")
+                            Spacer()
+                        } else {
+                            Text(batch.fromToTime)
+                            Spacer()
+                            Text("Faculty Name: \(batch.faculty)")
+                            Spacer()
+                        }
+                        
+                        
                     })
                     .padding(25)
                     
