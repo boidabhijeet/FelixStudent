@@ -63,6 +63,7 @@ struct SelectRole: View {
                         .multilineTextAlignment(.center)
                         .background(Color.red)
                     }
+                    NavigationLink(destination: EmptyView(), label: {})
                     Spacer()
                 }
             }.padding()

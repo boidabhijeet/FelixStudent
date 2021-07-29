@@ -11,7 +11,7 @@ struct StudentFeedback: View {
     var topic: Topic
     @State var avgFeedback: Int
     @ObservedObject private var topicVM = TopicViewModel()
-    
+    @State var feedbackArr: [Feedbacks] = []
     var body: some View {
         VStack {
                 HStack {
@@ -21,26 +21,25 @@ struct StudentFeedback: View {
                     if avgFeedback == 0 {
                         Text("No feedback received")
                     } else if avgFeedback == 1 {
-                        Image("icn_understoodselected")
+                        Image("icn_notunderstoodselected")
                     } else if avgFeedback == 2 {
                         Image("icn_partiallyunderstood-1")
                     } else if avgFeedback == 3 {
-                        Image("icn_notunderstoodselected")
+                        Image("icn_understoodselected")
                     }
                 }.padding()
-                .onAppear(perform: {
+                
+//            if self.feedbackArr.count != 0 {
+                List(self.feedbackArr) { feedback in
+                    StudentFeedbackRow(feedback: feedback)
+                }.onAppear(perform: {
                     topicVM.loadFeedbacksOfAid(aid: topic.aid) { (feedbacks, avgFeedback)  in
                        
                         self.avgFeedback = avgFeedback
+                        self.feedbackArr = feedbacks
                     }
                 })
-            if topicVM.feedbackArr.count != 0 {
-                List {
-                    ForEach(topicVM.feedbackArr) { feedback in
-                        StudentFeedbackRow(feedback: feedback)
-                    }
-                }
-            }
+//            }
             
         }
         .navigationTitle("Student Feedback")
@@ -65,7 +64,7 @@ struct StudentFeedbackRow: View {
                 HStack {
                     
                     VStack {
-                        Image(feedback.rating == 3 ? "icn_notunderstoodselected" : "icn_notunderstood")
+                        Image(feedback.rating == 1 ? "icn_notunderstoodselected" : "icn_notunderstood")
                             .resizable()
                             .frame(width: 60, height: 60)
                         Text("Not Understood").font(.caption)
@@ -77,7 +76,7 @@ struct StudentFeedbackRow: View {
                         Text("Partially Understood").font(.caption)
                     }
                     VStack {
-                        Image(feedback.rating == 1 ? "icn_understoodselected" : "icn_understood")
+                        Image(feedback.rating == 3 ? "icn_understoodselected" : "icn_understood")
                             .resizable()
                             .frame(width: 60, height: 60)
                         Text("Understood").font(.caption)

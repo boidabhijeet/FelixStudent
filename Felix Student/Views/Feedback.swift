@@ -34,7 +34,7 @@ struct Feedback: View {
                 HStack {
                     
                     VStack {
-                        Image(topic.rating == 3 ? "icn_notunderstoodselected" : "icn_notunderstood")
+                        Image(topic.rating == 1 ? "icn_notunderstoodselected" : "icn_notunderstood")
                             .resizable()
                             .frame(width: 60, height: 60)
                         Text("Not Understood").font(.caption)
@@ -46,7 +46,7 @@ struct Feedback: View {
                         Text("Partially Understood").font(.caption)
                     }
                     VStack {
-                        Image(topic.rating == 1 ? "icn_understoodselected" : "icn_understood")
+                        Image(topic.rating == 3 ? "icn_understoodselected" : "icn_understood")
                             .resizable()
                             .frame(width: 60, height: 60)
                         Text("Understood").font(.caption)

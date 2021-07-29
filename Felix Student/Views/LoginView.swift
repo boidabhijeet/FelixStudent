@@ -10,8 +10,8 @@ import SwiftUI
 struct LoginView: View {
     @State private var emailAddress = ""
     @State private var password: String = ""
-//    @State private var emailAddress = "snehal@felixtechlabs.com"
-//    @State private var password: String = "snehal@123"
+//    @State private var emailAddress = "testsnehal@gmail.com"
+//    @State private var password: String = "17557767"
     @State var error: String = ""
     @State private var showAlert = false;
     let role = Utility.getRole()
@@ -56,6 +56,7 @@ struct LoginView: View {
                 TextField("Email", text: $emailAddress)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .keyboardType(.emailAddress)
+                    .autocapitalization(.none)
                     .padding()
                 SecureField("Enter a Password", text: $password).padding()
                     .textFieldStyle(RoundedBorderTextFieldStyle())

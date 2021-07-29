@@ -79,14 +79,12 @@ class TopicViewModel: ObservableObject, Identifiable {
         }
     }
     
-    func giveFeedback(feedback: Feedbacks, topicId: String) {
+    func giveFeedback(feedback: Feedbacks, topic: Topic) {
         Utility.fromFeedbackScreen = true
         feedback.uid = Auth.auth().currentUser?.uid ?? ""
         feedback.createdAt = Int64(Date().timeIntervalSince1970)
-        DatabaseReference.shared.topicReference().document(topicId).updateData(["feedbacks": [feedback.uid: feedback.toJSON()]])
-        { (err) in
-            print(err?.localizedDescription as Any)
-        }
+        topic.feedbacks![Auth.auth().currentUser!.uid] = feedback
+        DatabaseReference.shared.topicReference().document(topic.topicId).setData(topic.toJSON(), merge: true)
     }
     
     func loadAttendancesWith(aid: String, topic: Topic) {
@@ -97,7 +95,7 @@ class TopicViewModel: ObservableObject, Identifiable {
                     
                     let atten = Mapper<Attendance>().map(JSON: document.data())
                     self.attendance.append(atten!)
-                    print("my Attendance", self.attendance[0].markAttendance)
+//                    print("my Attendance", self.attendance[0].markAttendance)
                     var counter = 0, totalCounter = 0
                     if let markAttendance = atten?.markAttendance {
                         if Utility.getRole() == Constants.FACULTY {
@@ -198,8 +196,6 @@ class TopicViewModel: ObservableObject, Identifiable {
     }
     
     func checkTopicsAePresentAtDate(selectedDate: String, batchId: String, handler:@escaping (Bool) -> Void) {
-        print(selectedDate)
-        print(batchId)
         DatabaseReference.shared.topicReference().whereField("date", isEqualTo: selectedDate).whereField("batchId", isEqualTo: batchId).getDocuments { (snapshot, error) in
             if (snapshot?.documents.count ?? 0 > 0) {
                 handler(true)
@@ -275,7 +271,6 @@ class TopicViewModel: ObservableObject, Identifiable {
                         }
                     }
                 }
-                print(averageFeedback)
                 
                 if counter != 0 {
                     averageFeedback = averageFeedback / counter

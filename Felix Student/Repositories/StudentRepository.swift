@@ -10,7 +10,6 @@ import Foundation
 import Combine
 import FirebaseFirestore
 import FirebaseFirestoreSwift
-import Resolver
 import ObjectMapper
 
 class StudentRepository: ObservableObject {

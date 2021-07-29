@@ -11,7 +11,7 @@ import Firebase
 
 struct Settings: View {
     @State var isActive : Bool = false
-    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+//    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
     var url: URL
     @State private var image = UIImage()
@@ -28,21 +28,6 @@ struct Settings: View {
     var body: some View {
         VStack(alignment: .center) {
             Spacer()
-//            Image(uiImage: image)
-//                .resizable()
-//                .aspectRatio(contentMode: .fit)
-//                .frame(width:100, height:100)
-//                .opacity(0.8)
-//                .cornerRadius(50.0)
-//                .padding(3)
-//                .overlay(ImageOverlay(), alignment: .bottomTrailing)
-//                .onReceive(imageLoader.didChange) { data in
-//                    self.image = UIImage(data: data) ?? UIImage()
-//                }
-//            WebImage(url: URL(string: url))
-//                .onSuccess { (image, data, cache) in
-//
-//                }
                 
             WebImage(url: url)
                     .placeholder(Image("icn_placeholderImage"))
@@ -61,6 +46,7 @@ struct Settings: View {
                 
                 Divider()
                 
+              
                 NavigationLink(
                     destination: EditProfile(url: url)) {
                     HStack {
@@ -104,23 +90,24 @@ struct Settings: View {
             
             
             
-            NavigationLink(
-                destination: LoginView()) {
-                HStack {
-                    Image("ic_lock")
-                    Text("Change Password")
-                }.font(.title3)
-                .padding()
-                .foregroundColor(Color.black)
-                .multilineTextAlignment(.center)
-                
-            }.isDetailLink(false)
-            .frame(minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: 100,
-                    alignment: .leading)
-//            .border(Color.gray).frame(maxWidth: .infinity)
+//            NavigationLink(
+//                destination: LoginView()) {
+//                HStack {
+//                    Image("ic_lock")
+//                    Text("Change Password")
+//                }.font(.title3)
+//                .padding()
+//                .foregroundColor(Color.black)
+//                .multilineTextAlignment(.center)
+//
+//            }.isDetailLink(false)
+//            .frame(minWidth: 0,
+//                    maxWidth: .infinity,
+//                    minHeight: 0,
+//                    maxHeight: 100,
+//                    alignment: .leading)
+
+//            NavigationLink(destination: EmptyView(), label: {})
             
             Button(action: signOut, label: {
                 HStack {

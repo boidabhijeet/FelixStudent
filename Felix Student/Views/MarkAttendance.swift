@@ -46,7 +46,7 @@ struct MarkAttendance: View {
                     for stud in studArray {
                         checklistItems.append(ChecklistItem(name: stud.name, uid: stud.leadId))
                     }
-                    print(checklistItems)
+//                    print(checklistItems)
                 }
             })
             .navigationBarItems(trailing: EditButton())
@@ -59,7 +59,7 @@ struct MarkAttendance: View {
                 self.shouldPopToRootView = true
                 for newTopic in newTopics {
                     let att = Attendance(batchId: batch.batchId, batchModule: batch.module, remark: newTopic.remarks, totalTimeSpent: newTopic.timeSpent, totalTimeSpentMints: newTopic.timeSpentMints, markAttendance: markAtt, createdAt: Int64(Date().timeIntervalSince1970))
-                    print(att.toJSON())
+//                    print(att.toJSON())
                     newTopic.date = batchDateString
                     topicVM.saveAttendanceAndTopic(newTopic: newTopic, attn: att)
                     DatabaseReference.shared.topicArray = []

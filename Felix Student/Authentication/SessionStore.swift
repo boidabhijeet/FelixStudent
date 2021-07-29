@@ -60,7 +60,7 @@ class SessionStore: ObservableObject {
         } else if role == Constants.STUDENT {
             DatabaseReference.shared.walkinReference().whereField(Constants.UID, isEqualTo: Auth.auth().currentUser?.uid ?? "").getDocuments { [unowned self] (snapshot, error) in
                 guard let documents = snapshot?.documents else {
-                    print("No Documents")
+                    
                     Handler(false)
                     return
                 }

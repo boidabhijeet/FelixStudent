@@ -7,7 +7,6 @@
 
 import Foundation
 import Combine
-import Resolver
 
 class BatchCellViewModel: ObservableObject, Identifiable {
     

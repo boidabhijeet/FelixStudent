@@ -40,6 +40,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
             application.registerForRemoteNotifications()
+        
+        let userDefaults = UserDefaults.standard
+        if userDefaults.value(forKey: "appFirstTimeOpend") == nil {
+            //if app is first time opened then it will be nil
+            userDefaults.setValue(true, forKey: "appFirstTimeOpend")
+            // signOut from FIRAuth
+            do {
+                try Auth.auth().signOut()
+            }catch {
+
+            }
+            // go to beginning of app
+        } else {
+            //go to where you want
+        }
 
             // [END register_for_notifications]
         return true
@@ -69,11 +84,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
-          print("Message ID: \(messageID)")
+//          print("Message ID: \(messageID)")
         }
 //        UIApplication.shared.applicationIconBadgeNumber += 1
         // Print full message.
-        print(userInfo)
+//        print(userInfo)
       }
     // [START receive_message]
      func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
@@ -85,11 +100,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        // Messaging.messaging().appDidReceiveMessage(userInfo)
        // Print message ID.
        if let messageID = userInfo[gcmMessageIDKey] {
-         print("Message ID: \(messageID)")
+//         print("Message ID: \(messageID)")
        }
 //        UIApplication.shared.applicationIconBadgeNumber += 1
        // Print full message.
-       print(userInfo)
+//       print(userInfo)
 
        completionHandler(UIBackgroundFetchResult.newData)
      }
@@ -128,7 +143,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
        }
        // [END_EXCLUDE]
        // Print full message.
-       print(userInfo)
+//       print(userInfo)
 
        // Change this to your preferred presentation option
        completionHandler([[.alert, .sound]])

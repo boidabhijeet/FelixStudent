@@ -181,7 +181,7 @@ struct TopicRow: View {
                         
                         if topicData.averageFeedback == 0 {
                             Text("Avg rating:\(topicData.averageFeedback)")
-                        } else if topicData.averageFeedback == 1 {
+                        } else if topicData.averageFeedback == 3 {
                             HStack {
                                 Text("Avg rating: ")
                                 Image("icn_understoodselected")
@@ -192,7 +192,7 @@ struct TopicRow: View {
                                 Text("Avg rating: ")
                                 Image("icn_partiallyunderstood-1")
                             }
-                        } else if topicData.averageFeedback == 3 {
+                        } else if topicData.averageFeedback == 1 {
                             HStack {
                                 Text("Avg rating: ")
                                 Image("icn_notunderstoodselected")
@@ -205,7 +205,7 @@ struct TopicRow: View {
                     HStack {
                         if topicData.rating == 0 {
                             Text("My rating: 0")
-                        } else if topicData.rating == 1 {
+                        } else if topicData.rating == 3 {
                             HStack {
                                 Text("My rating: ")
                                 Image("icn_understoodselected")
@@ -216,7 +216,7 @@ struct TopicRow: View {
                                 Text("My rating: ")
                                 Image("icn_partiallyunderstood-1")
                             }
-                        } else if topicData.rating == 3 {
+                        } else if topicData.rating == 1 {
                             HStack {
                                 Text("My rating: ")
                                 Image("icn_notunderstoodselected")

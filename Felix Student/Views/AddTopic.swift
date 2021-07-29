@@ -25,6 +25,7 @@ struct AddTopic: View {
     @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
     @State private var showToast = false
     @State private var showfutureToast = false
+    @State private var showAtLeastToat = false
     @State private var disableButton = false
     @State private var showingAlert = false
     @State private var isShowingDetailView: Int? = 0
@@ -136,7 +137,13 @@ struct AddTopic: View {
                 EmptyView()
             }
             
+            NavigationLink(destination: EmptyView(), label: {})
+            
             Button(action: {
+                if DatabaseReference.shared.topicArray.count == 0 {
+                    showAtLeastToat = true
+                    return
+                }
                 showingAlert = true
             }) {
                 HStack(spacing: 10) {
@@ -168,6 +175,11 @@ struct AddTopic: View {
         .toast(isPresenting: $showfutureToast, duration: 10.0){
             
             AlertToast(type: .regular, title: ToastAlert.FutureDate)
+        }
+        
+        .toast(isPresenting: $showAtLeastToat, duration: 10.0){
+            
+            AlertToast(type: .regular, title: ToastAlert.AtLeastOne)
         }
     }
 }

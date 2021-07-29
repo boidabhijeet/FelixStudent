@@ -67,7 +67,7 @@ class Topic: Mappable, Identifiable {
 }
 
 class Feedbacks: Mappable, Identifiable {
-    var id: String?
+    var id = UUID()
     var comment: String = ""
     var createdAt: Int64 = 0
     var feedback: String = ""

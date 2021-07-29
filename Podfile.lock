@@ -358,13 +358,11 @@ PODS:
   - nanopb/encode (2.30907.0)
   - ObjectMapper (4.2.0)
   - PromisesObjC (1.2.12)
-  - Resolver (1.4.1)
   - SDWebImage (5.10.4):
     - SDWebImage/Core (= 5.10.4)
   - SDWebImage/Core (5.10.4)
   - SDWebImageSwiftUI (2.0.2):
     - SDWebImage (~> 5.10)
-  - ToastUI (2.0.0)
 
 DEPENDENCIES:
   - AlertToast
@@ -375,9 +373,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - FirebaseFirestoreSwift (~> 7.1.0-beta)
   - ObjectMapper
-  - Resolver
   - SDWebImageSwiftUI
-  - ToastUI
 
 SPEC REPOS:
   trunk:
@@ -405,10 +401,8 @@ SPEC REPOS:
     - nanopb
     - ObjectMapper
     - PromisesObjC
-    - Resolver
     - SDWebImage
     - SDWebImageSwiftUI
-    - ToastUI
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -435,11 +429,9 @@ SPEC CHECKSUMS:
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
-  Resolver: c293d0177cbc69fcb700cfd49922ae2122c1829c
   SDWebImage: c666b97e1fa9c64b4909816a903322018f0a9c84
   SDWebImageSwiftUI: 8a3923c95108312b03a599ec1498754af55a6819
-  ToastUI: 391eb9a1cc15e7ef4b79ee112e4a0b969259154f
 
-PODFILE CHECKSUM: 2a36deb89eb6e6c337d42ece6ab4d29d76ec7b98
+PODFILE CHECKSUM: c242c7e631e1c4678ac1ca929fb2e9cfe5e06203
 
-COCOAPODS: 1.10.0
+COCOAPODS: 1.10.1

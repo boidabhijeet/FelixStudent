@@ -19,13 +19,13 @@ class StudentViewModel: ObservableObject, Identifiable {
     }
     
     func saveProfileOfFaculty(email: String, fullName: String, contact: String) {
-        print(email, fullName, contact)
+        
         let leadId = SessionStore.shared.user?.uid
         DatabaseReference.shared.walkinReference().document(leadId!).updateData(["email": email, "fullName": fullName, "contact": Int64(contact)!])
     }
     
     func saveProfile(email: String, fullName: String, contact: String) {
-        print(email, fullName, contact)
+        
         let leadId = SessionStore.shared.student?.leadId
         DatabaseReference.shared.walkinReference().document(leadId!).updateData(["email": email, "fullName": fullName, "contact": Int64(contact)!])
     }

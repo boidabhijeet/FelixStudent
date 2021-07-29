@@ -38,7 +38,7 @@ struct GiveFeedback: View {
                         self.isNotUnderstood.toggle()
                         self.isPartiallyUnderstood = false
                         self.isUnderstood = false
-                        topic.rating = 3
+                        topic.rating = 1
                     }) {
                         Image(self.isNotUnderstood == true ? "icn_notunderstoodselected" : "icn_notunderstood")
                             .resizable()
@@ -69,7 +69,7 @@ struct GiveFeedback: View {
                         self.isUnderstood.toggle()
                         self.isPartiallyUnderstood = false
                         self.isNotUnderstood = false
-                        topic.rating = 1
+                        topic.rating = 3
                     }) {
                         Image(self.isUnderstood == true ? "icn_understoodselected" : "icn_understood")
                             .resizable()
@@ -82,7 +82,7 @@ struct GiveFeedback: View {
             
             TextField("Comments", text: $comment, onEditingChanged: { (changed) in
                 topic.remarks = comment
-                print("Username onEditingChanged - \(changed)")
+                //print("Username onEditingChanged - \(changed)")
             })
             .textFieldStyle(PlainTextFieldStyle())
             Divider()
@@ -102,7 +102,7 @@ struct GiveFeedback: View {
                     return
                 }
                 let feedback = Feedbacks(comment: comment, feedback: comment, rating: topic.rating)
-                topicVM.giveFeedback(feedback: feedback, topicId: topic.topicId)
+                topicVM.giveFeedback(feedback: feedback, topic: topic)
                 self.mode.wrappedValue.dismiss()
                 
             }) {
@@ -198,7 +198,7 @@ struct TopicFeedbackRow: View {
             
             TextField("Comments", text: $comment, onEditingChanged: { (changed) in
                 topicData.remarks = comment
-                print("Username onEditingChanged - \(changed)")
+//                print("Username onEditingChanged - \(changed)")
             })
             .textFieldStyle(PlainTextFieldStyle())
             Divider()
@@ -212,7 +212,7 @@ struct TopicFeedbackRow: View {
             Text("Note: Feedback will be seen by faculty.").font(.caption)
             Button(action: {
                 let feedback = Feedbacks(comment: topicData.remarks, feedback: topicData.remarks, rating: topicData.rating)
-                topicVM.giveFeedback(feedback: feedback, topicId: topicData.topicId)
+                topicVM.giveFeedback(feedback: feedback, topic: topicData)
                 //                self.mode.wrappedValue.dismiss()
                 
                 self.rootPresentationMode.wrappedValue.dismiss()

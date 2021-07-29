@@ -8,7 +8,6 @@
 import Foundation
 import Combine
 import ObjectMapper
-import Resolver
 import FirebaseAuth
 import Firebase
 

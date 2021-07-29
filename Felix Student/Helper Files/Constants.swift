@@ -33,6 +33,7 @@ final class Constants {
 }
 
 final class ToastAlert {
+    static let AtLeastOne = "Please add at least one topic."
     static let FutureDate = "You can not mark attendance for future date."
     static let attendanceMarked = "Attendance for current date has been already marked"
     static let referAndEarn = "Contact information is submitted."
