@@ -1,15 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "iOs-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "iOs.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "iOs.png",
+      "filename" : "iOs-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -44,7 +44,8 @@ struct SelectRole: View {
                     
                     HStack {
                         Button(action: {
-                            
+                            UserDefaults.standard.setValue(Constants.FACULTY, forKey: Constants.ROLE)
+                            self.action = 1
                         }, label: {
                             HStack{
                                 Image("FacultyIcon")
@@ -56,7 +57,8 @@ struct SelectRole: View {
                         Spacer()
                         
                         Button(action: {
-                            
+                            UserDefaults.standard.setValue(Constants.STUDENT, forKey: Constants.ROLE)
+                            self.action = 2
                         }, label: {
                             HStack{
                                 Image("StudentIcon")

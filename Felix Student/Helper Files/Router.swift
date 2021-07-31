@@ -23,7 +23,7 @@ class Router {
     }
     
     static func showTabbar() {
-        window?.rootViewController = UIHostingController(rootView: Tabbar())
+        window?.rootViewController = UIHostingController(rootView: CustomTabBar())
     }
     
     static func showLogin() {

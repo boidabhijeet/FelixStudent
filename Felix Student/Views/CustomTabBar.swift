@@ -46,7 +46,6 @@ struct CustomTabBar: View {
             CircleTab(index: $index)
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        
     }
 }
 

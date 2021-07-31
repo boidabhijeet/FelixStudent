@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "angular-1.png",
+      "filename" : "UIUXBar.svg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "angular-2.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "angular.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

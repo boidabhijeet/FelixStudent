@@ -18,7 +18,6 @@ class BatchDetailTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         imgUser.backgroundColor = UIColor.blue
-        
         imgUser.translatesAutoresizingMaskIntoConstraints = false
         labUserName.translatesAutoresizingMaskIntoConstraints = false
         labMessage.translatesAutoresizingMaskIntoConstraints = false

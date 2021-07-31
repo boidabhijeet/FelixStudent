@@ -61,9 +61,11 @@ struct LoginView: View {
                         if self.visible{
                             TextField("Password", text: self.$password)
                                 .autocapitalization(.none)
+                                .disableAutocorrection(true)
                         }else{
                             SecureField("Password", text: self.$password)
                                 .autocapitalization(.none)
+                                .disableAutocorrection(true)
                         }
                         
                         Button(action: {
@@ -85,23 +87,7 @@ struct LoginView: View {
                         .modifier(RedButton())
                         
                     })
-             
-                    /*
-                    Button(action: { self.showAlert = true }) {
-                        Text("Forgot Password?")
-                    }.foregroundColor(.black)
-                    .alert(isPresented: $showAlert,
-                           TextAlert(title: "Enter your email to send reset link",
-                                     message: "",
-                                     keyboardType: .emailAddress) { result in
-                            if (result != nil) {
-                                // Text was accepted
-                                SessionStore.shared.forgotPassword(email: result!)
-                            } else {
-                                // The dialog was cancelled
-                            }
-                           })*/
-                    
+       
                     Spacer().frame(maxHeight: 30)
                     
                     Button("Forgot Password?"){
@@ -143,7 +129,6 @@ struct LoginView: View {
                         SessionStore.shared.signOut()
                     }
                 }
-                //                Router.showTabbar()
             }
         }
     }

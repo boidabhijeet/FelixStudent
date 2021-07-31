@@ -11,51 +11,48 @@ import FirebaseAuth
 struct HomePage: View {
     @StateObject var batchVM = BatchViewModel()
     
-    init() {
-        let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
-        navigationBarAppearace.tintColor = #colorLiteral(red: 0, green: 0.4377841353, blue: 0.654399991, alpha: 1)
-        
-    }
-  
-    
     var body: some View {
-    
-
-        List(batchVM.batches) { batch in
-                BatchRow(batch: batch)
-                    .shadow(color: Color.gray, radius: 5)
-        }
-        .onAppear() {
-            
-            if batchVM.batches.count > 0 {
+        
+        NavigationView {
+            VStack {
+                HStack {
+                    Text("Felix Student")
+                    Spacer()
+                    NavigationLink(
+                        destination: NotificationView()
+                            .navigationBarHidden(true)
+                            .navigationBarBackButtonHidden(true),
+                        label: {
+                            Image(systemName : "bell")
+                                .foregroundColor(.black)
+                        })
+                }
+                .padding()
+                .modifier(TextStyle20())
                 
-            } else {
-                if Utility.getRole() == Constants.FACULTY {
-                    self.batchVM.subscribe(facultyUid: Auth.auth().currentUser!.uid)
-                } else if Utility.getRole() == Constants.STUDENT {
-                    self.batchVM.getBatchForStudent()
+                List(batchVM.batches) { batch in
+                    BatchRow(batch: batch)
                 }
-            }
-        }
-        .listStyle(InsetListStyle())
-        .navigationTitle("Felix Student")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-//                Button(action: {
-//                    print("Notification icon tap")
-//                    let myDate = Date()
-//                }, label: { Image("icn_notification")
-//
-//                })
-                NavigationLink(destination: NotificationView()) {
-                    Image("icn_notification")
+                .onAppear() {
+                    if batchVM.batches.count > 0 {
+                        
+                    } else {
+                        if Utility.getRole() == Constants.FACULTY {
+                            self.batchVM.subscribe(facultyUid: Auth.auth().currentUser!.uid)
+                        } else if Utility.getRole() == Constants.STUDENT {
+                            self.batchVM.getBatchForStudent()
+                        }
+                    }
                 }
+                .listStyle(PlainListStyle())
+                .navigationBarTitleDisplayMode(.inline)
+                .modifier(TextStyle20())
             }
+            .navigationBarHidden(true)
         }
     }
 }
+
 struct HomePage_Previews: PreviewProvider {
     static var previews: some View {
         HomePage()
@@ -67,49 +64,51 @@ struct BatchRow: View {
     
     @State private var isActive : Bool = false
     var body: some View {
-        NavigationLink(destination: BatchDetails(batch: batch), isActive: $isActive) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 25, style: .continuous)
-                    .fill(Color.white)
-                HStack {
+        
+        NavigationLink(
+            destination : BatchDetails(batch: batch)
+                .navigationBarBackButtonHidden(true)
+                .navigationBarHidden(true))
+        {
+            HStack{
+                
+                Image("\(batch.module)Bar")
+                
+                VStack(alignment :.leading, spacing : 10) {
+                    Text(batch.module)
+                        .textCase(.uppercase)
+                        .modifier(TextStyle20())
                     
-                    VStack(alignment: .leading, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
-                        Spacer()
-                        
-                        Text(verbatim: batch.module)
-                            .modifier(TextStyle20())
-                        
-                        Spacer()
-                        
-                        if Utility.getRole() == Constants.FACULTY {
-                            Text("start date: \(batch.fromDateString) @\(batch.fromTime)")
-                        } else {
-                            Text("Batch Start Date: \(batch.fromDateString)")
-                        }
-                        
-                        Spacer()
-                        
-                        if Utility.getRole() == Constants.FACULTY {
-                            Text("Hours Covered: \(batch.totalHours)")
-                            Spacer()
-                            Text("Total Students: \(batch.students.count)")
-                            Spacer()
-                        } else {
-                            Text(batch.fromToTime)
-                            Spacer()
-                            Text("Faculty Name: \(batch.faculty)")
-                            Spacer()
-                        }
-                        
-                        
-                    })
-                    .modifier(TextStyle14())
-                    .lineLimit(0)
-
+                    if Utility.getRole() == Constants.FACULTY {
+                        Text("Start date: \(batch.fromDateString) @\(batch.fromTime)")
+                    } else {
+                        Text("Batch Start Date: \(batch.fromDateString)")
+                    }
+                    if Utility.getRole() == Constants.FACULTY {
+                        Text("Hours Covered: \(batch.totalHours)")
+                        Text("Total Students: \(batch.students.count)")
+                    } else {
+                        Text(batch.fromToTime)
+                        Text("Faculty : \(batch.faculty)")
+                    }
                 }
+                .modifier(TextStyle14())
+                .lineLimit(0)
+                
+                Spacer()
+                
+                Image(batch.module)
+                    .renderingMode(.original)
+                    .resizable()
+                    .frame(width: 55, height: 55)
+                    .padding(.bottom)
+                    .padding(.horizontal)
             }
-            
         }
-        .isDetailLink(false)
+        .frame(maxWidth : .infinity)
+        .background(Color.white)
+        .clipped()
+        .shadow(radius : 5)
+        .padding(.top, 10)
     }
 }

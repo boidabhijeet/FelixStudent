@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct BatchDetails: View {
+    
     var batch: Batch
     @State var didAppear = false
     @State var appearCount = 0
@@ -17,16 +18,9 @@ struct BatchDetails: View {
     @State private var isActive : Bool = false
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
-    
+    var screenSize = UIScreen.main.bounds
     @State var hrsCovered = ""
     func onLoad() {
-        UINavigationBar.appearance().tintColor = .systemGray6
-        UINavigationBar.appearance().barTintColor = .systemTeal
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor:UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 25)]
-        // Set selected (onTapped) background color of cell.
-        let color = UIView()
-        color.backgroundColor = UIColor.red
-        UITableViewCell.appearance().selectedBackgroundView = color
         if !didAppear || Utility.fromFeedbackScreen {
             appearCount += 1
             topicVM.loadTopicsWith(batchId: batch.batchId){ (topics,avgFeedback,hrsCovered)  in
@@ -39,89 +33,108 @@ struct BatchDetails: View {
         didAppear = true
     }
     var body: some View {
-        VStack(spacing: 0) {
-            ZStack {
-                RoundedRectangle(cornerRadius: 25)
-                    .fill(Color.white)
-                    .frame(width: 350, height: 130)
+        
+        ZStack(alignment : .bottomTrailing) {
+            
+            VStack{
                 
-                VStack(alignment: .leading) {
-                    Text(batch.module)
-                        .font(.system(size: 20, weight: .regular, design: .default))
-                    if Utility.getRole() == Constants.FACULTY {
-                        Text("Start date: \(batch.fromDateString) @\(batch.fromTime)")
-                    } else {
-                        Text("Batch start date: \(batch.fromDateString)")
+                Button(
+                    action: {self.presentationMode.wrappedValue.dismiss()},
+                    label: {
+                        HStack{
+                            Image(systemName: "arrow.left")
+                            Text("Batch Details")
+                        }
+                        .foregroundColor(.black)
+                        .frame(maxWidth : .infinity, alignment : .leading)
+                        .padding(.leading, 15.0)
+                    })
+                
+                Divider()
+                
+                HStack(spacing : 0){
+                    
+                    Image("\(batch.module)Bar")
+                    VStack(spacing : 10){
+                        
+                        HStack{
+                            
+                            
+                            VStack(alignment :.leading, spacing : 10) {
+                                Text(batch.module)
+                                    .textCase(.uppercase)
+                                    .modifier(TextStyle20())
+                                
+                                if Utility.getRole() == Constants.FACULTY {
+                                    Text("Start date: \(batch.fromDateString) @\(batch.fromTime)")
+                                } else {
+                                    Text("Batch Start Date: \(batch.fromDateString)")
+                                }
+                                Text("Hours Covered: \(batch.totalHours)")
+                                if Utility.getRole() == Constants.FACULTY {
+                                    Text("Total Students: \(batch.students.count)")
+                                }
+                            }
+                            .modifier(TextStyle14())
+                            .lineLimit(0)
+                            
+                            Spacer()
+                            
+                            Image(batch.module)
+                                .renderingMode(.original)
+                                .resizable()
+                                .frame(width: 63, height: 63)
+                                .padding(.bottom)
+                                .padding(.horizontal)
+                        }
+                        NavigationLink(
+                            destination : Text("Display Study Material"),
+                            label: {
+                                Text("Show study material")
+                                    .modifier(TextStyle14())
+                                    .foregroundColor(.red)
+                                    .lineLimit(0)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment : .trailing)
+                                
+                                Image("rightArrowRed")
+                            })
                     }
-                    
-                    Text("Hours Covered: \(self.hrsCovered)")
-                    
-                    if Utility.getRole() == Constants.FACULTY {
-                        Text("Total Students: \(batch.students.count)")
-                    } else {
-                        Text("Faculty Name: \(batch.faculty)")
-                    }
-                    
-                }
-                .padding()
-                .modifier(TextStyle14())
-
+                    .padding()
+                    .frame(maxWidth : screenSize.width * 0.9, maxHeight : screenSize.height * 0.16, alignment: .center)
+                    .background(Color.white)
+                    .clipped()
+                    .shadow(radius : 5)
+                }.padding(.top, 10)
+                
+                
+                Text("Topics Covered")
+                    .font(.system(size: 18, weight: .semibold))
+                    .frame(maxWidth : screenSize.width * 0.9, alignment: .leading)
+                    .padding(.top)
+                
+                
+                listView
+                    .onAppear(perform: {
+                        onLoad()
+                    })
+                //                .listStyle(InsetListStyle())
+                //                .listItemTint(.black)
+                
             }
-            .padding()
-            .shadow(color: Color.gray, radius: 5)
-            
-            Section(header:
-                        Text("Topics Covered")
-                        .fontWeight(.heavy)
-            ) {
-            }.foregroundColor(.black)
-            
-            
-            listView
-                .onAppear(perform: {
-                    onLoad()
-                })
-//                .listStyle(InsetListStyle())
-//                .listItemTint(.black)
-                
             
             if Utility.getRole() == Constants.FACULTY {
                 Spacer()
-                VStack {
-                    HStack {
-                        Spacer()
-                        NavigationLink(
-                            destination: AddTopic(batch: batch, aid: "", fromPlusButton: true, topic: nil, rootIsActive: self.$isActive, batchDateString: "", isActive: isActive)) {
-                            HStack(spacing: 10) {
-                                Text("+")
-                                    .font(.system(.largeTitle))
-                                    .frame(width: 57, height: 50)
-                                    .foregroundColor(Color.white)
-                                    .padding(.bottom, 7)
-                            }
-                            
-                        }
-                        .isDetailLink(false)
-                        .background(Color.black)
-                        .cornerRadius(38.5)
-                        .padding()
-                        .shadow(color: Color.black.opacity(0.3),
-                                radius: 3,
-                                x: 3,
-                                y: 3)
-                    }
+                
+                NavigationLink(destination:
+                                AddTopic(batch: batch, aid: "", fromPlusButton: true, topic: nil, rootIsActive: self.$isActive, batchDateString: "", isActive: isActive)
+                                .navigationBarBackButtonHidden(true)
+                                .navigationBarHidden(true))
+                {
+                    Image("addTopicIcon").padding()
                 }
             }
         }
-        .frame(
-            minWidth: 0,
-            maxWidth: .infinity,
-            minHeight: 0,
-            maxHeight: .infinity,
-            alignment: .topLeading
-        )
-        .navigationBarTitle("Batch Details")
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarHidden(true)
     }
     @ViewBuilder
     var listView: some View {
@@ -129,7 +142,6 @@ struct BatchDetails: View {
             emptyListView
         } else {
             objectsListView
-            
         }
     }
     
@@ -151,40 +163,48 @@ struct TopicRow: View {
     let role = Utility.getRole()
     @State var isActive : Bool = false
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .fill(Color.white)
-            
-            VStack(alignment: .leading) {
-                Spacer()
+        ZStack(alignment : .bottomTrailing) {
+            VStack(alignment : .leading){
                 HStack {
-                    Text(topicData.topic).font(.system(size: 16, weight: .bold, design: .default))
+                    Text(topicData.topic)
+                        .font(.system(size: 14, weight: .semibold))
                     Spacer()
                     Text(topicData.date)
+                        .font(.system(size: 12))
                 }
-                Spacer()
+                
                 Text("Hours: " + topicData.timeSpent)
-                Spacer()
+                    .font(.system(size: 12))
+                
+                Spacer().frame(maxHeight : 20)
+                
                 if role == Constants.FACULTY {
-                    HStack {
+                    HStack(spacing : 1) {
                         
                         if topicData.averageFeedback == 0 {
-                            Text("Avg rating:\(topicData.averageFeedback)")
+                            Text("My rating:\(topicData.averageFeedback)")
+                                .font(.system(size: 12))
+                            
                         } else if topicData.averageFeedback == 3 {
                             HStack {
-                                Text("Avg rating: ")
-                                Image("icn_understoodselected")
+                                Text("My rating: ")
+                                    .font(.system(size: 12))
+                                
+                                Image("understood")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                
                             }
                             
                         } else if topicData.averageFeedback == 2 {
                             HStack {
-                                Text("Avg rating: ")
-                                Image("icn_partiallyunderstood-1")
+                                Text("My rating: ")
+                                Image("partiallyUnderstood")
                             }
                         } else if topicData.averageFeedback == 1 {
                             HStack {
-                                Text("Avg rating: ")
-                                Image("icn_notunderstoodselected")
+                                Text("My rating: ")
+                                Image("notUnderstoodRed")
                             }
                             Spacer()
                             Text(topicData.presentString)
@@ -194,24 +214,43 @@ struct TopicRow: View {
                     HStack {
                         if topicData.rating == 0 {
                             Text("My rating: 0")
+                                .font(.system(size: 12))
+                            
                         } else if topicData.rating == 3 {
                             HStack {
                                 Text("My rating: ")
-                                Image("icn_understoodselected")
+                                    .font(.system(size: 12))
+                                
+                                Image("understood")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                
                             }
                             
                         } else if topicData.rating == 2 {
                             HStack {
                                 Text("My rating: ")
-                                Image("icn_partiallyunderstood-1")
+                                    .font(.system(size: 12))
+                                
+                                Image("partiallyUnderstood")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                
                             }
                         } else if topicData.rating == 1 {
                             HStack {
                                 Text("My rating: ")
-                                Image("icn_notunderstoodselected")
+                                    .font(.system(size: 12))
+                                
+                                Image("notUnderstoodRed")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                
                             }
                         }
+                        
                         Spacer()
+                        
                         if topicData.presentString == "Feedback sent" {
                             Group {
                                 Text(topicData.presentString)
@@ -262,14 +301,8 @@ struct TopicRow: View {
                     }.isDetailLink(false)
                     .buttonStyle(PlainButtonStyle()).frame(width:0).opacity(0)
                 }
-                
-                
-                
-                
             }.padding()
-        }.padding()
-        .shadow(color: Color.gray, radius: 5)
-        
+        }
     }
 }
 
@@ -391,4 +424,3 @@ extension UIListView {
     }
     
 }
-
