@@ -28,6 +28,7 @@ class SessionStore: ObservableObject {
 //                self.session = nil
 //            }
 //        })
+        
         if (Auth.auth().currentUser?.uid) != nil {
             let uid = Auth.auth().currentUser?.uid
             let email = Auth.auth().currentUser?.email
@@ -38,7 +39,6 @@ class SessionStore: ObservableObject {
         } else {
             return
         }
-        
     }
     
     func fetchUser(Handler:@escaping (Bool) -> Void) {

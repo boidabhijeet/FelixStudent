@@ -26,107 +26,93 @@ struct Settings: View {
     }
     
     var body: some View {
-        VStack(alignment: .center) {
-            Spacer()
-                
+        VStack(spacing : 10) {
+
+            Spacer().frame(maxHeight : 40)
+
             WebImage(url: url)
-                    .placeholder(Image("icn_placeholderImage"))
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width:100, height:100)
-                    .opacity(0.8)
-                    .cornerRadius(50.0)
-                    .padding(3)
-            
+                    .placeholder(Image("profileImage"))
+      
             if Utility.getRole() == Constants.FACULTY {
                 Text(SessionStore.shared.user?.fullName ?? "")
-                    .font(.caption)
+
                 Text(SessionStore.shared.user?.email ?? "")
-                    .font(.system(size: 12))
-                
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+
+                Spacer().frame(maxHeight : 20)
+
                 Divider()
                 
-              
+                Spacer().frame(maxHeight : 20)
+
                 NavigationLink(
-                    destination: EditProfile(url: url)) {
-                    HStack {
-                        Image("icn_profile")
-                        Text("Profile")
-                    }.font(.title3)
-                    .padding()
-                    .foregroundColor(Color.black)
-                    .multilineTextAlignment(.center)
-                    
-                }.isDetailLink(false)
-                .frame(minWidth: 0,
-                        maxWidth: .infinity,
-                        minHeight: 0,
-                        maxHeight: 100,
-                        alignment: .leading)
+                    destination: EditProfile(url : url)
+                        .navigationBarBackButtonHidden(true)
+                        .navigationBarHidden(true),
+                    label: {
+                        HStack(spacing: 19) {
+                            Image("profileIcon")
+                            Text(" Profile")
+                            Spacer()
+                        }
+                        .padding()
+                    })
+                
             } else if Utility.getRole() == Constants.STUDENT {
                 Text(SessionStore.shared.student?.name ?? "")
-                    .font(.caption)
+
                 Text(SessionStore.shared.student?.email ?? "")
-                    .font(.system(size: 12))
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+
+                Spacer().frame(maxHeight : 20)
+
                 Divider()
                 
+                Spacer().frame(maxHeight : 20)
+
                 NavigationLink(
-                    destination: EditProfile(url: url)) {
-                    HStack {
-                        Image("ic_profile")
-                        Text("Profile")
-                    }.font(.title3)
-                    .padding()
-                    .foregroundColor(Color.black)
-                    .multilineTextAlignment(.center)
-                    
-                }.isDetailLink(false)
-                .frame(minWidth: 0,
-                        maxWidth: .infinity,
-                        minHeight: 0,
-                        maxHeight: 100,
-                        alignment: .leading)
+                    destination: EditProfile(url : url)
+                        .navigationBarBackButtonHidden(true)
+                        .navigationBarHidden(true),
+                    label: {
+                        HStack(spacing: 19) {
+                            Image("profileIcon")
+                            Text(" Profile")
+                            Spacer()
+                        }
+                        .padding()
+                    })
             }
             
-            
-            
-//            NavigationLink(
-//                destination: LoginView()) {
-//                HStack {
-//                    Image("ic_lock")
-//                    Text("Change Password")
-//                }.font(.title3)
-//                .padding()
-//                .foregroundColor(Color.black)
-//                .multilineTextAlignment(.center)
-//
-//            }.isDetailLink(false)
-//            .frame(minWidth: 0,
-//                    maxWidth: .infinity,
-//                    minHeight: 0,
-//                    maxHeight: 100,
-//                    alignment: .leading)
+            Spacer().frame(maxHeight: 20)
 
-//            NavigationLink(destination: EmptyView(), label: {})
+            NavigationLink(
+                destination: Text("Change Password"),
+                label: {
+                    HStack(spacing: 15) {
+                        Image("lockIcon")
+                        Text("Change Password")
+                        Spacer()
+                    }
+                    .padding()
+                })
             
+            Spacer().frame(maxHeight: 20)
+
             Button(action: signOut, label: {
-                HStack {
-                    Image("ic_logout")
-                    Text("Logout")
-                }.font(.title3)
-                .padding()
-                .foregroundColor(Color.black)
-                .multilineTextAlignment(.center)
                 
-            }).frame(minWidth: 0,
-                    maxWidth: .infinity,
-                    minHeight: 0,
-                    maxHeight: 100,
-                    alignment: .leading)
-//            .border(Color.gray).frame(maxWidth: .infinity)
-        
+                HStack(spacing: 19) {
+                    Image("logoutIcon")
+                    Text("Logout")
+                    Spacer()
+                }
+                .padding()
+            })
             Spacer()
-        }.padding()
-        .navigationBarTitle("")
+        }
+        .foregroundColor(.black)
+        .navigationBarHidden(true)
     }
 }

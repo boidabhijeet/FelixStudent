@@ -47,36 +47,25 @@ struct BatchDetails: View {
                 
                 VStack(alignment: .leading) {
                     Text(batch.module)
-                        .font(.system(size: 25, weight: .bold, design: .default))
+                        .font(.system(size: 20, weight: .regular, design: .default))
                     if Utility.getRole() == Constants.FACULTY {
-                        Text("start date: \(batch.fromDateString) @\(batch.fromTime)")
+                        Text("Start date: \(batch.fromDateString) @\(batch.fromTime)")
                     } else {
                         Text("Batch start date: \(batch.fromDateString)")
                     }
                     
                     Text("Hours Covered: \(self.hrsCovered)")
+                    
                     if Utility.getRole() == Constants.FACULTY {
                         Text("Total Students: \(batch.students.count)")
                     } else {
                         Text("Faculty Name: \(batch.faculty)")
                     }
                     
-                    //                    VStack(alignment: .trailing) {
-                    //                        HStack(alignment: .bottom, spacing: nil, content: {
-                    //                            Spacer()
-                    //                            Button(action: {
-                    //                                print("Edit button was tapped")
-                    //                            }) {
-                    //                                HStack(spacing: 10) {
-                    //                                    Text("Show study material")
-                    //                                    Image("icn_redArrow")
-                    //
-                    //                                }
-                    //                            }.foregroundColor(.red)
-                    //                        })
-                    //                    }
-                    
-                }.padding()
+                }
+                .padding()
+                .modifier(TextStyle14())
+
             }
             .padding()
             .shadow(color: Color.gray, radius: 5)

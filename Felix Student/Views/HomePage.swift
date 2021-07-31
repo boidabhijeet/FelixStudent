@@ -54,7 +54,6 @@ struct HomePage: View {
                 }
             }
         }
-        
     }
 }
 struct HomePage_Previews: PreviewProvider {
@@ -76,15 +75,20 @@ struct BatchRow: View {
                     
                     VStack(alignment: .leading, spacing: /*@START_MENU_TOKEN@*/nil/*@END_MENU_TOKEN@*/, content: {
                         Spacer()
+                        
                         Text(verbatim: batch.module)
-                            .font(.system(size: 25, weight: .bold, design: .default))
+                            .modifier(TextStyle20())
+                        
                         Spacer()
+                        
                         if Utility.getRole() == Constants.FACULTY {
                             Text("start date: \(batch.fromDateString) @\(batch.fromTime)")
                         } else {
-                            Text("Batch start date: \(batch.fromDateString)")
+                            Text("Batch Start Date: \(batch.fromDateString)")
                         }
+                        
                         Spacer()
+                        
                         if Utility.getRole() == Constants.FACULTY {
                             Text("Hours Covered: \(batch.totalHours)")
                             Spacer()
@@ -99,8 +103,9 @@ struct BatchRow: View {
                         
                         
                     })
-                    .padding(25)
-                    
+                    .modifier(TextStyle14())
+                    .lineLimit(0)
+
                 }
             }
             

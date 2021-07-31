@@ -8,67 +8,77 @@
 import SwiftUI
 
 struct SelectRole: View {
+
     @State private var action: Int? = 0
+    var screenSize = UIScreen.main.bounds
+
     var body: some View {
         VStack {
-            Image("Students")
-            Image("StudentList")
-                .resizable()
+            Spacer()
             
+            Image("HeaderLogo")
+            
+            Image("SelectRole")
+                      
+            Spacer()
+
             ZStack {
-                RoundedRectangle(cornerRadius: 25, style: .continuous)
-                    .fill(Color.white)
-                
                 
                 NavigationLink(destination: LoginView().environmentObject(SessionStore.shared), tag: 1, selection: $action) {
                     EmptyView()
                 }
                 .isDetailLink(false)
+                
                 NavigationLink(destination: LoginView().environmentObject(SessionStore.shared), tag: 2, selection: $action) {
                     EmptyView()
                 }
                 .isDetailLink(false)
+                
                 VStack {
                     Spacer()
-                    Text("Please select your role")
-                    Spacer()
+                    Text("Please select your role.")
+                        .font(.system(size: 23.0))
+                        .frame(maxWidth : .infinity, alignment: .topLeading)
+                        .padding(.horizontal)
+                        .padding(.bottom, 30)
+                    
                     HStack {
-                        
                         Button(action: {
-                            UserDefaults.standard.setValue(Constants.FACULTY, forKey: Constants.ROLE)
-                            self.action = 1
-                        }){
                             
-                            HStack(spacing: 10) {
-                                Image("facultyBtn")
+                        }, label: {
+                            HStack{
+                                Image("FacultyIcon")
                                 Text("Faculty")
-                                
-                            }}
-                        .font(.title3)
-                        .padding(10)
-                        .foregroundColor(Color.white)
-                        .multilineTextAlignment(.center)
-                        .background(Color.red)
+                            }
+                            .modifier(RedButton())
+                        })
+                        
+                        Spacer()
                         
                         Button(action: {
-                            UserDefaults.standard.setValue(Constants.STUDENT, forKey: Constants.ROLE)
-                            self.action = 2
-                        }){
-                            HStack(spacing: 10) {
-                                Image("studentBtn")
+                            
+                        }, label: {
+                            HStack{
+                                Image("StudentIcon")
                                 Text("Student")
-                            }}.font(.title3)
-                        .padding(10)
-                        .foregroundColor(Color.white)
-                        .multilineTextAlignment(.center)
-                        .background(Color.red)
+                            }
+                            .modifier(RedButton())
+                        })
+                        Spacer()
                     }
+                    .padding(.bottom, 30)
+                    
                     NavigationLink(destination: EmptyView(), label: {})
                     Spacer()
                 }
-            }.padding()
-            .shadow(color: Color.gray, radius: 5 )
+                .padding()
+                .frame(maxWidth : screenSize.width, maxHeight: screenSize.height * 0.25)
+                .background(Color.white)
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+                .shadow(radius: 5)
+            }
         }
+        .edgesIgnoringSafeArea(.bottom)
     }
 }
 
@@ -79,3 +89,4 @@ struct SelectRole_Previews: PreviewProvider {
         }
     }
 }
+
