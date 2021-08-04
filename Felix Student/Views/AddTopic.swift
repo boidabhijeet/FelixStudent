@@ -3,7 +3,6 @@
 //  Felix Student
 //
 //  Created by Mac on 16/04/21.
-//
 
 import SwiftUI
 import AlertToast
@@ -21,14 +20,14 @@ struct AddTopic: View {
     @Binding var rootIsActive : Bool
     @State var batchDateString: String
     @State var isActive : Bool
-    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
-    @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
+    @Environment(\.presentationMode) var presentationMode
     @State private var showToast = false
     @State private var showfutureToast = false
     @State private var showAtLeastToat = false
     @State private var disableButton = false
     @State private var showingAlert = false
     @State private var isShowingDetailView: Int? = 0
+    @State private var isPresented : Bool = false
     
     func stringDate() -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(batchDate))
@@ -76,138 +75,174 @@ struct AddTopic: View {
         }
     }
     var body: some View {
-        VStack {
-            ZStack {
-                HStack {
-                    
-                    Text("Session Date: \(stringDate())").font(.headline)
-                        .onAppear {
-                            onLoad()
+        ZStack {
+            VStack(alignment: .leading){
+                Group{
+                    Button(action: {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        HStack{
+                            Image(systemName: "arrow.left")
+                            Text("Add Topic")
                         }
-                    DatePicker("label", selection: $date, displayedComponents: [.date])
-                        .datePickerStyle(CompactDatePickerStyle())
-                        .labelsHidden()
-                        .onChange(of: date) {
-                            batchDate = $0.timeIntervalSince1970
-                            let currentTimestamp = Date().timeIntervalSince1970
-                            if currentTimestamp < batchDate {
-                                showfutureToast = true
-                                disableButton = true
-                                return
+                        .foregroundColor(.black)
+                    })
+                    .padding(.horizontal)
+                                        
+                    Divider()
+                    
+                    Spacer().frame(maxHeight : 20)
+                    
+                    HStack() {
+                        
+                        Text("Batch Date :")
+                            .fontWeight(.semibold)
+                        Text(stringDate())
+                            .onAppear {
+                                onLoad()
                             }
-                            let formate = $0.getFormattedDate(format: "dd MMM, yyyy") // Set output formate
-                            batchDateString = formate
-                            onCheck(selectedDate: formate)
-                            
-                        }
-                }
-            }
-            
-            
-            List(DatabaseReference.shared.topicArray, id: \.id) { feedback in
-                AddTopicRow(topicData: feedback)
-            }
-            
-            VStack {
-                
-                HStack {
-                    Spacer()
+                        
+                        Spacer()
+                        
+                        DatePicker("", selection: $date, displayedComponents: [.date])
+                            .onChange(of: date) {
+                                batchDate = $0.timeIntervalSince1970
+                                let currentTimestamp = Date().timeIntervalSince1970
+                                if currentTimestamp < batchDate {
+                                    showfutureToast = true
+                                    disableButton = true
+                                    return
+                                }
+                                let formate = $0.getFormattedDate(format: "dd MMM, yyyy") // Set output formate
+                                batchDateString = formate
+                                onCheck(selectedDate: formate)
+                            }
+                    }.padding(.horizontal)
                     
-                    NavigationLink(destination: AddNewTopic(showModal: $showModal, batch: batch, batchDate: Int64(batchDate), batchDateString: batchDateString, rootIsActive: self.$rootIsActive, isActive: isActive)) {
-                        HStack(spacing: 10) {
-                            Text("+ click to add topic")
-                                .frame(width: 177, height: 35)
-                                .foregroundColor(Color.black)
-                                .padding(.bottom, 7)
-                        }
+                    Spacer().frame(maxHeight : 20)
+                    
+                    
+                    List(DatabaseReference.shared.topicArray, id: \.id) { feedback in
+                        AddTopicRow(item: feedback)
                     }
-                    .isDetailLink(false)
-                    .background(Color.white)
-                    .cornerRadius(38.5)
-                    .padding()
-                    .shadow(color: Color.black.opacity(0.3),
-                            radius: 3,
-                            x: 3,
-                            y: 3)
+                    .listStyle(PlainListStyle())
                     
+                    HStack{
+                        
+                        Spacer()
+                        
+                        HStack(spacing : 2){
+                            Image(systemName : "plus")
+                                .foregroundColor(.red)
+                            
+                            Button("Click To Add Topic") {
+                                isPresented.toggle()
+                            }
+                            .sheet(isPresented: $isPresented) {
+                                // MARK: FIX ME
+                                //                                AddNewTopicAlert(isPresented: $showingAlert)
+                                AddNewTopic(showModal: $showModal, batch: batch, batchDate: Int64(batchDate), batchDateString: batchDateString, rootIsActive: self.$rootIsActive, isActive: isActive)
+                                
+                            }
+                        }
+                        .font(.system(size: 13, weight: .semibold))
+                        .frame(maxWidth: 165, maxHeight: 40)
+                        .background(Color.white)
+                        .foregroundColor(.black)
+                        .clipShape(Capsule())
+                        .clipped()
+                        .shadow(color: .gray, radius : 5)
+                    }
+                    .padding(.horizontal)
+                    
+                    
+                    Spacer().frame(maxHeight : 20)
+                    
+                    NavigationLink(destination:  MarkAttendance(newTopics: DatabaseReference.shared.topicArray, batch: batch, batchDateString: batchDateString, shouldPopToRootView: $isActive)                              .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true), tag: 1, selection: $isShowingDetailView) {
+                        EmptyView()
+                    }
+                    NavigationLink(destination: EmptyView(), label: {})
                 }
-            }.disabled(disableButton == true)
-            
-            NavigationLink(destination:  MarkAttendance(newTopics: DatabaseReference.shared.topicArray, batch: batch, batchDateString: batchDateString, shouldPopToRootView: $isActive), tag: 1, selection: $isShowingDetailView) {
-                EmptyView()
-            }
-            
-            NavigationLink(destination: EmptyView(), label: {})
-            
-            Button(action: {
-                if DatabaseReference.shared.topicArray.count == 0 {
-                    showAtLeastToat = true
-                    return
-                }
-                showingAlert = true
-            }) {
-                HStack(spacing: 10) {
+                
+                Button(action: {
+                    if DatabaseReference.shared.topicArray.count == 0 {
+                        showAtLeastToat = true
+                        return
+                    }
+                    showingAlert = true
+                }) {
                     Text("Next")
                 }
+                .font(.system(size: 24, weight: .semibold))
+                .frame(maxWidth: .infinity, maxHeight: 65, alignment: .center)
+                .background(Color.red)
+                .foregroundColor(.white)
+                .disabled(disableButton == true)
             }
-            .padding(10)
-            .frame(maxWidth: .infinity)
-            .foregroundColor(.white)
-            .background(Color.red)
-            .disabled(disableButton == true)
+            .edgesIgnoringSafeArea(.bottom)
+            .blur(radius: showingAlert ? 2 : 0)
+            .toast(isPresenting: $showToast, duration: 10.0){
+                AlertToast(type: .regular, title: ToastAlert.attendanceMarked)
+            }
+            .toast(isPresenting: $showfutureToast, duration: 10.0){
+                AlertToast(type: .regular, title: ToastAlert.FutureDate)
+            }
+            .toast(isPresenting: $showAtLeastToat, duration: 10.0){
+                AlertToast(type: .regular, title: ToastAlert.AtLeastOne)
+            }
+            
+            //Added to avoid the automatic dismiss of View as there some bug in current version.
+            NavigationLink(destination: EmptyView(), label: {})
         }
         .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Do you want to add more topics?"), message: Text("Once you mark attendance you unable to add more topics to this session"),  primaryButton: .destructive(Text("No")) {
-                self.isShowingDetailView = 1
-                let formate = date.getFormattedDate(format: "dd MMM, yyyy") // Set output formate
-                batchDateString = formate
-            },
-            secondaryButton: .default(Text("Yes")) {
-                
-            })
-        }
-        .navigationTitle("Add Topic")
-        .navigationBarTitleDisplayMode(.inline)
-        .toast(isPresenting: $showToast, duration: 10.0){
-            
-            AlertToast(type: .regular, title: ToastAlert.attendanceMarked)
-        }
-        .toast(isPresenting: $showfutureToast, duration: 10.0){
-            
-            AlertToast(type: .regular, title: ToastAlert.FutureDate)
-        }
-        
-        .toast(isPresenting: $showAtLeastToat, duration: 10.0){
-            
-            AlertToast(type: .regular, title: ToastAlert.AtLeastOne)
+            Alert(title: Text("Do you want to add more topics?"), message: Text("Once you mark attendance you unable to add more topics to this session"),
+                  primaryButton: .destructive(Text("No")) {
+                    self.isShowingDetailView = 1
+                    let formate = date.getFormattedDate(format: "dd MMM, yyyy") // Set output formate
+                    batchDateString = formate
+                  },
+                  secondaryButton: .default(Text("Yes")) {
+                    //Code
+                  })
         }
     }
 }
+
 
 struct AddTopicRow: View {
-    var topicData: Topic
+    var item: Topic
     
     var body: some View {
-        VStack(alignment: .leading){
-            HStack {
-                Text(topicData.topic)
-                Spacer()
-                //                Button(action: {
-                //                    print("Edit button was tapped")
-                //                }) {
-                //                    HStack(spacing: 10) {
-                //                        Image("icn_threedots")
-                //                    }
-                //                }
-            }
-            Text(topicData.remarks)
-            Text(topicData.timeSpent)
-            
-        }
-        .padding(25)
-        .border(Color("GrayColor"))
-        .shadow(radius: 5 )
         
+        HStack{
+            VStack(alignment :.leading, spacing : 10) {
+                Text("topic")
+                Text("remarks")
+                Text("timeSpent")
+                //
+                //                Text(item.topic)
+                //                Text(item.remarks)
+                //                Text(item.timeSpent)
+            }
+            .font(.system(size: 15))
+            
+            Spacer()
+            
+            Menu {
+                Button(action: {}) {
+                    Label("Edit", systemImage: "pencil")
+                }
+                
+                Button(action: {}) {
+                    Label("Delete", systemImage: "trash.fill")
+                }
+            }
+            label: {
+                Image("verticalDots")
+            }
+        }
+        .padding()
+        .modifier(GrayShadow())
     }
 }
-

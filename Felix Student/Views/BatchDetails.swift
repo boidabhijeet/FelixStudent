@@ -16,8 +16,8 @@ struct BatchDetails: View {
     @ObservedObject var topicVM = TopicViewModel()
     @State var avgFeedback = 0
     @State private var isActive : Bool = false
-    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
-    @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
+    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
     var screenSize = UIScreen.main.bounds
     @State var hrsCovered = ""
     func onLoad() {
@@ -35,9 +35,7 @@ struct BatchDetails: View {
     var body: some View {
         
         ZStack(alignment : .bottomTrailing) {
-            
             VStack{
-                
                 Button(
                     action: {self.presentationMode.wrappedValue.dismiss()},
                     label: {
@@ -53,13 +51,9 @@ struct BatchDetails: View {
                 Divider()
                 
                 HStack(spacing : 0){
-                    
                     Image("\(batch.module)Bar")
                     VStack(spacing : 10){
-                        
                         HStack{
-                            
-                            
                             VStack(alignment :.leading, spacing : 10) {
                                 Text(batch.module)
                                     .textCase(.uppercase)
@@ -84,8 +78,8 @@ struct BatchDetails: View {
                                 .renderingMode(.original)
                                 .resizable()
                                 .frame(width: 63, height: 63)
-                                .padding(.bottom)
-                                .padding(.horizontal)
+//                                .padding(.bottom)
+//                                .padding(.horizontal)
                         }
                         NavigationLink(
                             destination : Text("Display Study Material"),
@@ -104,7 +98,7 @@ struct BatchDetails: View {
                     .background(Color.white)
                     .clipped()
                     .shadow(radius : 5)
-                }.padding(.top, 10)
+                }.padding(.vertical, 5)
                 
                 
                 Text("Topics Covered")
@@ -117,14 +111,10 @@ struct BatchDetails: View {
                     .onAppear(perform: {
                         onLoad()
                     })
-                //                .listStyle(InsetListStyle())
-                //                .listItemTint(.black)
-                
             }
             
             if Utility.getRole() == Constants.FACULTY {
                 Spacer()
-                
                 NavigationLink(destination:
                                 AddTopic(batch: batch, aid: "", fromPlusButton: true, topic: nil, rootIsActive: self.$isActive, batchDateString: "", isActive: isActive)
                                 .navigationBarBackButtonHidden(true)
@@ -132,9 +122,13 @@ struct BatchDetails: View {
                 {
                     Image("addTopicIcon").padding()
                 }
+                NavigationLink(destination: EmptyView()) {
+                    EmptyView()
+                }
+
             }
         }
-        .navigationBarHidden(true)
+//        .navigationBarHidden(true)
     }
     @ViewBuilder
     var listView: some View {
@@ -146,7 +140,10 @@ struct BatchDetails: View {
     }
     
     var emptyListView: some View {
-        Text("No topic covered yet.")
+        VStack{
+            Text("No topic covered yet.")
+            Spacer()
+        }
     }
     
     var objectsListView: some View {
@@ -159,9 +156,11 @@ struct BatchDetails: View {
 
 struct TopicRow: View {
     @State var topicData: Topic
+    var screenSize = UIScreen.main.bounds
+    
     var batch: Batch
     let role = Utility.getRole()
-    @State var isActive : Bool = false
+//    @State var isActive : Bool = false
     var body: some View {
         ZStack(alignment : .bottomTrailing) {
             VStack(alignment : .leading){
@@ -182,12 +181,12 @@ struct TopicRow: View {
                     HStack(spacing : 1) {
                         
                         if topicData.averageFeedback == 0 {
-                            Text("My rating:\(topicData.averageFeedback)")
+                            Text("Avg rating: \(topicData.averageFeedback)")
                                 .font(.system(size: 12))
                             
                         } else if topicData.averageFeedback == 3 {
                             HStack {
-                                Text("My rating: ")
+                                Text("Avg rating: ")
                                     .font(.system(size: 12))
                                 
                                 Image("understood")
@@ -198,13 +197,19 @@ struct TopicRow: View {
                             
                         } else if topicData.averageFeedback == 2 {
                             HStack {
-                                Text("My rating: ")
+                                Text("Avg rating: ")
                                 Image("partiallyUnderstood")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                
                             }
                         } else if topicData.averageFeedback == 1 {
                             HStack {
-                                Text("My rating: ")
+                                Text("Avg rating: ")
                                 Image("notUnderstoodRed")
+                                    .resizable()
+                                    .frame(width: 24, height: 24)
+                                
                             }
                             Spacer()
                             Text(topicData.presentString)
@@ -249,69 +254,51 @@ struct TopicRow: View {
                             }
                         }
                         
-                        Spacer()
-                        
-                        if topicData.presentString == "Feedback sent" {
-                            Group {
-                                Text(topicData.presentString)
-                            }.padding(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.green, lineWidth: 2)
-                            )
-                            .background(Color.green)
-                            .opacity(0.5)
-                        } else if topicData.presentString == "Feedback pending" {
-                            Group {
-                                Text(topicData.presentString)
-                            }.padding(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.yellow, lineWidth: 2)
-                            )
-                            .background(Color.yellow)
-                            .opacity(0.5)
-                        } else {
-                            Group {
-                                Text(topicData.presentString)
-                            }.padding(10)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.red, lineWidth: 2)
-                            )
-                            .background(Color.red)
-                            .opacity(0.5)
-                        }
                     }
                 }
-                if Utility.getRole() == Constants.FACULTY {
-                    NavigationLink(destination: StudentFeedback(topic: topicData, avgFeedback: 0)) {
-                        EmptyView()
-                    } .isDetailLink(false)
-                    .buttonStyle(PlainButtonStyle()).frame(width:0).opacity(0)
-                } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback pending" {
-                    
-                    NavigationLink(destination: GiveFeedback(topic: topicData)) {
-                        EmptyView()
-                    } .isDetailLink(false)
-                    .buttonStyle(PlainButtonStyle()).frame(width:0).opacity(0)
-                } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback sent" {
-                    NavigationLink(destination: Feedback(topic: topicData)) {
-                        EmptyView()
-                    }.isDetailLink(false)
-                    .buttonStyle(PlainButtonStyle()).frame(width:0).opacity(0)
+            }
+            .padding()
+            .frame(maxWidth : screenSize.width * 0.9)
+            .modifier(GrayShadow())
+            //Fix the Image code-  Shift to right
+            if Utility.getRole() == Constants.FACULTY {
+                NavigationLink(destination:
+                                StudentFeedback(topic: topicData, avgFeedback: 0)
+                                    .navigationBarHidden(true)
+                                    .navigationBarBackButtonHidden(true)
+                ) {
+                    EmptyView()
+                } .isDetailLink(false)
+            } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback pending" {
+                NavigationLink(
+                    destination: GiveFeedback(topic: topicData)
+                        .navigationBarHidden(true)
+                        .navigationBarBackButtonHidden(true))
+                {
+                    Image("feedbackPending").padding()
                 }
-            }.padding()
+                .isDetailLink(false)
+            } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback sent" {
+                NavigationLink(
+                    destination: Feedback(topic: topicData)
+                        .navigationBarHidden(true)
+                        .navigationBarBackButtonHidden(true))
+                {
+                    Image("feedbackSent").padding()
+                }
+                .isDetailLink(false)
+            } else {
+                Image("absent").padding()
+            }
         }
+        Spacer()
     }
 }
-
 
 struct CustomListView: View {
     @StateObject var model = VM()
     var batch: Batch
     var body: some View {
-        print("******* BODY")
         return UIListView(reload: $model.reload, items: $model.items, batchDetails: $model.batchDetails)
             .onAppear {
                 model.batch = batch
@@ -319,6 +306,8 @@ struct CustomListView: View {
             }
     }
 }
+
+// MARK:- Data
 
 class VM: ObservableObject {
     
@@ -341,7 +330,6 @@ class VM: ObservableObject {
                         self.reload.toggle()
                     }
                 }
-                
             }
         }
     }
@@ -354,15 +342,12 @@ struct UIListView: UIViewRepresentable {
     @Binding var batchDetails: [String: [Topic]]
     
     func makeUIView(context: Context) -> UITableView {
-        print("*************** make")
         let tableView =  UITableView()
         tableView.dataSource = context.coordinator
         return tableView
     }
     
     func updateUIView(_ tableView: UITableView, context: Context) {
-        print("*************** update", items.count)
-        print("********* RELOAD", reload)
         if reload {
             DispatchQueue.main.async {
                 tableView.reloadData()
@@ -422,5 +407,4 @@ extension UIListView {
             return UITableView.automaticDimension
         }
     }
-    
 }

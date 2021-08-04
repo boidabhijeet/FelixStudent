@@ -13,43 +13,46 @@ struct HomePage: View {
     
     var body: some View {
         
-        NavigationView {
-            VStack {
-                HStack {
-                    Text("Felix Student")
-                    Spacer()
-                    NavigationLink(
-                        destination: NotificationView()
-                            .navigationBarHidden(true)
-                            .navigationBarBackButtonHidden(true),
-                        label: {
-                            Image(systemName : "bell")
-                                .foregroundColor(.black)
-                        })
-                }
-                .padding()
-                .modifier(TextStyle20())
-                
-                List(batchVM.batches) { batch in
-                    BatchRow(batch: batch)
-                }
-                .onAppear() {
-                    if batchVM.batches.count > 0 {
-                        
-                    } else {
-                        if Utility.getRole() == Constants.FACULTY {
-                            self.batchVM.subscribe(facultyUid: Auth.auth().currentUser!.uid)
-                        } else if Utility.getRole() == Constants.STUDENT {
-                            self.batchVM.getBatchForStudent()
-                        }
+        VStack {
+            HStack {
+                Text("Felix Student")
+                Spacer()
+                NavigationLink(
+                    destination: NotificationView()
+                        .navigationBarHidden(true)
+                        .navigationBarBackButtonHidden(true),
+                    label: {
+                        Image(systemName : "bell")
+                            .foregroundColor(.black)
+                            .overlay(
+                                Color.red.clipShape(Circle())
+                                    .frame(width: 11, height: 11)
+                                    .offset(x: 7, y: -5)
+                            )
+                    })
+            }
+            .padding()
+            .modifier(TextStyle20())
+            
+            List(batchVM.batches) { batch in
+                BatchRow(batch: batch)
+            }
+            .onAppear() {
+                if batchVM.batches.count > 0 {
+                    
+                } else {
+                    if Utility.getRole() == Constants.FACULTY {
+                        self.batchVM.subscribe(facultyUid: Auth.auth().currentUser!.uid)
+                    } else if Utility.getRole() == Constants.STUDENT {
+                        self.batchVM.getBatchForStudent()
                     }
                 }
-                .listStyle(PlainListStyle())
-                .navigationBarTitleDisplayMode(.inline)
-                .modifier(TextStyle20())
             }
-            .navigationBarHidden(true)
+            .listStyle(PlainListStyle())
+            .navigationBarTitleDisplayMode(.inline)
+            .modifier(TextStyle20())
         }
+        .navigationBarHidden(true)
     }
 }
 

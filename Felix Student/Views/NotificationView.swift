@@ -14,7 +14,7 @@ struct NotificationView: View {
     var screenSize = UIScreen.main.bounds
     func dateFormatting(postedAt: String) -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(postedAt) ?? TimeInterval(0))
-        let formate = date.getFormattedDate(format: "dd/MM/yyyy hh:mm:ss") // Set output formate
+        let formate = date.getFormattedDate(format: "dd/MM/yyyy hh:mm:ss") // Set output format
         return formate
     }
     

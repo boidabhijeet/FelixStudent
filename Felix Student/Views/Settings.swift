@@ -31,7 +31,12 @@ struct Settings: View {
             Spacer().frame(maxHeight : 40)
 
             WebImage(url: url)
-                    .placeholder(Image("profileImage"))
+                .placeholder(Image("profileImage"))
+                .renderingMode(.original)
+                .resizable()
+                .frame(maxWidth: 79, maxHeight: 79)
+                .cornerRadius(39.5)
+
       
             if Utility.getRole() == Constants.FACULTY {
                 Text(SessionStore.shared.user?.fullName ?? "")
@@ -70,7 +75,7 @@ struct Settings: View {
 
                 Divider()
                 
-                Spacer().frame(maxHeight : 20)
+                Spacer().frame(maxHeight : 16)
 
                 NavigationLink(
                     destination: EditProfile(url : url)
@@ -86,12 +91,12 @@ struct Settings: View {
                     })
             }
             
-            Spacer().frame(maxHeight: 20)
+            Spacer().frame(maxHeight: 16)
 
             NavigationLink(
                 destination: Text("Change Password"),
                 label: {
-                    HStack(spacing: 15) {
+                    HStack(spacing: 16) {
                         Image("lockIcon")
                         Text("Change Password")
                         Spacer()
@@ -99,7 +104,7 @@ struct Settings: View {
                     .padding()
                 })
             
-            Spacer().frame(maxHeight: 20)
+            Spacer().frame(maxHeight: 16)
 
             Button(action: signOut, label: {
                 

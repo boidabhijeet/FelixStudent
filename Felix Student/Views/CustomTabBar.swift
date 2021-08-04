@@ -14,44 +14,46 @@ struct CustomTabBar: View {
     let screenSize = UIScreen.main.bounds
     
     var body: some View {
-        ZStack(alignment : .bottom){
-            
-            VStack{
-                if self.index == 0{
-                    HomePage()
-                }
-                else if self.index == 1{
-//                    TalkToFelix()
-                }
-                else{
-//                    Settings()
-                    
-                    /*
-                    if Utility.getRole() == Constants.FACULTY {
-                        if SessionStore.shared.user?.photoUrl == ""  || SessionStore.shared.user?.photoUrl == nil {
-                            Settings(url: URL(string: Constants.PlaceholderImage)!)
-                        } else {
-                            Settings(url: URL(string: SessionStore.shared.user!.photoUrl)!)
-                        }
-                        
-                    } else {
-                        if SessionStore.shared.student?.photoUrl == "" || SessionStore.shared.student?.photoUrl == nil {
-                            Settings(url: URL(string: Constants.PlaceholderImage)!)
-                        } else {
-                            Settings(url: URL(string: SessionStore.shared.student!.photoUrl)!)
+        NavigationView{
+            ZStack(alignment : .bottom){
+                
+                VStack{
+                    if self.index == 0{
+                        HomePage()
                     }
-                    */
+                    else if self.index == 1{
+                        FelixManagement()
+                    }
+                    else{
+                        if Utility.getRole() == Constants.FACULTY {
+                            if SessionStore.shared.user?.photoUrl == ""  || SessionStore.shared.user?.photoUrl == nil {
+                                Settings(url: URL(string: Constants.PlaceholderImage)!)
+                            } else {
+                                Settings(url: URL(string: SessionStore.shared.user!.photoUrl)!)
+                            }
+                            
+                        } else {
+                            if SessionStore.shared.student?.photoUrl == "" || SessionStore.shared.student?.photoUrl == nil {
+                                Settings(url: URL(string: Constants.PlaceholderImage)!)
+                            } else {
+                                Settings(url: URL(string: SessionStore.shared.student!.photoUrl)!)
+                            }
+                        }
+                    }
                 }
+                CircleTab(index: $index)
             }
-            CircleTab(index: $index)
+            .navigationViewStyle(StackNavigationViewStyle())
         }
-        .navigationViewStyle(StackNavigationViewStyle())
+        .navigationBarHidden(true)
+
     }
 }
 
 struct CircleTab : View {
     
     @Binding var index : Int
+    var screenSize = UIScreen.main.bounds
     
     var body: some View{
         
@@ -126,12 +128,12 @@ struct CircleTab : View {
             Spacer()
             
         }
+        .frame(width: screenSize.width * 0.9, height: 70, alignment: .center)
         .border(Color.gray, width: 0.2)
         .padding(.horizontal, 25)
-        .font(.system(size: 10))
         .background(Color.white)
+        .font(.system(size: 10))
         .animation(.spring())
-        
     }
 }
 struct CustomTabBar_Previews: PreviewProvider {

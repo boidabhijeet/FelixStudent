@@ -14,7 +14,6 @@ struct CustomPageView: View {
         NavigationView {
             ZStack(alignment : .bottomTrailing){
                 TabView(selection: $currentIndex) {
-                    
                     TrackCourseProgress().tag(0)
                     GiveFacultyFeedback().tag(1)
                     ReferAndEarn1().tag(2)

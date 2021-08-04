@@ -10,88 +10,87 @@ import AlertToast
 import Firebase
 
 struct FelixFeedback: View {
+    @Environment(\.presentationMode) var presentationMode
     @State private var text = ""
     @State private var showToast = false
     @State private var showErrorToast = false
     var frameworks = ["Poor", "Bad", "Okay", "Good", "Great"]
     @State private var selectedFrameworkIndex = 0
     var body: some View {
-        VStack {
-            Form {
-            Text("Do you have any suggestion or issue? \n Please feel free to let us know..")
-//            TextEditor(text: $comment)
-//                .padding()
-//                .background(Color.init(.sRGB, red: 255, green: 199, blue: 203, opacity: 1))
-//                .foregroundColor(.black)
-//                .border(Color.black)
-                ZStack(alignment: .topLeading) {
-                            RoundedRectangle(cornerRadius: 8, style: .continuous)
-                                .fill(Color(UIColor.secondarySystemBackground))
-                            
-                            if text.isEmpty {
-                                Text("Describe your issue or idea")
-                                    .foregroundColor(Color(UIColor.placeholderText))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 12)
-                                    
-                            }
-                            
-                            TextEditor(text: $text)
-                                .padding(4)
-                            
+        GeometryReader { geo in
+            VStack{
+                Button(
+                    action: {
+                        self.presentationMode.wrappedValue.dismiss()},
+                    label: {
+                        HStack(spacing : 10){
+                            Image(systemName: "arrow.left")
+                            Text("Give Feedback")
+                                .font(.system(size: 20))
                         }
-                        .frame(width: 300, height: 400)
-                        .font(.body)
-            Text("How do you feel? (optional)")
-            Picker(selection: $selectedFrameworkIndex, label: Text("")) {
-                ForEach(0 ..< frameworks.count) {
-                    Text(self.frameworks[$0])
+                        .frame(maxWidth: geo.size.width * 0.9, alignment: .leading)
+                        .padding(.horizontal)
+                        .foregroundColor(.black)
+                    })
+                
+                Divider()
+                
+                Text("Do you have any suggestion or issue?\nPlease feel free to let us know...")
+                    .frame(maxWidth: geo.size.width * 0.9, alignment: .leading)
+                    .padding()
+                
+                TextField("Describe your issue or idea...", text: $text)
+                    .modifier(TextStyle14())
+                    .padding(10)
+                    .frame(maxWidth: geo.size.width * 0.9, minHeight: 130, alignment: .topLeading)
+                    .background(Color(red: 1.0, green: 0.78, blue: 0.796))
+                    .clipShape(RoundedRectangle(cornerRadius: 5))
+                    .padding(.horizontal)
+                
+                Text("How do you feel? (Optional)")
+                    .font(.system(size: 16))
+                    .frame(maxWidth: geo.size.width * 0.9, alignment: .leading)
+                    .padding(.top, 30)
+                    .padding(.horizontal)
+                
+                Image("FeedbackEmoji")
+                    .frame(maxWidth: geo.size.width, alignment: .center)
+                //Paste below HStack here and remove above static image.
+//                Picker(selection: $selectedFrameworkIndex, label: Text("")) {
+//                    ForEach(0 ..< frameworks.count) {
+//                        Text(self.frameworks[$0])
+//                    }
+//                }
+                
+                Spacer()
+            
+                Button("Send") {
+                    if text == "" {
+                        showErrorToast = true
+                        return
+                    }
+                    var name = ""
+                    if let student = SessionStore.shared.student {
+                        name = student.name
+                    }
+                    if let faculty = SessionStore.shared.user {
+                        name = faculty.fullName
+                    }
+                    let uid = Auth.auth().currentUser?.uid
+                    let feedback = GeneralFeedback(byName: name, rating: "\(selectedFrameworkIndex)", reply: "", title: text, uid: uid ?? "")
+                   let feedbackVM = GeneralFeedbackViewModel(feedback: feedback)
+                    feedbackVM.addGeneralFeedback()
+                    text = ""
+                    showToast = true
                 }
+                .font(.system(size: 24, weight: .semibold, design: .default))
+                .frame(maxWidth: geo.size.width, minHeight: 65, alignment: .center)
+                .background(Color.red)
+                .foregroundColor(.white)
             }
-            Spacer()
-            
-            Button(action: {
-                if text == "" {
-                    showErrorToast = true
-                    return
-                }
-                var name = ""
-                if let student = SessionStore.shared.student {
-                    name = student.name
-                }
-                if let faculty = SessionStore.shared.user {
-                    name = faculty.fullName
-                }
-                let uid = Auth.auth().currentUser?.uid
-                let feedback = GeneralFeedback(byName: name, rating: "\(selectedFrameworkIndex)", reply: "", title: text, uid: uid ?? "")
-               let feedbackVM = GeneralFeedbackViewModel(feedback: feedback)
-                feedbackVM.addGeneralFeedback()
-                text = ""
-                showToast = true
-            }) {
-                HStack(spacing: 10) {
-                    Text("Save")
-                }
-            }.padding(10)
-            .frame(maxWidth: .infinity)
-            .foregroundColor(.white)
-            .background(Color.red)
-            }
-        }.navigationTitle("Give Feedback")
-        .navigationBarTitleDisplayMode(.inline)
-        .toast(isPresenting: $showToast){
-            
-            // `.alert` is the default displayMode
-            AlertToast(type: .regular, title: ToastAlert.felixFeedback)
-        }
-        
-        .toast(isPresenting: $showErrorToast){
-            
-            // `.alert` is the default displayMode
-            AlertToast(type: .regular, title: ToastAlert.feedbackError)
+            .edgesIgnoringSafeArea(.bottom)
         }
     }
-//}
 }
 
 struct FelixFeedback_Previews: PreviewProvider {

@@ -9,6 +9,8 @@ import SwiftUI
 import AlertToast
 
 struct ReferAndEarn: View {
+    @Environment(\.presentationMode) var presentationMode
+
     @State  private var fullName = ""
     @State  private var email = ""
     @State  private var contact = ""
@@ -18,88 +20,85 @@ struct ReferAndEarn: View {
     @State private var showEmailErrorToast = false
     
     var body: some View {
-        ScrollView {
-            VStack {
-                Image("ReferandEarn-1")
-                    .resizable()
-                    .frame(width: 400, height: 250)
-                Text("Here's an Awesome")
-                    .foregroundColor(.gray
-                    )
-                Text("Refer & Earn").font(.headline)
-                Text("Refer a friend and receive upto ₹1000 as reward").font(.body)
-                    .foregroundColor(.gray)
-                VStack {
-                    TextField("Full Name", text: $fullName)
-                        .padding()
-                        .border(Color.black)
-                    TextField("Email", text: $email)
-                        .padding()
-                        .border(Color.black)
-                    TextField("Contact", text: $contact)
-                        .padding()
-                        .border(Color.black)
+        VStack {
+            
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }, label: {
+                HStack{
+                    Image(systemName: "arrow.left")
+                    Text("Refer & Earn")
+                    Spacer()
+                }.padding(.horizontal)
+                .foregroundColor(.black)
+            })
+            
+            Divider()
+            
+            Image("ReferAndEarn-1")
+                .renderingMode(.original)
+                .resizable()
+                .frame(maxWidth : .infinity, maxHeight: .infinity)
+
+            
+            Spacer()
+            
+            Text("Here'a an Awesome")
+            Text("Refer & Earn!").font(.title3)
+            Text("Refer a friend and recieve upto ₹1000 as reward").font(.subheadline)
+            
+            Spacer()
+            
+            VStack{
+                Group{
                     
-                    Button(action: {
-                        if fullName == "" {
-                            showFullNameErrorToast = true
-                            return
-                        } else if !contact.isPhoneNumber {
-                            showContactErrorToast = true
-                            return
-                        } else if !Utility.isValidEmail(email) && email != "" {
-                            showEmailErrorToast = true
-                            return
-                        }
-                        var name = ""
-                        if let student = SessionStore.shared.student {
-                            name = student.name
-                        }
-                        if let faculty = SessionStore.shared.user {
-                            name = faculty.fullName
-                        }
-                        let timestamp = NSDate().timeIntervalSince1970
-                        let uid = SessionStore.shared.session!.uid
-                        let ref = Reference(byName: name, contact: contact, createdAt: Int64(timestamp), email: email, fullName: fullName, source: "Reference", uid: uid)
-                        let refVM = ReferenceViewModel(reference: ref)
-                        refVM.addReference()
-                        showToast = true
-                        email = ""
-                        contact = ""
-                        fullName = ""
-                    }) {
-                        HStack(spacing: 10) {
-                            Text("Submit")
-                        }
-                    }.padding(10)
-                    .frame(maxWidth: 320)
-                    .foregroundColor(.white)
-                    .background(Color.red)
-                } .padding()
-                //                } .padding()
-                //                .shadow(color: Color.gray, radius: 5 )
-            }.navigationTitle("Refer & Earn")
-            .navigationBarTitleDisplayMode(.inline)
-            .toast(isPresenting: $showToast){
+                    TextField("Full Name", text: $fullName)
+
+                    TextField("Email", text: $email)
+
+                    TextField("Contact", text: $contact)
+                    
+                }
+                .modifier(CustomTextField())
+                // FelixManagement View Call
                 
-                // `.alert` is the default displayMode
-                AlertToast(type: .regular, title: ToastAlert.referAndEarn)
+                Button(action: {
+                    if fullName == "" {
+                        showFullNameErrorToast = true
+                        return
+                    } else if !contact.isPhoneNumber {
+                        showContactErrorToast = true
+                        return
+                    } else if !Utility.isValidEmail(email) && email != "" {
+                        showEmailErrorToast = true
+                        return
+                    }
+                    var name = ""
+                    if let student = SessionStore.shared.student {
+                        name = student.name
+                    }
+                    if let faculty = SessionStore.shared.user {
+                        name = faculty.fullName
+                    }
+                    let timestamp = NSDate().timeIntervalSince1970
+                    let uid = SessionStore.shared.session!.uid
+                    let ref = Reference(byName: name, contact: contact, createdAt: Int64(timestamp), email: email, fullName: fullName, source: "Reference", uid: uid)
+                    let refVM = ReferenceViewModel(reference: ref)
+                    refVM.addReference()
+                    showToast = true
+                    email = ""
+                    contact = ""
+                    fullName = ""
+                }) {
+                    Text("SUBMIT")
+                        .font(.system(size: 16, weight: .semibold))
+                        .modifier(RedButton())
+                }
             }
-            .toast(isPresenting: $showFullNameErrorToast){
-                
-                // `.alert` is the default displayMode
-                AlertToast(type: .regular, title: ToastAlert.FullNameError)
-            }
-            .toast(isPresenting: $showContactErrorToast){
-                
-                // `.alert` is the default displayMode
-                AlertToast(type: .regular, title: ToastAlert.contactError)
-            }
-            .toast(isPresenting: $showEmailErrorToast){
-                
-                // `.alert` is the default displayMode
-                AlertToast(type: .regular, title: ToastAlert.emailError)
-            }
+            .padding()
+            .modifier(GrayShadow())
+            .padding(10)
+            
         }
     }
 }

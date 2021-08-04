@@ -47,7 +47,6 @@
 		0449AFCB26B3C405005A1C19 /* GiveFacultyFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFCA26B3C405005A1C19 /* GiveFacultyFeedback.swift */; };
 		0449AFCD26B3C433005A1C19 /* ReferAndEarn1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFCC26B3C433005A1C19 /* ReferAndEarn1.swift */; };
 		0449AFD026B3D6E3005A1C19 /* CustomViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFCF26B3D6E3005A1C19 /* CustomViewModifier.swift */; };
-		0449AFD326B3FADC005A1C19 /* AddNewTopicAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFD226B3FADC005A1C19 /* AddNewTopicAlert.swift */; };
 		0449AFD526B3FAFA005A1C19 /* HomePageSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFD426B3FAFA005A1C19 /* HomePageSubView.swift */; };
 		0449AFD726B3FB18005A1C19 /* ForgotPwdAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFD626B3FB18005A1C19 /* ForgotPwdAlert.swift */; };
 		0449AFD926B40B46005A1C19 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFD826B40B46005A1C19 /* CustomTabBar.swift */; };
@@ -56,7 +55,6 @@
 		0463DE922626C7350047DCC0 /* SelectRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE912626C7350047DCC0 /* SelectRole.swift */; };
 		0463DE952626D91B0047DCC0 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE942626D91B0047DCC0 /* LoginView.swift */; };
 		0463DE982626FEF90047DCC0 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE972626FEF90047DCC0 /* HomePage.swift */; };
-		0463DE9B2627082C0047DCC0 /* Tabbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DE9A2627082C0047DCC0 /* Tabbar.swift */; };
 		0463DEA5262740F50047DCC0 /* BatchDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0463DEA4262740F50047DCC0 /* BatchDetails.swift */; };
 		0464C005263183AD0040A753 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464C004263183AD0040A753 /* SessionStore.swift */; };
 		046B8523265E6A2E007A7E5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 040694F92625BBCD00C0EDC0 /* LaunchScreen.storyboard */; };
@@ -135,7 +133,6 @@
 		0449AFCA26B3C405005A1C19 /* GiveFacultyFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFacultyFeedback.swift; sourceTree = "<group>"; };
 		0449AFCC26B3C433005A1C19 /* ReferAndEarn1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarn1.swift; sourceTree = "<group>"; };
 		0449AFCF26B3D6E3005A1C19 /* CustomViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModifier.swift; sourceTree = "<group>"; };
-		0449AFD226B3FADC005A1C19 /* AddNewTopicAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTopicAlert.swift; sourceTree = "<group>"; };
 		0449AFD426B3FAFA005A1C19 /* HomePageSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageSubView.swift; sourceTree = "<group>"; };
 		0449AFD626B3FB18005A1C19 /* ForgotPwdAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPwdAlert.swift; sourceTree = "<group>"; };
 		0449AFD826B40B46005A1C19 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
@@ -144,7 +141,6 @@
 		0463DE912626C7350047DCC0 /* SelectRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectRole.swift; sourceTree = "<group>"; };
 		0463DE942626D91B0047DCC0 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		0463DE972626FEF90047DCC0 /* HomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
-		0463DE9A2627082C0047DCC0 /* Tabbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tabbar.swift; sourceTree = "<group>"; };
 		0463DEA4262740F50047DCC0 /* BatchDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchDetails.swift; sourceTree = "<group>"; };
 		0464C004263183AD0040A753 /* SessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionStore.swift; sourceTree = "<group>"; };
 		04AB43C1262F0907004E932B /* BatchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchViewModel.swift; sourceTree = "<group>"; };
@@ -262,33 +258,31 @@
 		043D8614262AF37C00397596 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				0449AFCF26B3D6E3005A1C19 /* CustomViewModifier.swift */,
+				040694F22625BBCC00C0EDC0 /* ContentView.swift */,
 				0463DE8E2626BDFA0047DCC0 /* CustomPageView.swift */,
 				0449AFC826B3C3B1005A1C19 /* TrackCourseProgress.swift */,
-				0449AFCA26B3C405005A1C19 /* GiveFacultyFeedback.swift */,
 				0449AFCC26B3C433005A1C19 /* ReferAndEarn1.swift */,
 				0463DE912626C7350047DCC0 /* SelectRole.swift */,
 				0463DE942626D91B0047DCC0 /* LoginView.swift */,
 				0449AFD826B40B46005A1C19 /* CustomTabBar.swift */,
 				0463DE972626FEF90047DCC0 /* HomePage.swift */,
+				04159AAB26280C750056006C /* FelixManagement.swift */,
+				04159AB426284D2E0056006C /* Settings.swift */,
 				042BB37F26693E0E00A9AA3D /* NotificationView.swift */,
 				0463DEA4262740F50047DCC0 /* BatchDetails.swift */,
 				04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */,
-				0463DE9A2627082C0047DCC0 /* Tabbar.swift */,
-				040694F22625BBCC00C0EDC0 /* ContentView.swift */,
-				042AC42826341A52005EA11C /* TextAlert.swift */,
 				04159AA52628049F0056006C /* GiveFeedback.swift */,
+				0449AFCA26B3C405005A1C19 /* GiveFacultyFeedback.swift */,
 				04159AA826280BCC0056006C /* Feedback.swift */,
-				04159AAB26280C750056006C /* FelixManagement.swift */,
-				04159AAE262845AF0056006C /* FelixFeedback.swift */,
-				04159AB12628493D0056006C /* ReferAndEarn.swift */,
-				04159AB426284D2E0056006C /* Settings.swift */,
-				04159AB7262851140056006C /* EditProfile.swift */,
-				04159ABA2628550D0056006C /* RaiseTicket.swift */,
+				04452BDF265A4A7600E9EAB8 /* StudentFeedback.swift */,
 				043D85CD2629927900397596 /* AddTopic.swift */,
 				043D85D0262997A500397596 /* MarkAttendance.swift */,
-				043D85D32629D1C300397596 /* AddNewTopic.swift */,
-				04452BDF265A4A7600E9EAB8 /* StudentFeedback.swift */,
+				04159AAE262845AF0056006C /* FelixFeedback.swift */,
+				04159AB12628493D0056006C /* ReferAndEarn.swift */,
+				04159AB7262851140056006C /* EditProfile.swift */,
+				04159ABA2628550D0056006C /* RaiseTicket.swift */,
+				042AC42826341A52005EA11C /* TextAlert.swift */,
+				0449AFCF26B3D6E3005A1C19 /* CustomViewModifier.swift */,
 				0449AFD126B3FABF005A1C19 /* SubViews */,
 			);
 			path = Views;
@@ -312,7 +306,7 @@
 		0449AFD126B3FABF005A1C19 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				0449AFD226B3FADC005A1C19 /* AddNewTopicAlert.swift */,
+				043D85D32629D1C300397596 /* AddNewTopic.swift */,
 				0449AFD426B3FAFA005A1C19 /* HomePageSubView.swift */,
 				0449AFD626B3FB18005A1C19 /* ForgotPwdAlert.swift */,
 			);
@@ -534,7 +528,6 @@
 				04159AAC26280C750056006C /* FelixManagement.swift in Sources */,
 				043FE1F826327B5F00D3BC7F /* TopicRepository.swift in Sources */,
 				04159AB22628493D0056006C /* ReferAndEarn.swift in Sources */,
-				0449AFD326B3FADC005A1C19 /* AddNewTopicAlert.swift in Sources */,
 				04014B38262F42D5008F2C01 /* Constants.swift in Sources */,
 				04159AB8262851140056006C /* EditProfile.swift in Sources */,
 				042BB38026693E0E00A9AA3D /* NotificationView.swift in Sources */,
@@ -559,7 +552,6 @@
 				04159AA926280BCC0056006C /* Feedback.swift in Sources */,
 				0464C005263183AD0040A753 /* SessionStore.swift in Sources */,
 				043D85D42629D1C300397596 /* AddNewTopic.swift in Sources */,
-				0463DE9B2627082C0047DCC0 /* Tabbar.swift in Sources */,
 				04159AAF262845AF0056006C /* FelixFeedback.swift in Sources */,
 				043FE1F5263271F300D3BC7F /* AttendanceRespository.swift in Sources */,
 				04159AB526284D2E0056006C /* Settings.swift in Sources */,

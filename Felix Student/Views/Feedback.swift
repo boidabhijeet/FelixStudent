@@ -11,60 +11,94 @@ struct Feedback: View {
     var topic: Topic
     @State var topicVM = TopicViewModel()
     @State var feedback = Feedbacks()
+    @Environment(\.presentationMode) var presentationMode
+
     func loadFeedback() {
         topicVM.getFeedbackOfParticularStudent(topicId: topic.topicId) { (feedback) in
             self.feedback = feedback
         }
     }
-    var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 25, style: .continuous)
-                .fill(Color.white)
+    
+    var body : some View{
+        
+        VStack(spacing : 20) {
             
-            VStack(alignment: .leading, spacing: 5) {
-                
-                HStack {
-                    Text("Topic name: ").font(.headline)
+            Button(
+                action: {self.presentationMode.wrappedValue.dismiss()},
+                label: {
+                    HStack{
+                        Image(systemName: "arrow.left")
+                        Text("Feedback")
+                        Spacer()
+                    }
+                    .foregroundColor(.black)
+                    .frame(maxWidth : .infinity, alignment : .leading)
+                    .padding(.leading, 15.0)
+                })
+            
+            Divider()
+            
+            VStack(alignment: .leading){
+                HStack{
+                    Text("Topic Name :").fontWeight(.semibold)
                     Text(topic.topic)
-                }
-                HStack {
-                    Text("Hours: ").font(.headline)
+                    Spacer()
+                    //ToDo :- Make edit functional
+                    Image("editIcon").padding()
+                }.modifier(TextStyle14())
+                
+                
+                HStack{
+                    Text("Hours: ").fontWeight(.semibold)
                     Text(topic.timeSpent)
-                }
+                }.modifier(TextStyle14())
+                
+                Spacer()
+                
                 HStack {
                     
                     VStack {
-                        Image(topic.rating == 1 ? "icn_notunderstoodselected" : "icn_notunderstood")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                        Text("Not Understood").font(.caption)
+                        Image(topic.rating == 1 ? "notUnderstoodRed" : "notUnderstoodGray")
+                        Text("Not Understood")
                     }
+                    
+                    Spacer()
+                    
                     VStack {
-                        Image(topic.rating == 2 ? "icn_partiallyunderstood-1" : "icn_partiallyunderstood")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                        Text("Partially Understood").font(.caption)
+                        Image(topic.rating == 2 ? "partiallyUnderstood" : "partiallyUnderstoodGray")
+                        Text("Partially Understood")
                     }
+                    
+                    Spacer()
+                    
                     VStack {
-                        Image(topic.rating == 3 ? "icn_understoodselected" : "icn_understood")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                        Text("Understood").font(.caption)
+                        Image(topic.rating == 3 ? "understood" : "understoodGray")
+                        Text("Understood")
                     }
                 }
+                .modifier(TextStyle10())
                 
-                Text("Comment: ").font(.headline)
+                Spacer()
+                
+                Text("Comment:")
+                    .fontWeight(.semibold)
+                    .modifier(TextStyle14())
+                
+                
+                Spacer().frame(height: 10)
+                
                 Text(feedback.comment)
-                
-        } .padding(25)
-            .onAppear {
-                loadFeedback()
+                    .modifier(TextStyle14())
             }
-            
-        }.navigationTitle("Feedback")
-        .navigationBarTitleDisplayMode(.inline)
-        .padding()
-        .shadow(color: Color.gray, radius: 5 )
+            .padding()
+            .frame(maxWidth: .infinity, maxHeight: 276)
+            .modifier(GrayShadow())
+            .padding(.horizontal)
+            Spacer()
+        }
+        .onAppear {
+            loadFeedback()
+        }
     }
 }
 

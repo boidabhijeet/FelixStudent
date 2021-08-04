@@ -17,7 +17,6 @@ struct LoginView: View {
     let role = Utility.getRole()
     @State var message = ""
     
-    
     var body: some View {
         
         ZStack {

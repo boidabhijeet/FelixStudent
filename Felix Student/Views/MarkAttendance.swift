@@ -15,43 +15,58 @@ struct MarkAttendance: View {
     var topicVM = TopicViewModel()
     var batchDateString: String
     @Binding var shouldPopToRootView : Bool
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-//    let navigationStack: NavigationStack
-    
     @State var isActive : Bool = false
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
-    @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
-
+    
     var body: some View {
-        VStack {
-            List (checklistItems) { checklistItem in
-                HStack {
-                    Image("icn_smallPlaceholder")
+        VStack(alignment: .leading){
+            
+            //Added to avoid the automatic dismiss of View as there some bug in current version.
+            NavigationLink(destination: EmptyView(), label: {})
+
+
+            Text("Mark Attendance")
+                .padding(.horizontal)
+            
+            Divider()
+            
+            List(checklistItems) { checklistItem in
+                HStack{
+                    Image("personCircle")
+                    
                     Text(checklistItem.name)
+                    
                     Spacer()
                     
-                        Text(checklistItem.isChecked ? "✅" : "🔲")
-                    
-                    
+                    if(checklistItem.isChecked){
+                        Image(systemName: "checkmark.square.fill")
+                            .foregroundColor(.red)
+                    }else{
+                        Image(systemName: "square")
+                            .foregroundColor(.red)
+                    }
                 }
+                .padding(10)
+                .modifier(GrayShadow())
                 .onTapGesture {
-                  if let matchingIndex = self.checklistItems.firstIndex(where: { $0.id == checklistItem.id }) {
-                    self.checklistItems[matchingIndex].isChecked.toggle()
-                  }
+                    if let matchingIndex = self.checklistItems.firstIndex(where: { $0.id == checklistItem.id }) {
+                        self.checklistItems[matchingIndex].isChecked.toggle()
+                    }
                 }
-
-            }.onAppear(perform: {
+            }
+            .listStyle(PlainListStyle())
+            .onAppear(perform: {
                 studentVM.getStudentsFom(batchId: batch.batchId) { (studArray) in
                     checklistItems = []
                     for stud in studArray {
                         checklistItems.append(ChecklistItem(name: stud.name, uid: stud.leadId))
                     }
-//                    print(checklistItems)
                 }
             })
-            .navigationBarItems(trailing: EditButton())
-            .navigationBarTitle("Mark Attendance")
-            Button(action: {
+            
+            Spacer()
+          
+            Button("Mark Attendance") {
                 var markAtt = [String: Bool]()
                 for item in checklistItems {
                     markAtt.updateValue(item.isChecked, forKey: item.uid)
@@ -59,34 +74,33 @@ struct MarkAttendance: View {
                 self.shouldPopToRootView = true
                 for newTopic in newTopics {
                     let att = Attendance(batchId: batch.batchId, batchModule: batch.module, remark: newTopic.remarks, totalTimeSpent: newTopic.timeSpent, totalTimeSpentMints: newTopic.timeSpentMints, markAttendance: markAtt, createdAt: Int64(Date().timeIntervalSince1970))
-//                    print(att.toJSON())
+                    //                    print(att.toJSON())
                     newTopic.date = batchDateString
                     topicVM.saveAttendanceAndTopic(newTopic: newTopic, attn: att)
                     DatabaseReference.shared.topicArray = []
                 }
-                
-                Router.showTabbar()
-            }) {
-                HStack(spacing: 10) {
-                    Text("Mark Attendance")
-                }
-            }.padding(10)
-            .frame(maxWidth: .infinity)
-            .foregroundColor(.white)
+
+//                NavigationView{
+                    Router.showTabbar()
+//                }
+            }
+            .font(.system(size: 24, weight: .semibold))
+            .frame(maxWidth: .infinity, minHeight: 65, alignment: .center)
             .background(Color.red)
-        }.navigationTitle("Mark Attendance")
-        .navigationBarTitleDisplayMode(.inline)
+            .foregroundColor(.white)
+        }
+        .edgesIgnoringSafeArea(.bottom)
     }
-    
+
     func deleteListItem(whichElement: IndexSet) {
         checklistItems.remove(atOffsets: whichElement)
     }
-    
+
     func moveListItem(whichElement: IndexSet, destination: Int) {
         checklistItems.move(fromOffsets: whichElement, toOffset: destination)
     }
-}
 
+}
 
 struct ChecklistItem: Identifiable {
     let id = UUID()

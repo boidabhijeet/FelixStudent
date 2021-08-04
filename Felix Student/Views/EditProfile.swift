@@ -31,23 +31,6 @@ class ImageLoader: ObservableObject {
     }
 }
 
-
-struct ImageOverlay: View {
-    
-    var body: some View {
-        ZStack {
-            Button(action: {
-            }) {
-                Image("icn_camera")
-                    .padding(3)
-                    .foregroundColor(.white)
-            }
-        }
-        .opacity(0.8)
-        .cornerRadius(10.0)
-        .padding(3)
-    }
-}
 struct EditProfile: View {
     @State private var fullName = ""
     @State private var email = ""
@@ -57,133 +40,124 @@ struct EditProfile: View {
     @State private var image = UIImage()
     @State var url: URL
     @State private var showToast = false
-    @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    //    @ObservedObject var imageLoader:ImageLoader
-    //
-    //    init(withURL url:String) {
-    //        imageLoader = ImageLoader(urlString:url)
-    //    }
-    
-    
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
-        ScrollView {
-            VStack {
-                //            WebImage(url: URL(string: url))
-                //                .onSuccess { (image, data, cache) in
-                //
-                //                }
-                //                .placeholder(Image("icn_placeholderImage"))
-                //                .resizable()
-                //                .aspectRatio(contentMode: .fit)
-                //                .frame(width:100, height:100)
-                //                .opacity(0.8)
-                //                .cornerRadius(50.0)
-                //                .padding(3)
+        VStack{
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }, label: {
+                    HStack{
+                        Image(systemName: "arrow.left")
+                        Text("Profile")
+                        Spacer()
+                    }
+                    .padding(.horizontal)
+                    .foregroundColor(.black)
+            })
+ 
+            Group{
+       
+                Divider()
+
+                Spacer().frame(maxHeight: 20)
                 
                 WebImage(url: url)
-                    .placeholder(Image("icn_placeholderImage"))
+                    .placeholder(Image("profileImage"))
+                    .renderingMode(.original)
                     .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width:100, height:100)
-                    .opacity(0.8)
-                    .cornerRadius(50.0)
-                    .padding(3)
+                    .frame(maxWidth: 79, maxHeight: 79)
+                    .cornerRadius(39.5)
+
+
+//                    .aspectRatio(contentMode: .fit)
                 
-                //                .overlay({
-                //                    ZStack {
-                //                        Button(action: {
-                //                            self.isShowPhotoLibrary = true
-                //                        }) {
-                //                            Image("icn_camera")
-                //                                .padding(3)
-                //                                .foregroundColor(.white)
-                //                        }
-                //                    }
-                //                    .sheet(isPresented: $isShowPhotoLibrary) {
-                //                        ImagePicker(selectedImage: self.$image, sourceType: .photoLibrary)
-                //                    }
-                //
-                //                }(), alignment: .bottomTrailing)
-                //                .onReceive(imageLoader.didChange) { data in
-                //                    self.image = UIImage(data: data) ?? UIImage()
-                //                }
+                Spacer().frame(maxHeight: 20)
                 
-                
-                //            Text("Change Profile Picture").foregroundColor(Color.gray)
+                Text("Change Profile Picture")
+                    .foregroundColor(.gray)
+
+                Spacer().frame(maxHeight: 20)
+
                 Divider()
-                VStack(alignment: .leading) {
-                    Text("Name") .padding()
-                    TextField("Full Name", text: $fullName)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                    Text("Email") .padding()
-                    TextField("Email", text: $email)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                    Text("Mobile") .padding()
-                    TextField("Mobile", text: $mobile)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                }
-                
-                VStack(alignment: .trailing) {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            self.mode.wrappedValue.dismiss()
-                        }) {
-                            HStack(spacing: 10) {
-                                
-                                Text("Cancel")
-                            }
-                        } .padding(10).border(Color.red).foregroundColor(.red
-                        )
-                        Button(action: {
-                            let role = Utility.getRole()
-                            if role == Constants.FACULTY {
-                                studentVM.saveProfileOfFaculty(email: email, fullName: fullName, contact: mobile)
-                            } else {
-                                studentVM.saveProfile(email: email, fullName: fullName, contact: mobile)
-                            }
-                            showToast = true
-                        }) {
-                            HStack(spacing: 10) {
-                                
-                                Text("Update")
-                            }
-                        }
-                        .padding(10).border(Color.gray).foregroundColor(.white)
-                        .background(Color.red)
-                        
-                        Spacer()
-                    }
-                }.onAppear(perform: {
-                    if Utility.getRole() == Constants.FACULTY {
-                        if let faculty = SessionStore.shared.user {
-                            email = faculty.email
-                            mobile = String(faculty.mobileNumber)
-                            fullName = faculty.fullName
-                        }
-                    }
-                    else if Utility.getRole() == Constants.STUDENT {
-                        if let student = SessionStore.shared.student {
-                            email = student.email
-                            mobile = String(student.contact)
-                            fullName = student.name
-                        }
-                    }
-                    
-                    
-                })
-                Spacer()
-            }.navigationTitle("Profile")
-            .navigationBarTitleDisplayMode(.inline)
-            .toast(isPresenting: $showToast){
-                
-                // `.alert` is the default displayMode
-                AlertToast(type: .regular, title: ToastAlert.profileChanged)
             }
+           
+            VStack(alignment : .leading){
+                Spacer().frame(maxHeight : 20)
+                
+                Text("Name")
+                    .padding(.horizontal)
+                TextField("Full Name", text: $fullName)
+                    .modifier(CustomTextField())
+                
+                Spacer().frame(maxHeight: 20)
+                
+                Text("Email")
+                    .padding(.horizontal)
+                TextField("Email", text: $email)
+                    .modifier(CustomTextField())
+
+               
+                Spacer().frame(maxHeight: 20)
+                
+                Text("Mobile")
+                    .padding(.horizontal)
+                TextField("Mobile", text: $mobile)
+                    .modifier(CustomTextField())
+            }
+            
+            Spacer().frame(maxHeight : 30)
+
+            HStack{
+                Spacer()
+                Button("Cancel") {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+                .frame(maxWidth : 80, maxHeight: 34)
+                .border(Color.red)
+                .background(Color.white)
+                .foregroundColor(.red)
+                .font(.system(size: 15, weight: .regular, design: .default))
+                Spacer().frame(width: 20)
+                Button("Update") {
+                    let role = Utility.getRole()
+                    if role == Constants.FACULTY {
+                        studentVM.saveProfileOfFaculty(email: email, fullName: fullName, contact: mobile)
+                    } else {
+                        studentVM.saveProfile(email: email, fullName: fullName, contact: mobile)
+                    }
+                    showToast = true
+                }
+                .frame(maxWidth : 80, maxHeight: 34)
+                .background(Color.red)
+                .foregroundColor(.white)
+                .font(.system(size: 15, weight: .regular, design: .default))
+            }
+            .padding(.horizontal)
+            .onAppear(perform: {
+                if Utility.getRole() == Constants.FACULTY {
+                    if let faculty = SessionStore.shared.user {
+                        email = faculty.email
+                        mobile = String(faculty.mobileNumber)
+                        fullName = faculty.fullName
+                    }
+                }
+                else if Utility.getRole() == Constants.STUDENT {
+                    if let student = SessionStore.shared.student {
+                        email = student.email
+                        mobile = String(student.contact)
+                        fullName = student.name
+                    }
+                }
+            })
+            Spacer()
         }
+        .toast(isPresenting: $showToast){
+            
+            // `.alert` is the default displayMode
+            AlertToast(type: .regular, title: ToastAlert.profileChanged)
+        }
+
     }
 }
 
