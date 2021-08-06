@@ -182,13 +182,13 @@ struct AddTopic: View {
             }
             .edgesIgnoringSafeArea(.bottom)
             .blur(radius: showingAlert ? 2 : 0)
-            .toast(isPresenting: $showToast, duration: 10.0){
+            .toast(isPresenting: $showToast, duration: 3.0){
                 AlertToast(type: .regular, title: ToastAlert.attendanceMarked)
             }
-            .toast(isPresenting: $showfutureToast, duration: 10.0){
+            .toast(isPresenting: $showfutureToast, duration: 3.0){
                 AlertToast(type: .regular, title: ToastAlert.FutureDate)
             }
-            .toast(isPresenting: $showAtLeastToat, duration: 10.0){
+            .toast(isPresenting: $showAtLeastToat, duration: 3.0){
                 AlertToast(type: .regular, title: ToastAlert.AtLeastOne)
             }
             
@@ -212,18 +212,15 @@ struct AddTopic: View {
 
 struct AddTopicRow: View {
     var item: Topic
-    
     var body: some View {
         
         HStack{
             VStack(alignment :.leading, spacing : 10) {
-                Text("topic")
-                Text("remarks")
-                Text("timeSpent")
-                //
-                //                Text(item.topic)
-                //                Text(item.remarks)
-                //                Text(item.timeSpent)
+                Text(item.topic)
+                Text(item.remarks)
+                Text(item.timeSpent + "Hrs")
+//                Text("\(Int(item.timeSpent) ?? 0, specifier: "%.2f") Hrs")
+
             }
             .font(.system(size: 15))
             

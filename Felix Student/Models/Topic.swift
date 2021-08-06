@@ -40,7 +40,7 @@ class Topic: Mappable, Identifiable {
         self.dateCreatedAt = dateCreatedAt
         self.remarks = remarks
         self.timeSpent = timeSpent
-        self.timeSpentMints = timespentmints
+//        self.timeSpentMints = timespentmints
         self.topic = topic
         self.createdAt = Int64(Date().timeIntervalSince1970)
     }

@@ -25,8 +25,17 @@ struct MarkAttendance: View {
             NavigationLink(destination: EmptyView(), label: {})
 
 
-            Text("Mark Attendance")
-                .padding(.horizontal)
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }, label: {
+                HStack{
+                    Image(systemName: "arrow.left")
+                    Text("Add Topic")
+                }
+                .foregroundColor(.black)
+            })
+            .padding(.horizontal)
+                                
             
             Divider()
             

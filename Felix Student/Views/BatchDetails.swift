@@ -17,7 +17,7 @@ struct BatchDetails: View {
     @State var avgFeedback = 0
     @State private var isActive : Bool = false
     @Environment(\.presentationMode) var presentationMode
-//    @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
+    //    @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
     var screenSize = UIScreen.main.bounds
     @State var hrsCovered = ""
     func onLoad() {
@@ -54,7 +54,7 @@ struct BatchDetails: View {
                     Image("\(batch.module)Bar")
                     VStack(spacing : 10){
                         HStack{
-                            VStack(alignment :.leading, spacing : 10) {
+                            VStack(alignment :.leading, spacing : 12) {
                                 Text(batch.module)
                                     .textCase(.uppercase)
                                     .modifier(TextStyle20())
@@ -71,6 +71,8 @@ struct BatchDetails: View {
                             }
                             .modifier(TextStyle14())
                             .lineLimit(0)
+                            .padding(.top, 10)
+
                             
                             Spacer()
                             
@@ -78,11 +80,13 @@ struct BatchDetails: View {
                                 .renderingMode(.original)
                                 .resizable()
                                 .frame(width: 63, height: 63)
-//                                .padding(.bottom)
-//                                .padding(.horizontal)
+                            //                                .padding(.bottom)
+                            //                                .padding(.horizontal)
                         }
                         NavigationLink(
-                            destination : Text("Display Study Material"),
+                            destination : DisplayStudyMaterial()
+                                .navigationBarBackButtonHidden(true)
+                                .navigationBarHidden(true),
                             label: {
                                 Text("Show study material")
                                     .modifier(TextStyle14())
@@ -92,9 +96,11 @@ struct BatchDetails: View {
                                 
                                 Image("rightArrowRed")
                             })
+                            .padding(.bottom, 12)
+
                     }
                     .padding()
-                    .frame(maxWidth : screenSize.width * 0.9, maxHeight : screenSize.height * 0.16, alignment: .center)
+                    .frame(maxWidth : screenSize.width * 0.9, minHeight : screenSize.height * 0.19, maxHeight : screenSize.height * 0.20, alignment: .center)
                     .background(Color.white)
                     .clipped()
                     .shadow(radius : 5)
@@ -125,10 +131,9 @@ struct BatchDetails: View {
                 NavigationLink(destination: EmptyView()) {
                     EmptyView()
                 }
-
             }
         }
-//        .navigationBarHidden(true)
+        //        .navigationBarHidden(true)
     }
     @ViewBuilder
     var listView: some View {
@@ -141,7 +146,8 @@ struct BatchDetails: View {
     
     var emptyListView: some View {
         VStack{
-            Text("No topic covered yet.")
+            Spacer()
+            Text("No topics covered yet.")
             Spacer()
         }
     }
@@ -160,20 +166,25 @@ struct TopicRow: View {
     
     var batch: Batch
     let role = Utility.getRole()
-//    @State var isActive : Bool = false
+    //    @State var isActive : Bool = false
     var body: some View {
-        ZStack(alignment : .bottomTrailing) {
+        ZStack(alignment: .bottomTrailing){
             VStack(alignment : .leading){
-                HStack {
+                HStack(alignment : .top) {
                     Text(topicData.topic)
                         .font(.system(size: 14, weight: .semibold))
                     Spacer()
-                    Text(topicData.date)
-                        .font(.system(size: 12))
+                    VStack(alignment : .trailing){
+                        Text(topicData.date)
+                            .font(.system(size: 12, weight: .semibold))
+                        Text(topicData.presentString)
+                            .font(.system(size: 12))
+                    }
                 }
                 
                 Text("Hours: " + topicData.timeSpent)
                     .font(.system(size: 12))
+
                 
                 Spacer().frame(maxHeight : 20)
                 
@@ -185,7 +196,7 @@ struct TopicRow: View {
                                 .font(.system(size: 12))
                             
                         } else if topicData.averageFeedback == 3 {
-                            HStack {
+                            HStack(spacing : 1) {
                                 Text("Avg rating: ")
                                     .font(.system(size: 12))
                                 
@@ -196,44 +207,49 @@ struct TopicRow: View {
                             }
                             
                         } else if topicData.averageFeedback == 2 {
-                            HStack {
+                            HStack(spacing : 1) {
                                 Text("Avg rating: ")
+                                    .font(.system(size: 12))
+
                                 Image("partiallyUnderstood")
                                     .resizable()
                                     .frame(width: 24, height: 24)
                                 
                             }
                         } else if topicData.averageFeedback == 1 {
-                            HStack {
+                            HStack(spacing : 1) {
                                 Text("Avg rating: ")
+                                    .font(.system(size: 12))
+
                                 Image("notUnderstoodRed")
                                     .resizable()
                                     .frame(width: 24, height: 24)
                                 
                             }
-                            Spacer()
-                            Text(topicData.presentString)
                         }
+                        Spacer()
+
                     }
                 } else {
+                    //                HStack(spacing : nil){
                     HStack {
                         if topicData.rating == 0 {
                             Text("My rating: 0")
                                 .font(.system(size: 12))
                             
                         } else if topicData.rating == 3 {
-                            HStack {
+                            HStack(spacing : 1) {
                                 Text("My rating: ")
                                     .font(.system(size: 12))
                                 
                                 Image("understood")
                                     .resizable()
                                     .frame(width: 24, height: 24)
-                                
+                                Spacer()
                             }
                             
                         } else if topicData.rating == 2 {
-                            HStack {
+                            HStack(spacing : 1) {
                                 Text("My rating: ")
                                     .font(.system(size: 12))
                                 
@@ -241,9 +257,10 @@ struct TopicRow: View {
                                     .resizable()
                                     .frame(width: 24, height: 24)
                                 
+                                Spacer()
                             }
                         } else if topicData.rating == 1 {
-                            HStack {
+                            HStack(spacing : 1) {
                                 Text("My rating: ")
                                     .font(.system(size: 12))
                                 
@@ -251,47 +268,54 @@ struct TopicRow: View {
                                     .resizable()
                                     .frame(width: 24, height: 24)
                                 
+                                Spacer()
                             }
                         }
-                        
                     }
                 }
             }
             .padding()
             .frame(maxWidth : screenSize.width * 0.9)
             .modifier(GrayShadow())
-            //Fix the Image code-  Shift to right
+            
             if Utility.getRole() == Constants.FACULTY {
                 NavigationLink(destination:
                                 StudentFeedback(topic: topicData, avgFeedback: 0)
-                                    .navigationBarHidden(true)
-                                    .navigationBarBackButtonHidden(true)
+                                .navigationBarHidden(true)
+                                .navigationBarBackButtonHidden(true)
                 ) {
                     EmptyView()
-                } .isDetailLink(false)
+                }
             } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback pending" {
                 NavigationLink(
                     destination: GiveFeedback(topic: topicData)
                         .navigationBarHidden(true)
                         .navigationBarBackButtonHidden(true))
                 {
-                    Image("feedbackPending").padding()
+                    HStack{
+                        Spacer()
+                        Image("feedbackPending").padding()
+                    }
                 }
-                .isDetailLink(false)
             } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback sent" {
                 NavigationLink(
                     destination: Feedback(topic: topicData)
                         .navigationBarHidden(true)
                         .navigationBarBackButtonHidden(true))
                 {
-                    Image("feedbackSent").padding()
+                    HStack{
+                        Spacer()
+                        Image("feedbackSent").padding()
+                    }
                 }
-                .isDetailLink(false)
             } else {
-                Image("absent").padding()
+                HStack{
+                    Spacer()
+                    Image("absent").padding()
+                }
             }
         }
-        Spacer()
+//        Spacer()
     }
 }
 

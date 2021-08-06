@@ -83,6 +83,9 @@ class TopicViewModel: ObservableObject, Identifiable {
         Utility.fromFeedbackScreen = true
         feedback.uid = Auth.auth().currentUser?.uid ?? ""
         feedback.createdAt = Int64(Date().timeIntervalSince1970)
+        if topic.feedbacks == nil{
+            topic.feedbacks = [:]
+        }
         topic.feedbacks![Auth.auth().currentUser!.uid] = feedback
         DatabaseReference.shared.topicReference().document(topic.topicId).setData(topic.toJSON(), merge: true)
     }
@@ -105,7 +108,7 @@ class TopicViewModel: ObservableObject, Identifiable {
                                     counter += 1
                                 }
                             }
-                            topic.presentString = "Present students: \(counter)/\(totalCounter)"
+                            topic.presentString = "Present Students: \(counter)/\(totalCounter)"
                         } else {
                             if let atValue = markAttendance[self.leadId ?? ""] {
                                 if atValue {

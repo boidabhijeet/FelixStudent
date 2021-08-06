@@ -10,6 +10,7 @@ import FirebaseAuth
 
 struct HomePage: View {
     @StateObject var batchVM = BatchViewModel()
+    @StateObject var notificationVM = NotificationViewModel()
     
     var body: some View {
         
@@ -22,13 +23,20 @@ struct HomePage: View {
                         .navigationBarHidden(true)
                         .navigationBarBackButtonHidden(true),
                     label: {
-                        Image(systemName : "bell")
-                            .foregroundColor(.black)
-                            .overlay(
-                                Color.red.clipShape(Circle())
-                                    .frame(width: 11, height: 11)
-                                    .offset(x: 7, y: -5)
-                            )
+                        if notificationVM.notifications.count == 0{
+                            Image(systemName : "bell")
+                                .foregroundColor(.black)
+                        }else{
+                            Image(systemName : "bell")
+                                .foregroundColor(.black)
+                                .overlay(
+                                    Color.red.clipShape(Circle())
+                                        .frame(width: 11, height: 11)
+                                        .offset(x: 7, y: -5)
+                                )
+                        }
+                        
+                      
                     })
             }
             .padding()

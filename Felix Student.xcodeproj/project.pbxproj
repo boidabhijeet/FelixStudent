@@ -32,6 +32,7 @@
 		042BB37D26693C8600A9AA3D /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042BB37C26693C8600A9AA3D /* Notification.swift */; };
 		042BB38026693E0E00A9AA3D /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042BB37F26693E0E00A9AA3D /* NotificationView.swift */; };
 		042BB38326693FE300A9AA3D /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 042BB38226693FE300A9AA3D /* NotificationViewModel.swift */; };
+		0430B88A26BBB28200FF590E /* DisplayStudyMaterial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0430B88926BBB28200FF590E /* DisplayStudyMaterial.swift */; };
 		043D85CE2629927900397596 /* AddTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D85CD2629927900397596 /* AddTopic.swift */; };
 		043D85D1262997A500397596 /* MarkAttendance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D85D0262997A500397596 /* MarkAttendance.swift */; };
 		043D85D42629D1C300397596 /* AddNewTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 043D85D32629D1C300397596 /* AddNewTopic.swift */; };
@@ -66,6 +67,7 @@
 		04AB43EB262F4217004E932B /* DatabaseReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43EA262F4217004E932B /* DatabaseReference.swift */; };
 		04C6245C2657C0430074A370 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6245B2657C0430074A370 /* Extensions.swift */; };
 		04E03ABC264BD6E40094E4B3 /* BatchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */; };
+		04E1D97326BD12DC0040B03B /* StudentFeedbackRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1D97226BD12DC0040B03B /* StudentFeedbackRow.swift */; };
 		04E547FD263082BD0083D81D /* BatchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E547FC263082BD0083D81D /* BatchCellViewModel.swift */; };
 		1DAEA643E7443D6EDEEE60BA /* Pods_Felix_Student.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37B497B1CB19A41473643959 /* Pods_Felix_Student.framework */; };
 /* End PBXBuildFile section */
@@ -118,6 +120,7 @@
 		042BB37C26693C8600A9AA3D /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		042BB37F26693E0E00A9AA3D /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		042BB38226693FE300A9AA3D /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		0430B88926BBB28200FF590E /* DisplayStudyMaterial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayStudyMaterial.swift; sourceTree = "<group>"; };
 		043D85CD2629927900397596 /* AddTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTopic.swift; sourceTree = "<group>"; };
 		043D85D0262997A500397596 /* MarkAttendance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkAttendance.swift; sourceTree = "<group>"; };
 		043D85D32629D1C300397596 /* AddNewTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewTopic.swift; sourceTree = "<group>"; };
@@ -152,6 +155,7 @@
 		04C6245B2657C0430074A370 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		04D3AB2C266FD94C00573564 /* Felix Student.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Felix Student.entitlements"; sourceTree = "<group>"; };
 		04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchDetailTableViewCell.swift; sourceTree = "<group>"; };
+		04E1D97226BD12DC0040B03B /* StudentFeedbackRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentFeedbackRow.swift; sourceTree = "<group>"; };
 		04E547FC263082BD0083D81D /* BatchCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchCellViewModel.swift; sourceTree = "<group>"; };
 		33D9B047749F0C4396739C84 /* Pods-Felix Student.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Felix Student.release.xcconfig"; path = "Target Support Files/Pods-Felix Student/Pods-Felix Student.release.xcconfig"; sourceTree = "<group>"; };
 		37B497B1CB19A41473643959 /* Pods_Felix_Student.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Felix_Student.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,7 +311,9 @@
 			isa = PBXGroup;
 			children = (
 				043D85D32629D1C300397596 /* AddNewTopic.swift */,
+				0430B88926BBB28200FF590E /* DisplayStudyMaterial.swift */,
 				0449AFD426B3FAFA005A1C19 /* HomePageSubView.swift */,
+				04E1D97226BD12DC0040B03B /* StudentFeedbackRow.swift */,
 				0449AFD626B3FB18005A1C19 /* ForgotPwdAlert.swift */,
 			);
 			path = SubViews;
@@ -517,6 +523,7 @@
 				042AC43026344F18005EA11C /* Reference.swift in Sources */,
 				04E547FD263082BD0083D81D /* BatchCellViewModel.swift in Sources */,
 				042AC43326345240005EA11C /* GeneralFeedback.swift in Sources */,
+				0430B88A26BBB28200FF590E /* DisplayStudyMaterial.swift in Sources */,
 				043D861B262AF7DC00397596 /* Attendance.swift in Sources */,
 				0449AFD726B3FB18005A1C19 /* ForgotPwdAlert.swift in Sources */,
 				04AB43EB262F4217004E932B /* DatabaseReference.swift in Sources */,
@@ -547,6 +554,7 @@
 				04C6245C2657C0430074A370 /* Extensions.swift in Sources */,
 				04AB43CB262F0998004E932B /* StudentViewModel.swift in Sources */,
 				04159AA62628049F0056006C /* GiveFeedback.swift in Sources */,
+				04E1D97326BD12DC0040B03B /* StudentFeedbackRow.swift in Sources */,
 				042AC43726345CBD005EA11C /* ReferenceViewModel.swift in Sources */,
 				043D8618262AF56000397596 /* Batch.swift in Sources */,
 				04159AA926280BCC0056006C /* Feedback.swift in Sources */,

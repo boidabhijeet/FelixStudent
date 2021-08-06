@@ -8,7 +8,7 @@
 import Foundation
 import ObjectMapper
 
-class GeneralFeedback: Mappable {
+class GeneralFeedback: Mappable, Identifiable{
     var id = UUID()
     var byName: String = ""
     var createdAt: Int64 = 0

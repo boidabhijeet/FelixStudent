@@ -75,7 +75,7 @@ struct Settings: View {
 
                 Divider()
                 
-                Spacer().frame(maxHeight : 16)
+                Spacer().frame(maxHeight : 10)
 
                 NavigationLink(
                     destination: EditProfile(url : url)
@@ -91,7 +91,7 @@ struct Settings: View {
                     })
             }
             
-            Spacer().frame(maxHeight: 16)
+            Spacer().frame(maxHeight: 10)
 
             NavigationLink(
                 destination: Text("Change Password"),
@@ -104,7 +104,7 @@ struct Settings: View {
                     .padding()
                 })
             
-            Spacer().frame(maxHeight: 16)
+            Spacer().frame(maxHeight: 10)
 
             Button(action: signOut, label: {
                 

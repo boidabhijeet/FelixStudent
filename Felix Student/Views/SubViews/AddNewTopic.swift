@@ -23,7 +23,7 @@ struct AddNewTopic: View {
     @Binding var rootIsActive : Bool
     @State var isActive : Bool
     @Environment(\.presentationMode) var presentationMode
-    @State private var timeSpentInHrs: Double = 0
+    @State private var timeSpentInHrs : Double = 0
     //    @State var selection: [String] = [0, 00].map { "\($0)" }
     @State var data: [(String, [String])] = [
         ("One", Array(0...8).map { "\($0)" }),
@@ -61,13 +61,15 @@ struct AddNewTopic: View {
                 
                 Group{
                     
+                    Spacer().frame(maxHeight : 20)
+
                     TextField("Topic", text: $topic)
-                        .padding(.top, 20)
                     
                     Divider().background(Color.black)
                     
+                    Spacer().frame(maxHeight : 20)
+
                     TextField("Note (Optional)", text: $note)
-                        .padding(.top, 20)
                     
                     Divider().background(Color.black)
                     
@@ -75,7 +77,7 @@ struct AddNewTopic: View {
                         Text("Time Spent")
                         Spacer()
                         //                        Text("\(selection.joined(separator: ".")) Hrs")
-                        Text("\(timeSpentInHrs, specifier: "%.1f") Hrs")
+                        Text("\(timeSpentInHrs, specifier: "%.2f") Hrs")
                         
                     }
                     .padding(.top, 20)
@@ -84,7 +86,7 @@ struct AddNewTopic: View {
                 .font(.system(size: 15))
                 
                 
-                Slider(value: $timeSpentInHrs, in: 1...10)
+                Slider(value: $timeSpentInHrs, in: 1...10, step : 0.5)
                     .accentColor(.red)
                 
                 Text("Note* : Time cannot change once you add.")
@@ -99,13 +101,14 @@ struct AddNewTopic: View {
                         self.presentationMode.wrappedValue.dismiss()
                     }
                     Button {
-                        //                        if topic == "" ||  Double(selection.joined(separator: ".")) == 0.0 {
-                        //                            showToast = true
-                        //                        } else {
-                        //                            futureTopic = Topic(aid: "", batchId: batch.batchId, batchModule: batch.module, date: batchDateString, dateCreatedAt: batchDate, remarks: note, timeSpent: "\(selection.joined(separator: ".")) Hrs", timespentmints: calculateTimeSpentMins(), topic: topic)
-                        //                            showModal = false
-                        //                            DatabaseReference.shared.topicArray.append(futureTopic)
-                        //                        }
+//                        if topic == "" ||  Double(selection.joined(separator: ".")) == 0.0 {
+                        if topic == "" {
+                            showToast = true
+                        } else {
+                            futureTopic = Topic(aid: "", batchId: batch.batchId, batchModule: batch.module, date: batchDateString, dateCreatedAt: batchDate, remarks: note, timeSpent: "\(timeSpentInHrs)", timespentmints: 0, topic: topic)
+                            showModal = false
+                            DatabaseReference.shared.topicArray.append(futureTopic)
+                        }
                         self.presentationMode.wrappedValue.dismiss()
                     } label: {
                         Text("OK")
@@ -127,30 +130,3 @@ struct AddNewTopic: View {
         }
     }
 }
-
-//struct MultiPicker: View  {
-//
-//    typealias Label = String
-//    typealias Entry = String
-//
-//    let data: [ (Label, [Entry]) ]
-//    @Binding var selection: [Entry]
-//
-//    var body: some View {
-//        GeometryReader { geometry in
-//            HStack {
-//                ForEach(0..<self.data.count) { column in
-//                    Picker(self.data[column].0, selection: self.$selection[column]) {
-//                        ForEach(0..<self.data[column].1.count) { row in
-//                            Text(verbatim: self.data[column].1[row])
-//                                .tag(self.data[column].1[row])
-//                        }
-//                    }
-//                    .pickerStyle(WheelPickerStyle())
-//                    .frame(width: geometry.size.width / CGFloat(self.data.count), height: geometry.size.height)
-//                    .clipped()
-//                }
-//            }
-//        }
-//    }
-//}

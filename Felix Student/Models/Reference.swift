@@ -8,7 +8,7 @@
 import Foundation
 import ObjectMapper
 
-class Reference: Mappable {
+class Reference: Mappable, Identifiable {
     var id = UUID()
     var byName: String = ""
     var contact: String = ""

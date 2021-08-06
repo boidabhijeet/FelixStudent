@@ -98,7 +98,18 @@ struct ReferAndEarn: View {
             .padding()
             .modifier(GrayShadow())
             .padding(10)
-            
+        }
+        .toast(isPresenting: $showToast){
+            AlertToast(type: .regular, title: ToastAlert.referAndEarn)
+        }
+        .toast(isPresenting: $showFullNameErrorToast){
+            AlertToast(type: .regular, title: ToastAlert.FullNameError)
+        }
+        .toast(isPresenting: $showContactErrorToast){
+            AlertToast(type: .regular, title: ToastAlert.contactError)
+        }
+        .toast(isPresenting: $showEmailErrorToast){
+            AlertToast(type: .regular, title: ToastAlert.emailError)
         }
     }
 }
