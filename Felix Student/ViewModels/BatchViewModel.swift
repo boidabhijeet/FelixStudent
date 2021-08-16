@@ -75,7 +75,6 @@ class BatchViewModel: ObservableObject, Identifiable {
                             let brachStr = batch!.batchId + "_student"
                             BatchViewModel.subscribedTopics.append(brachStr)
                             Messaging.messaging().subscribe(toTopic: brachStr) { error in
-                              
                             }
                             self.batches.append(batch!)
                         }

@@ -3,7 +3,6 @@
 //  Felix Student
 //
 //  Created by Mac on 15/04/21.
-//
 
 import SwiftUI
 
@@ -101,4 +100,3 @@ struct Feedback: View {
         }
     }
 }
-

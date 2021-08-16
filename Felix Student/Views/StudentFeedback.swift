@@ -57,35 +57,64 @@ struct StudentFeedback: View {
             
             Spacer().frame(maxHeight: 20)
             
-//            List{
-////                ForEach(feedbackArr.count, id: \.self) { feedback in
-////                    StudentFeedbackRow(feedback: feedback)
-////                }
-//
-//                  ForEach(0 ..< feedbackArr.count, id: \.id) { feedback in
-//                    StudentFeedbackRow(feedback: feedback)
-//                }
-            
-//            }
-//            .onAppear(perform: {
-//                topicVM.loadFeedbacksOfAid(aid: topic.aid) { (feedbacks, avgFeedback)  in
-//                    self.avgFeedback = avgFeedback
-//                    self.feedbackArr = feedbacks
-//                }
-//            })
-
             List(self.feedbackArr) { feedback in
-                Section{
-                    StudentFeedbackRow(feedback: feedback)
+                VStack(alignment : .leading) {
+                    
+                    HStack(spacing : 15){
+                        Image("personCircle")
+                        Text(feedback.name)
+                            .font(.system(size: 20, weight: .semibold))
+                            .textCase(.uppercase)
+                    }
+                    .padding(.horizontal)
+                    
+                    Spacer().frame(maxHeight: 40)
+                    
+                    
+                    HStack {
+                        VStack {
+                            Image(feedback.rating == 1 ? "notUnderstoodRed" : "notUnderstoodGray")
+                            Text("Not Understood")
+                        }
+                        
+                        Spacer()
+                        
+                        VStack {
+                            Image(feedback.rating == 2 ? "partiallyUnderstood" : "partiallyUnderstoodGray")
+                            Text("Partially Understood")
+                        }
+                        
+                        Spacer()
+                        
+                        VStack {
+                            Image(feedback.rating == 3 ? "understood" : "understoodGray")
+                            Text("Understood")
+                        }
+                    }
+                    .modifier(TextStyle10())
+                    
+                    Spacer().frame(maxHeight: 40)
+                    
+                    Text("Comment:")
+                        .font(.system(size: 14.0, weight: .semibold, design: .default))
+                    
+                    Spacer().frame(maxHeight: 10)
+                    
+                    Text(feedback.comment)
+                        .font(.system(size: 14.0))
                 }
+                .padding()
+                .frame(maxWidth: .infinity, minHeight : 276)
+                .modifier(GrayShadow())
+                .padding(.horizontal, 4)
             }
             .onAppear(perform: {
-                topicVM.loadFeedbacksOfAid(aid: topic.aid) { (feedbacks, avgFeedback)  in
-                    self.avgFeedback = avgFeedback
-                    self.feedbackArr = feedbacks
-                }
-            })
-//            .listStyle(PlainListStyle())
+                        topicVM.loadFeedbacksOfAid(aid: topic.aid) { (feedbacks, avgFeedback)  in
+                            self.avgFeedback = avgFeedback
+                            self.feedbackArr = feedbacks
+                        }})
+            .listStyle(PlainListStyle())
+            Spacer()
         }
     }
 }

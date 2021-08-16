@@ -30,8 +30,9 @@ struct DisplayStudyMaterial: View {
             
             Spacer()
             
-            Text("ToDo :- Implement DisplayStudyMaterial ")
-            
+            Text("THE STUDY MATERIAL WILL BE AVAILABLE SOON!!!")
+                .font(.custom("Bodoni 72 Smallcaps", size: 25))
+
             Spacer()
         }
     }
