@@ -46,6 +46,9 @@ final class ToastAlert {
     static let emailError = "Please enter valid email."
     static let studentFeedbackError = "Please select any feedback."
     static let commentError = "Please enter your comment."
+    static let wrongPasswordError = " New Password and Confirm Password does not match. Re-enter passwords again"
+    static let samePasswordError = "New password cannot be same as previous password"
+    static let passwordUpdated = "Password has been successfully updated."
 }
 
 

@@ -17,17 +17,8 @@ class SessionStore: ObservableObject {
     var student: Student?
     @Published var session: User? {didSet {self.didChange.send(self)}}
     var handle: AuthStateDidChangeListenerHandle?
-
+    
     func listen() {
-        
-//        handle = Auth.auth().addStateDidChangeListener({ [unowned self] (auth, user) in
-//            if let user = user {
-//                self.session = User(uid: user.uid, email: user.email!)
-//                self.fetchUser()
-//            } else {
-//                self.session = nil
-//            }
-//        })
         
         if (Auth.auth().currentUser?.uid) != nil {
             let uid = Auth.auth().currentUser?.uid
@@ -74,7 +65,6 @@ class SessionStore: ObservableObject {
         }
     }
     
-    
     func signIn(email: String, password: String, handler: @escaping AuthDataResultCallback) {
         Auth.auth().signIn(withEmail: email, password: password, completion: handler)
     }
@@ -99,11 +89,6 @@ class SessionStore: ObservableObject {
             print(error!)
         }
     }
-    
-    
-//    deinit {
-//        unbind()
-//    }
 }
 
 

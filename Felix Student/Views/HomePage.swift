@@ -35,8 +35,6 @@ struct HomePage: View {
                                         .offset(x: 7, y: -5)
                                 )
                         }
-                        
-                      
                     })
             }
             .padding()
@@ -121,5 +119,6 @@ struct BatchRow: View {
         .clipped()
         .shadow(radius : 5)
         .padding(.top, 10)
+
     }
 }

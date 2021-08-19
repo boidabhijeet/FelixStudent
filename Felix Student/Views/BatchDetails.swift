@@ -17,7 +17,6 @@ struct BatchDetails: View {
     @State var avgFeedback = 0
     @State private var isActive : Bool = false
     @Environment(\.presentationMode) var presentationMode
-    //    @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
     var screenSize = UIScreen.main.bounds
     @State var hrsCovered = ""
     func onLoad() {
@@ -52,6 +51,7 @@ struct BatchDetails: View {
                 
                 HStack(spacing : 0){
                     Image("\(batch.module)Bar")
+                    
                     VStack(spacing : 10){
                         HStack{
                             VStack(alignment :.leading, spacing : 12) {
@@ -72,7 +72,7 @@ struct BatchDetails: View {
                             .modifier(TextStyle14())
                             .lineLimit(0)
                             .padding(.top, 10)
-
+                            
                             
                             Spacer()
                             
@@ -80,8 +80,6 @@ struct BatchDetails: View {
                                 .renderingMode(.original)
                                 .resizable()
                                 .frame(width: 63, height: 63)
-                            //                                .padding(.bottom)
-                            //                                .padding(.horizontal)
                         }
                         NavigationLink(
                             destination : DisplayStudyMaterial()
@@ -97,7 +95,7 @@ struct BatchDetails: View {
                                 Image("rightArrowRed")
                             })
                             .padding(.bottom, 12)
-
+                        
                     }
                     .padding()
                     .frame(maxWidth : screenSize.width * 0.9, minHeight : screenSize.height * 0.19, maxHeight : screenSize.height * 0.20, alignment: .center)
@@ -122,7 +120,7 @@ struct BatchDetails: View {
             if Utility.getRole() == Constants.FACULTY {
                 Spacer()
                 NavigationLink(destination:
-                                AddTopic(batch: batch, aid: "", fromPlusButton: true, topic: nil, rootIsActive: self.$isActive, batchDateString: "", isActive: isActive)
+                                AddTopic(batch: batch, fromPlusButton: true, aid: "", batchDateString: "", isActive: isActive, rootIsActive: self.$isActive)
                                 .navigationBarBackButtonHidden(true)
                                 .navigationBarHidden(true))
                 {
@@ -184,7 +182,7 @@ struct TopicRow: View {
                 
                 Text("Hours: " + topicData.timeSpent)
                     .font(.system(size: 12))
-
+                
                 
                 Spacer().frame(maxHeight : 20)
                 
@@ -210,7 +208,7 @@ struct TopicRow: View {
                             HStack(spacing : 1) {
                                 Text("Avg rating: ")
                                     .font(.system(size: 12))
-
+                                
                                 Image("partiallyUnderstood")
                                     .resizable()
                                     .frame(width: 24, height: 24)
@@ -220,7 +218,7 @@ struct TopicRow: View {
                             HStack(spacing : 1) {
                                 Text("Avg rating: ")
                                     .font(.system(size: 12))
-
+                                
                                 Image("notUnderstoodRed")
                                     .resizable()
                                     .frame(width: 24, height: 24)
@@ -228,7 +226,7 @@ struct TopicRow: View {
                             }
                         }
                         Spacer()
-
+                        
                     }
                 } else {
                     //                HStack(spacing : nil){
@@ -315,7 +313,7 @@ struct TopicRow: View {
                 }
             }
         }
-//        Spacer()
+        //        Spacer()
     }
 }
 

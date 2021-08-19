@@ -48,7 +48,6 @@
 		0449AFCB26B3C405005A1C19 /* GiveFacultyFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFCA26B3C405005A1C19 /* GiveFacultyFeedback.swift */; };
 		0449AFCD26B3C433005A1C19 /* ReferAndEarn1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFCC26B3C433005A1C19 /* ReferAndEarn1.swift */; };
 		0449AFD026B3D6E3005A1C19 /* CustomViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFCF26B3D6E3005A1C19 /* CustomViewModifier.swift */; };
-		0449AFD526B3FAFA005A1C19 /* HomePageSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFD426B3FAFA005A1C19 /* HomePageSubView.swift */; };
 		0449AFD726B3FB18005A1C19 /* ForgotPwdAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFD626B3FB18005A1C19 /* ForgotPwdAlert.swift */; };
 		0449AFD926B40B46005A1C19 /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0449AFD826B40B46005A1C19 /* CustomTabBar.swift */; };
 		045F439426711C1B00E0CD77 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 045F439326711C1B00E0CD77 /* GoogleService-Info.plist */; };
@@ -65,7 +64,9 @@
 		04AB43CB262F0998004E932B /* StudentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43CA262F0998004E932B /* StudentViewModel.swift */; };
 		04AB43CF262F4004004E932B /* BatchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43CE262F4004004E932B /* BatchRepository.swift */; };
 		04AB43EB262F4217004E932B /* DatabaseReference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04AB43EA262F4217004E932B /* DatabaseReference.swift */; };
+		04B4DC1A26CE220F00FE3795 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B4DC1926CE220F00FE3795 /* UserSettings.swift */; };
 		04C6245C2657C0430074A370 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C6245B2657C0430074A370 /* Extensions.swift */; };
+		04C8D8D426CA82C3005A064A /* ChangePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C8D8D326CA82C3005A064A /* ChangePassword.swift */; };
 		04E03ABC264BD6E40094E4B3 /* BatchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */; };
 		04E1D97326BD12DC0040B03B /* StudentFeedbackRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E1D97226BD12DC0040B03B /* StudentFeedbackRow.swift */; };
 		04E547FD263082BD0083D81D /* BatchCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E547FC263082BD0083D81D /* BatchCellViewModel.swift */; };
@@ -136,7 +137,6 @@
 		0449AFCA26B3C405005A1C19 /* GiveFacultyFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiveFacultyFeedback.swift; sourceTree = "<group>"; };
 		0449AFCC26B3C433005A1C19 /* ReferAndEarn1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferAndEarn1.swift; sourceTree = "<group>"; };
 		0449AFCF26B3D6E3005A1C19 /* CustomViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewModifier.swift; sourceTree = "<group>"; };
-		0449AFD426B3FAFA005A1C19 /* HomePageSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageSubView.swift; sourceTree = "<group>"; };
 		0449AFD626B3FB18005A1C19 /* ForgotPwdAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPwdAlert.swift; sourceTree = "<group>"; };
 		0449AFD826B40B46005A1C19 /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
 		045F439326711C1B00E0CD77 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -152,7 +152,9 @@
 		04AB43CA262F0998004E932B /* StudentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentViewModel.swift; sourceTree = "<group>"; };
 		04AB43CE262F4004004E932B /* BatchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchRepository.swift; sourceTree = "<group>"; };
 		04AB43EA262F4217004E932B /* DatabaseReference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseReference.swift; sourceTree = "<group>"; };
+		04B4DC1926CE220F00FE3795 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
 		04C6245B2657C0430074A370 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		04C8D8D326CA82C3005A064A /* ChangePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePassword.swift; sourceTree = "<group>"; };
 		04D3AB2C266FD94C00573564 /* Felix Student.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Felix Student.entitlements"; sourceTree = "<group>"; };
 		04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BatchDetailTableViewCell.swift; sourceTree = "<group>"; };
 		04E1D97226BD12DC0040B03B /* StudentFeedbackRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentFeedbackRow.swift; sourceTree = "<group>"; };
@@ -272,6 +274,7 @@
 				0463DE972626FEF90047DCC0 /* HomePage.swift */,
 				04159AAB26280C750056006C /* FelixManagement.swift */,
 				04159AB426284D2E0056006C /* Settings.swift */,
+				04C8D8D326CA82C3005A064A /* ChangePassword.swift */,
 				042BB37F26693E0E00A9AA3D /* NotificationView.swift */,
 				0463DEA4262740F50047DCC0 /* BatchDetails.swift */,
 				04E03ABB264BD6E40094E4B3 /* BatchDetailTableViewCell.swift */,
@@ -303,6 +306,7 @@
 				042AC43226345240005EA11C /* GeneralFeedback.swift */,
 				042AC43926346CC0005EA11C /* User.swift */,
 				042BB37C26693C8600A9AA3D /* Notification.swift */,
+				04B4DC1926CE220F00FE3795 /* UserSettings.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -312,7 +316,6 @@
 			children = (
 				043D85D32629D1C300397596 /* AddNewTopic.swift */,
 				0430B88926BBB28200FF590E /* DisplayStudyMaterial.swift */,
-				0449AFD426B3FAFA005A1C19 /* HomePageSubView.swift */,
 				04E1D97226BD12DC0040B03B /* StudentFeedbackRow.swift */,
 				0449AFD626B3FB18005A1C19 /* ForgotPwdAlert.swift */,
 			);
@@ -532,6 +535,7 @@
 				0463DE952626D91B0047DCC0 /* LoginView.swift in Sources */,
 				04159ABB2628550D0056006C /* RaiseTicket.swift in Sources */,
 				0413BC50263AA3F1008E8BDD /* Router.swift in Sources */,
+				04B4DC1A26CE220F00FE3795 /* UserSettings.swift in Sources */,
 				04159AAC26280C750056006C /* FelixManagement.swift in Sources */,
 				043FE1F826327B5F00D3BC7F /* TopicRepository.swift in Sources */,
 				04159AB22628493D0056006C /* ReferAndEarn.swift in Sources */,
@@ -539,7 +543,6 @@
 				04159AB8262851140056006C /* EditProfile.swift in Sources */,
 				042BB38026693E0E00A9AA3D /* NotificationView.swift in Sources */,
 				043D8621262AFAB600397596 /* Student.swift in Sources */,
-				0449AFD526B3FAFA005A1C19 /* HomePageSubView.swift in Sources */,
 				043D85CE2629927900397596 /* AddTopic.swift in Sources */,
 				040694EF2625BBCC00C0EDC0 /* AppDelegate.swift in Sources */,
 				0449AFCB26B3C405005A1C19 /* GiveFacultyFeedback.swift in Sources */,
@@ -577,6 +580,7 @@
 				0463DE982626FEF90047DCC0 /* HomePage.swift in Sources */,
 				040694F32625BBCC00C0EDC0 /* ContentView.swift in Sources */,
 				043D85D1262997A500397596 /* MarkAttendance.swift in Sources */,
+				04C8D8D426CA82C3005A064A /* ChangePassword.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

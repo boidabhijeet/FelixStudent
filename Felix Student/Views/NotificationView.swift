@@ -29,6 +29,8 @@ struct NotificationView: View {
                 .foregroundColor(.black)
                 .frame(maxWidth : .infinity, alignment : .leading)
                 .padding(.leading, 15.0)
+                .padding(.top, 8)
+
             })
         
         Divider()
@@ -49,8 +51,6 @@ struct NotificationView: View {
                     Text(dateFormatting(postedAt: notification.postedAt))
                         .multilineTextAlignment(.leading)
                 }
-//                .frame(width: 100, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
-//                .frame(width : screenSize.width * 0.7)
                 Spacer()
             }
             .frame(width : screenSize.width * 0.9)

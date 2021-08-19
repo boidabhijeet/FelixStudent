@@ -8,19 +8,17 @@ import SwiftUI
 import AlertToast
 
 struct AddTopic: View {
-    @State var batchDate = Date().timeIntervalSince1970
-    @State var date = Date()
-    @State private var showModal = false
     var batch: Batch
-    @State var aid: String
-    @ObservedObject var topicVM = TopicViewModel()
     var batchString = ""
     var fromPlusButton: Bool
     var topic: Topic?
-    @Binding var rootIsActive : Bool
+
+    @State var batchDate = Date().timeIntervalSince1970
+    @State var date = Date()
+    @State private var showModal = false
+    @State var aid: String
     @State var batchDateString: String
     @State var isActive : Bool
-    @Environment(\.presentationMode) var presentationMode
     @State private var showToast = false
     @State private var showfutureToast = false
     @State private var showAtLeastToat = false
@@ -28,7 +26,12 @@ struct AddTopic: View {
     @State private var showingAlert = false
     @State private var isShowingDetailView: Int? = 0
     @State private var isPresented : Bool = false
+
     
+    @ObservedObject var topicVM = TopicViewModel()
+    @Environment(\.presentationMode) var presentationMode
+    @Binding var rootIsActive : Bool
+
     func stringDate() -> String {
         let date = Date(timeIntervalSince1970: TimeInterval(batchDate))
         let dateFormatter = DateFormatter()
@@ -68,12 +71,14 @@ struct AddTopic: View {
         //
         //        }
     }
+    
     func unpairAndSetDefaultDeviceInformation() {
         // YOUR CODE IS HERE
         DispatchQueue.main.async {
             self.isShowingDetailView = 1
         }
     }
+    
     var body: some View {
         ZStack {
             VStack(alignment: .leading){
@@ -88,6 +93,8 @@ struct AddTopic: View {
                         .foregroundColor(.black)
                     })
                     .padding(.horizontal)
+                    .padding(.top, 8)
+
                                         
                     Divider()
                     
@@ -196,7 +203,7 @@ struct AddTopic: View {
             NavigationLink(destination: EmptyView(), label: {})
         }
         .alert(isPresented: $showingAlert) {
-            Alert(title: Text("Do you want to add more topics?"), message: Text("Once you mark attendance you unable to add more topics to this session"),
+            Alert(title: Text("Do you want to add more topics?"), message: Text("Once you mark attendance you wont be able to add more topics to this session"),
                   primaryButton: .destructive(Text("No")) {
                     self.isShowingDetailView = 1
                     let formate = date.getFormattedDate(format: "dd MMM, yyyy") // Set output formate

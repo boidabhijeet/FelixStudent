@@ -40,7 +40,7 @@ class Topic: Mappable, Identifiable {
         self.dateCreatedAt = dateCreatedAt
         self.remarks = remarks
         self.timeSpent = timeSpent
-//        self.timeSpentMints = timespentmints
+        self.timeSpentMints = timespentmints
         self.topic = topic
         self.createdAt = Int64(Date().timeIntervalSince1970)
     }
@@ -81,7 +81,7 @@ class Feedbacks: Mappable, Identifiable {
     
     init(comment: String, feedback: String, rating: Int) {
         self.comment = comment
-//        self.createdAt = Int64(Date().timeIntervalSince1970)
+        self.createdAt = Int64(Date().timeIntervalSince1970)
         self.name = SessionStore.shared.student?.name ?? ""
         self.rating = rating
         self.uid = SessionStore.shared.user?.uid ?? ""

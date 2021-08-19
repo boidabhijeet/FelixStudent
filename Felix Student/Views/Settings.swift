@@ -11,7 +11,6 @@ import Firebase
 
 struct Settings: View {
     @State var isActive : Bool = false
-//    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     @Environment(\.rootPresentationMode) private var rootPresentationMode: Binding<RootPresentationMode>
     var url: URL
     @State private var image = UIImage()
@@ -94,7 +93,9 @@ struct Settings: View {
             Spacer().frame(maxHeight: 10)
 
             NavigationLink(
-                destination: Text("Change Password"),
+                destination: ChangePassword()
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarHidden(true),
                 label: {
                     HStack(spacing: 16) {
                         Image("lockIcon")

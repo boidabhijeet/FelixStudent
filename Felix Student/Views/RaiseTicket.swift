@@ -29,6 +29,8 @@ struct RaiseTicket: View {
                     .foregroundColor(.black)
                 })
                 .padding(.horizontal)
+                .padding(.top, 8)
+
             
             Divider()
             

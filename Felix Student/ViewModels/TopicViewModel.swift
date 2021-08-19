@@ -98,7 +98,6 @@ class TopicViewModel: ObservableObject, Identifiable {
                     
                     let atten = Mapper<Attendance>().map(JSON: document.data())
                     self.attendance.append(atten!)
-//                    print("my Attendance", self.attendance[0].markAttendance)
                     var counter = 0, totalCounter = 0
                     if let markAttendance = atten?.markAttendance {
                         if Utility.getRole() == Constants.FACULTY {

@@ -46,7 +46,6 @@ struct CustomTabBar: View {
             .navigationViewStyle(StackNavigationViewStyle())
         }
         .navigationBarHidden(true)
-
     }
 }
 
@@ -124,14 +123,14 @@ struct CircleTab : View {
                     }
                 }
             })
-            
+
             Spacer()
             
         }
         .frame(width: screenSize.width * 0.9, height: 70, alignment: .center)
         .border(Color.gray, width: 0.2)
-        .padding(.horizontal, 25)
         .background(Color.white)
+        .padding(.horizontal, 25)
         .font(.system(size: 10))
         .animation(.spring())
     }

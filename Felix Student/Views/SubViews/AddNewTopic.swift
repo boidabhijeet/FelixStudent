@@ -24,17 +24,18 @@ struct AddNewTopic: View {
     @State var isActive : Bool
     @Environment(\.presentationMode) var presentationMode
     @State private var timeSpentInHrs : Double = 0
-    //    @State var selection: [String] = [0, 00].map { "\($0)" }
+//    @State var selection: [String] = [0, 00].map { "\($0)" }
     @State var data: [(String, [String])] = [
         ("One", Array(0...8).map { "\($0)" }),
         ("Two", Array(arrayLiteral: "00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55").map { "\($0)" })
     ]
     
-    //    func calculateTimeSpentMins() -> Int {
-    //        let x = Int(selection[0])! * 60
-    //        let y = x + Int(selection[1])!
-    //        return y
-    //    }
+//    func calculateTimeSpentMins() -> Int {
+//        let x = Int(selection[0])! * 60
+//        let y = x + Int(selection[1])!
+//        return y
+//    }
+    
     var body: some View {
         ZStack {
             
@@ -76,9 +77,8 @@ struct AddNewTopic: View {
                     HStack{
                         Text("Time Spent")
                         Spacer()
-                        //                        Text("\(selection.joined(separator: ".")) Hrs")
+//                        Text("\(selection.joined(separator: ".")) Hrs")
                         Text("\(timeSpentInHrs, specifier: "%.2f") Hrs")
-                        
                     }
                     .padding(.top, 20)
                     
@@ -86,8 +86,10 @@ struct AddNewTopic: View {
                 .font(.system(size: 15))
                 
                 
-                Slider(value: $timeSpentInHrs, in: 1...10, step : 0.5)
+                Slider(value: $timeSpentInHrs, in: 1...10, step : 0.1)
                     .accentColor(.red)
+
+//                MultiPicker(data: data, selection: $selection).frame(height: 300)
                 
                 Text("Note* : Time cannot change once you add.")
                     .font(.system(size: 12))
@@ -127,6 +129,33 @@ struct AddNewTopic: View {
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             //            .offset(y: isPresented ? 0 : screenSize.height)
             .animation(.spring())
+        }
+    }
+}
+
+struct MultiPicker: View  {
+    
+    typealias Label = String
+    typealias Entry = String
+    
+    let data: [ (Label, [Entry]) ]
+    @Binding var selection: [Entry]
+    
+    var body: some View {
+        GeometryReader { geometry in
+            HStack {
+                ForEach(0..<self.data.count) { column in
+                    Picker(self.data[column].0, selection: self.$selection[column]) {
+                        ForEach(0..<self.data[column].1.count) { row in
+                            Text(verbatim: self.data[column].1[row])
+                                .tag(self.data[column].1[row])
+                        }
+                    }
+                    .pickerStyle(WheelPickerStyle())
+                    .frame(width: geometry.size.width / CGFloat(self.data.count), height: geometry.size.height)
+                    .clipped()
+                }
+            }
         }
     }
 }

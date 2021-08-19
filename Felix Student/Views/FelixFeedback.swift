@@ -32,6 +32,8 @@ struct FelixFeedback: View {
                         .padding(.horizontal)
                         .foregroundColor(.black)
                     })
+                    .padding(.top, 8)
+
                 
                 Divider()
                 
@@ -52,15 +54,12 @@ struct FelixFeedback: View {
                     .frame(maxWidth: geo.size.width * 0.9, alignment: .leading)
                     .padding(.top, 30)
                     .padding(.horizontal)
-                
-                Image("FeedbackEmoji")
-                    .frame(maxWidth: geo.size.width, alignment: .center)
-                //Paste below HStack here and remove above static image.
-//                Picker(selection: $selectedFrameworkIndex, label: Text("")) {
-//                    ForEach(0 ..< frameworks.count) {
-//                        Text(self.frameworks[$0])
-//                    }
-//                }
+        
+                Picker(selection: $selectedFrameworkIndex, label: Text("")) {
+                    ForEach(0 ..< frameworks.count) {
+                        Text(self.frameworks[$0])
+                    }
+                }
                 
                 Spacer()
             

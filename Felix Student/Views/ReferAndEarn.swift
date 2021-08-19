@@ -32,6 +32,8 @@ struct ReferAndEarn: View {
                 }.padding(.horizontal)
                 .foregroundColor(.black)
             })
+            .padding(.top, 8)
+
             
             Divider()
             

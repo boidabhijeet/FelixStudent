@@ -12,14 +12,14 @@ import ObjectMapper
 class StudentViewModel: ObservableObject, Identifiable {
     var id: String = ""
     private var cancellables = Set<AnyCancellable>()
-//    @Published var student: Student
+    //    @Published var student: Student
     @Published var students: [Student] = []
+   
     init() {
         
     }
-    
+
     func saveProfileOfFaculty(email: String, fullName: String, contact: String) {
-        
         let leadId = SessionStore.shared.user?.uid
         DatabaseReference.shared.walkinReference().document(leadId!).updateData(["email": email, "fullName": fullName, "contact": Int64(contact)!])
     }
@@ -40,15 +40,14 @@ class StudentViewModel: ObservableObject, Identifiable {
                     DatabaseReference.shared.walkinReference().document(stud).getDocument { (snap, err) in
                         if err == nil {
                             if let data = snap?.data() {
-                            let studT = Mapper<Student>().map(JSON: data)
-                            self.students.append(studT!)
-                            studArray.append(studT!)
-                            completionHandler(studArray)
+                                let studT = Mapper<Student>().map(JSON: data)
+                                self.students.append(studT!)
+                                studArray.append(studT!)
+                                completionHandler(studArray)
+                            }
                         }
                     }
                 }
-                }
-                
             }
         }
     }

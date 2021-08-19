@@ -54,6 +54,7 @@ struct EditProfile: View {
                     }
                     .padding(.horizontal)
                     .foregroundColor(.black)
+                    .padding(.top, 8)
             })
  
             Group{

@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct LoginView: View {
+    
+    @ObservedObject var userSettings = UserSettings()
+
     @State private var text : String = ""
     @State var visible = false
     @State private var emailAddress = ""
@@ -18,10 +21,10 @@ struct LoginView: View {
     @State var message = ""
     
     var body: some View {
+
         
         ZStack {
             VStack{
-                
                 Spacer().frame(maxHeight: 40)
                 
                 Image("HeaderLogo")
@@ -76,7 +79,6 @@ struct LoginView: View {
                     }
                     .modifier(CustomTextField())
                     
-                    
                     Spacer().frame(maxHeight: 50)
                     
                     Button(action: signIn, label: {
@@ -84,7 +86,6 @@ struct LoginView: View {
                             Text("LOGIN")
                         }
                         .modifier(RedButton())
-                        
                     })
        
                     Spacer().frame(maxHeight: 30)
@@ -118,11 +119,14 @@ struct LoginView: View {
             if let error = error {
                 self.error = error.localizedDescription
             } else {
-                self.emailAddress = ""
-                self.password = ""
+               
                 SessionStore.shared.fetchUser { (isUserExists) in
                     if isUserExists {
                         Router.showTabbar()
+                        userSettings.username = emailAddress
+                        userSettings.password = password
+                        self.emailAddress = ""
+                        self.password = ""
                     } else {
                         self.error = ToastAlert.userNotfound
                         SessionStore.shared.signOut()

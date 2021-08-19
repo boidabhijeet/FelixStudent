@@ -31,7 +31,6 @@ struct ReferAndEarn1: View {
                 
                 Spacer()
             }
-      
         }
         .padding()
     }

@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct ContentView: View {
+
     func getUser() {
         
         SessionStore.shared.listen()

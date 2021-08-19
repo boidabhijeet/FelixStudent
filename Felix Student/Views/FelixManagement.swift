@@ -34,7 +34,6 @@ struct FelixManagement: View {
                     .modifier(HStackModifier())
                 })
             
-            
             Spacer().frame(maxHeight : 25)
             
             NavigationLink(
@@ -49,7 +48,6 @@ struct FelixManagement: View {
                     }
                     .modifier(HStackModifier())
                 })
-            
             
             Spacer().frame(maxHeight : 25)
             

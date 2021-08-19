@@ -31,7 +31,7 @@ struct DisplayStudyMaterial: View {
             Spacer()
             
             Text("THE STUDY MATERIAL WILL BE AVAILABLE SOON!!!")
-                .font(.custom("Bodoni 72 Smallcaps", size: 25))
+                .lineLimit(2)
 
             Spacer()
         }

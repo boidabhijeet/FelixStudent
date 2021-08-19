@@ -35,6 +35,8 @@ struct MarkAttendance: View {
                 .foregroundColor(.black)
             })
             .padding(.horizontal)
+            .padding(.top, 8)
+
                                 
             
             Divider()

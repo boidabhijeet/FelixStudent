@@ -28,11 +28,15 @@ struct SelectRole: View {
                     EmptyView()
                 }
                 .isDetailLink(false)
+
                 
                 NavigationLink(destination: LoginView().environmentObject(SessionStore.shared), tag: 2, selection: $action) {
                     EmptyView()
                 }
                 .isDetailLink(false)
+                .frame(width: 0)
+                .opacity(0)
+
                 
                 VStack {
                     Spacer()
@@ -91,4 +95,3 @@ struct SelectRole_Previews: PreviewProvider {
         }
     }
 }
-

@@ -37,8 +37,5 @@ class Notification: Mappable {
         type            <- map["type"]
         readAt          <- map["readAt"]
         readStatus      <- map["readStatus"]
-        
-    }
-    
-    
+    }    
 }

@@ -33,6 +33,8 @@ struct Feedback: View {
                     .foregroundColor(.black)
                     .frame(maxWidth : .infinity, alignment : .leading)
                     .padding(.leading, 15.0)
+                    .padding(.top, 8)
+
                 })
             
             Divider()
