@@ -23,7 +23,6 @@ struct BatchDetails: View {
         if !didAppear || Utility.fromFeedbackScreen {
             appearCount += 1
             topicVM.loadTopicsWith(batchId: batch.batchId){ (topics,avgFeedback,hrsCovered)  in
-                
                 self.avgFeedback = avgFeedback
                 self.hrsCovered = hrsCovered
                 Utility.fromFeedbackScreen = false
@@ -167,114 +166,122 @@ struct TopicRow: View {
     //    @State var isActive : Bool = false
     var body: some View {
         ZStack(alignment: .bottomTrailing){
-            VStack(alignment : .leading){
-                HStack(alignment : .top) {
+            
+            //                topicData.sort({$0.date.timeIntervalSinceNow > $1.date.timeIntervalSinceNow})
+            HStack(alignment : .top) {
+                
+                VStack(alignment : .leading, spacing : 5){
+                    
                     Text(topicData.topic)
                         .font(.system(size: 14, weight: .semibold))
-                    Spacer()
-                    VStack(alignment : .trailing){
-                        Text(topicData.date)
-                            .font(.system(size: 12, weight: .semibold))
-                        Text(topicData.presentString)
-                            .font(.system(size: 12))
+                    
+                    Text("Hours: " + topicData.timeSpent)
+                        .font(.system(size: 12))
+                    
+                    
+//                    Spacer().frame(maxHeight : 20)
+                    
+                    if role == Constants.FACULTY {
+                        HStack(spacing : 1) {
+                            
+                            if topicData.averageFeedback == 0 {
+                                Text("Avg rating: \(topicData.averageFeedback)")
+                                    .font(.system(size: 12))
+                                
+                            } else if topicData.averageFeedback == 3 {
+                                HStack(spacing : 1) {
+                                    Text("Avg rating: ")
+                                        .font(.system(size: 12))
+                                    
+                                    Image("understood")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                    
+                                }
+                                
+                            } else if topicData.averageFeedback == 2 {
+                                HStack(spacing : 1) {
+                                    Text("Avg rating: ")
+                                        .font(.system(size: 12))
+                                    
+                                    Image("partiallyUnderstood")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                    
+                                }
+                            } else if topicData.averageFeedback == 1 {
+                                HStack(spacing : 1) {
+                                    Text("Avg rating: ")
+                                        .font(.system(size: 12))
+                                    
+                                    Image("notUnderstoodRed")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                    
+                                }
+                            }
+                            Spacer()
+                            
+                        }
+                    } else {
+                        //                HStack(spacing : nil){
+                        HStack {
+                            if topicData.rating == 0 {
+                                Text("My rating: 0")
+                                    .font(.system(size: 12))
+                                
+                            } else if topicData.rating == 3 {
+                                HStack(spacing : 1) {
+                                    Text("My rating: ")
+                                        .font(.system(size: 12))
+                                    
+                                    Image("understood")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                    Spacer()
+                                }
+                                
+                            } else if topicData.rating == 2 {
+                                HStack(spacing : 1) {
+                                    Text("My rating: ")
+                                        .font(.system(size: 12))
+                                    
+                                    Image("partiallyUnderstood")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                    
+                                    Spacer()
+                                }
+                            } else if topicData.rating == 1 {
+                                HStack(spacing : 1) {
+                                    Text("My rating: ")
+                                        .font(.system(size: 12))
+                                    
+                                    Image("notUnderstoodRed")
+                                        .resizable()
+                                        .frame(width: 24, height: 24)
+                                    
+                                    Spacer()
+                                }
+                            }
+                        }
                     }
                 }
                 
-                Text("Hours: " + topicData.timeSpent)
-                    .font(.system(size: 12))
+                Spacer()
                 
-                
-                Spacer().frame(maxHeight : 20)
-                
-                if role == Constants.FACULTY {
-                    HStack(spacing : 1) {
-                        
-                        if topicData.averageFeedback == 0 {
-                            Text("Avg rating: \(topicData.averageFeedback)")
-                                .font(.system(size: 12))
-                            
-                        } else if topicData.averageFeedback == 3 {
-                            HStack(spacing : 1) {
-                                Text("Avg rating: ")
-                                    .font(.system(size: 12))
-                                
-                                Image("understood")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                
-                            }
-                            
-                        } else if topicData.averageFeedback == 2 {
-                            HStack(spacing : 1) {
-                                Text("Avg rating: ")
-                                    .font(.system(size: 12))
-                                
-                                Image("partiallyUnderstood")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                
-                            }
-                        } else if topicData.averageFeedback == 1 {
-                            HStack(spacing : 1) {
-                                Text("Avg rating: ")
-                                    .font(.system(size: 12))
-                                
-                                Image("notUnderstoodRed")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                
-                            }
-                        }
-                        Spacer()
-                        
-                    }
-                } else {
-                    //                HStack(spacing : nil){
-                    HStack {
-                        if topicData.rating == 0 {
-                            Text("My rating: 0")
-                                .font(.system(size: 12))
-                            
-                        } else if topicData.rating == 3 {
-                            HStack(spacing : 1) {
-                                Text("My rating: ")
-                                    .font(.system(size: 12))
-                                
-                                Image("understood")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                Spacer()
-                            }
-                            
-                        } else if topicData.rating == 2 {
-                            HStack(spacing : 1) {
-                                Text("My rating: ")
-                                    .font(.system(size: 12))
-                                
-                                Image("partiallyUnderstood")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                
-                                Spacer()
-                            }
-                        } else if topicData.rating == 1 {
-                            HStack(spacing : 1) {
-                                Text("My rating: ")
-                                    .font(.system(size: 12))
-                                
-                                Image("notUnderstoodRed")
-                                    .resizable()
-                                    .frame(width: 24, height: 24)
-                                
-                                Spacer()
-                            }
-                        }
-                    }
+                VStack(alignment : .trailing){
+                    Text(topicData.date)
+                        .font(.system(size: 12, weight: .semibold))
+                    Text(topicData.presentString)
+                        .font(.system(size: 12))
+                        .padding(.top, 2)
                 }
             }
             .padding()
             .frame(maxWidth : screenSize.width * 0.9)
             .modifier(GrayShadow())
+
             
             if Utility.getRole() == Constants.FACULTY {
                 NavigationLink(destination:

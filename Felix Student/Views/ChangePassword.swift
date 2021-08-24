@@ -24,7 +24,6 @@ struct ChangePassword: View {
 
     var body: some View {
         VStack{
-            
             Button(
                 action: {self.presentationMode.wrappedValue.dismiss()},
                 label: {
@@ -106,7 +105,6 @@ struct ChangePassword: View {
                 showToast4.toggle()
                 return
             }
-            
             Auth.auth().currentUser?.updatePassword(to: newPassword) { (error) in
                 userSettings.password = newPassword
                 showToast3.toggle()

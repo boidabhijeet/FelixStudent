@@ -128,7 +128,7 @@ struct CircleTab : View {
             
         }
         .frame(width: screenSize.width * 0.9, height: 70, alignment: .center)
-        .border(Color.gray, width: 0.2)
+        .border(Color.gray, width: 0.2) //Check -- Remove Border
         .background(Color.white)
         .padding(.horizontal, 25)
         .font(.system(size: 10))

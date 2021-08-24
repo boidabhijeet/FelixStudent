@@ -36,7 +36,6 @@ struct TextStyle14 : ViewModifier {
     }
 }
 
-
 struct CustomTextField : ViewModifier {
     func body(content: Content) -> some View {
         content
@@ -80,4 +79,3 @@ struct HStackModifier : ViewModifier{
             .modifier(GrayShadow())
     }
 }
-

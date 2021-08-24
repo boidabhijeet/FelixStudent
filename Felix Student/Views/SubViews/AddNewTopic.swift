@@ -23,18 +23,18 @@ struct AddNewTopic: View {
     @Binding var rootIsActive : Bool
     @State var isActive : Bool
     @Environment(\.presentationMode) var presentationMode
-    @State private var timeSpentInHrs : Double = 0
-//    @State var selection: [String] = [0, 00].map { "\($0)" }
+//    @State private var timeSpentInHrs : Double = 0
+    @State var selection: [String] = [0, 00].map { "\($0)" }
     @State var data: [(String, [String])] = [
         ("One", Array(0...8).map { "\($0)" }),
         ("Two", Array(arrayLiteral: "00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55").map { "\($0)" })
     ]
     
-//    func calculateTimeSpentMins() -> Int {
-//        let x = Int(selection[0])! * 60
-//        let y = x + Int(selection[1])!
-//        return y
-//    }
+    func calculateTimeSpentMins() -> Int {
+        let x = Int(selection[0])! * 60
+        let y = x + Int(selection[1])!
+        return y
+    }
     
     var body: some View {
         ZStack {
@@ -52,9 +52,7 @@ struct AddNewTopic: View {
                     .shadow(color: Color(#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)), radius: 5, y : 6)
                 
                 Spacer().frame(maxHeight : 40)
-                
-                //                MultiPicker(data: data, selection: $selection).frame(height: 300)
-                
+                        
                 Text("Add topic and Time spent on it")
                     .font(.system(size: 15))
                 
@@ -77,8 +75,8 @@ struct AddNewTopic: View {
                     HStack{
                         Text("Time Spent")
                         Spacer()
-//                        Text("\(selection.joined(separator: ".")) Hrs")
-                        Text("\(timeSpentInHrs, specifier: "%.2f") Hrs")
+                        Text("\(selection.joined(separator: ".")) Hrs")
+//                        Text("\(timeSpentInHrs, specifier: "%.2f") Hrs")
                     }
                     .padding(.top, 20)
                     
@@ -86,10 +84,11 @@ struct AddNewTopic: View {
                 .font(.system(size: 15))
                 
                 
-                Slider(value: $timeSpentInHrs, in: 1...10, step : 0.1)
-                    .accentColor(.red)
+//                Slider(value: $timeSpentInHrs, in: 1...10, step : 0.1)
+//                    .accentColor(.red)
 
-//                MultiPicker(data: data, selection: $selection).frame(height: 300)
+                
+                MultiPicker(data: data, selection: $selection).frame(height: 300)
                 
                 Text("Note* : Time cannot change once you add.")
                     .font(.system(size: 12))
@@ -107,7 +106,7 @@ struct AddNewTopic: View {
                         if topic == "" {
                             showToast = true
                         } else {
-                            futureTopic = Topic(aid: "", batchId: batch.batchId, batchModule: batch.module, date: batchDateString, dateCreatedAt: batchDate, remarks: note, timeSpent: "\(timeSpentInHrs)", timespentmints: 0, topic: topic)
+                            futureTopic = Topic(aid: "", batchId: batch.batchId, batchModule: batch.module, date: batchDateString, dateCreatedAt: batchDate, remarks: note, timeSpent: "\(selection.joined(separator: "."))", timespentmints: calculateTimeSpentMins(), topic: topic)
                             showModal = false
                             DatabaseReference.shared.topicArray.append(futureTopic)
                         }
