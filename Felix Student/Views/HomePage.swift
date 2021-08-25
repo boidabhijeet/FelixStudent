@@ -74,11 +74,17 @@ struct BatchRow: View {
     @State private var isActive : Bool = false
     var body: some View {
         
-        NavigationLink(
-            destination : BatchDetails(batch: batch)
-                .navigationBarBackButtonHidden(true)
-                .navigationBarHidden(true))
-        {
+        ZStack(alignment: .leading) {
+            
+            NavigationLink(
+                destination : BatchDetails(batch: batch)
+                    .navigationBarBackButtonHidden(true)
+                    .navigationBarHidden(true))
+            {
+                EmptyView()
+            }
+            .opacity(0)
+            
             HStack{
                 
                 Image("\(batch.module)Bar")
@@ -113,12 +119,11 @@ struct BatchRow: View {
                     .padding(.bottom)
                     .padding(.horizontal)
             }
+            .frame(maxWidth : .infinity)
+            .background(Color.white)
+            .clipped()
+            .shadow(radius : 5)
+            .padding(.top, 10)
         }
-        .frame(maxWidth : .infinity)
-        .background(Color.white)
-        .clipped()
-        .shadow(radius : 5)
-        .padding(.top, 10)
-
     }
 }

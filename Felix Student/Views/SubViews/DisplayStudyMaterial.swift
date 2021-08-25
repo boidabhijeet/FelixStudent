@@ -30,7 +30,7 @@ struct DisplayStudyMaterial: View {
             
             Spacer()
             
-            Text("THE STUDY MATERIAL WILL BE AVAILABLE SOON!!!")
+            Text("The study material will be available soon")
                 .lineLimit(2)
 
             Spacer()

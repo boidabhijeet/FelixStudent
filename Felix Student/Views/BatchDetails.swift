@@ -118,6 +118,7 @@ struct BatchDetails: View {
             
             if Utility.getRole() == Constants.FACULTY {
                 Spacer()
+                
                 NavigationLink(destination:
                                 AddTopic(batch: batch, fromPlusButton: true, aid: "", batchDateString: "", isActive: isActive, rootIsActive: self.$isActive)
                                 .navigationBarBackButtonHidden(true)
@@ -125,6 +126,7 @@ struct BatchDetails: View {
                 {
                     Image("addTopicIcon").padding()
                 }
+                
                 NavigationLink(destination: EmptyView()) {
                     EmptyView()
                 }
@@ -160,7 +162,6 @@ struct BatchDetails: View {
 struct TopicRow: View {
     @State var topicData: Topic
     var screenSize = UIScreen.main.bounds
-    
     var batch: Batch
     let role = Utility.getRole()
     //    @State var isActive : Bool = false
@@ -178,8 +179,7 @@ struct TopicRow: View {
                     Text("Hours: " + topicData.timeSpent)
                         .font(.system(size: 12))
                     
-                    
-//                    Spacer().frame(maxHeight : 20)
+                    //                    Spacer().frame(maxHeight : 20)
                     
                     if role == Constants.FACULTY {
                         HStack(spacing : 1) {
@@ -273,15 +273,18 @@ struct TopicRow: View {
                 VStack(alignment : .trailing){
                     Text(topicData.date)
                         .font(.system(size: 12, weight: .semibold))
-                    Text(topicData.presentString)
-                        .font(.system(size: 12))
-                        .padding(.top, 2)
+                    if role == Constants.FACULTY {
+                        
+                        Text(topicData.presentString)
+                            .font(.system(size: 12))
+                            .padding(.top, 2)
+                    }
                 }
             }
             .padding()
             .frame(maxWidth : screenSize.width * 0.9)
             .modifier(GrayShadow())
-
+            
             
             if Utility.getRole() == Constants.FACULTY {
                 NavigationLink(destination:
@@ -290,24 +293,35 @@ struct TopicRow: View {
                                 .navigationBarBackButtonHidden(true)
                 ) {
                     EmptyView()
-                }
+                }.opacity(0)
             } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback pending" {
-                NavigationLink(
-                    destination: GiveFeedback(topic: topicData)
-                        .navigationBarHidden(true)
-                        .navigationBarBackButtonHidden(true))
-                {
+                ZStack(alignment: .leading) {
+                    
+                    NavigationLink(
+                        destination: GiveFeedback(topic: topicData)
+                            .navigationBarHidden(true)
+                            .navigationBarBackButtonHidden(true))
+                    {
+                        EmptyView()
+                    }
+                    .opacity(0)
                     HStack{
                         Spacer()
                         Image("feedbackPending").padding()
                     }
                 }
+                
             } else if Utility.getRole() == Constants.STUDENT && topicData.presentString == "Feedback sent" {
-                NavigationLink(
-                    destination: Feedback(topic: topicData)
-                        .navigationBarHidden(true)
-                        .navigationBarBackButtonHidden(true))
-                {
+                ZStack(alignment: .leading) {
+                    
+                    NavigationLink(
+                        destination: Feedback(topic: topicData)
+                            .navigationBarHidden(true)
+                            .navigationBarBackButtonHidden(true))
+                    {
+                        EmptyView()
+                    }.opacity(0)
+                    
                     HStack{
                         Spacer()
                         Image("feedbackSent").padding()
